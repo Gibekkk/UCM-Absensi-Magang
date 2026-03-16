@@ -1,0 +1,797 @@
+DEBUG - 2026-02-26 08:03:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-26 08:03:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-26 10:22:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2026-02-26 10:23:28 --> Error connecting to the database: mysqli_sql_exception: No such file or directory in /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php:201
+Stack trace:
+#0 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php(201): mysqli->real_connect()
+#1 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect()
+#2 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/BaseConnection.php(654): CodeIgniter\Database\BaseConnection->initialize()
+#3 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/BaseConnection.php(1565): CodeIgniter\Database\BaseConnection->query()
+#4 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/BaseConnection.php(1585): CodeIgniter\Database\BaseConnection->listTables()
+#5 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/MigrationRunner.php(821): CodeIgniter\Database\BaseConnection->tableExists()
+#6 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/MigrationRunner.php(173): CodeIgniter\Database\MigrationRunner->ensureTable()
+#7 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Commands/Database/Migrate.php(89): CodeIgniter\Database\MigrationRunner->latest()
+#8 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/CLI/SignalTrait.php(245): CodeIgniter\Commands\Database\Migrate::CodeIgniter\Commands\Database\{closure}()
+#9 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Commands/Database/Migrate.php(88): CodeIgniter\Commands\Database\Migrate->withSignalsBlocked()
+#10 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/CLI/Commands.php(74): CodeIgniter\Commands\Database\Migrate->run()
+#11 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/CLI/Console.php(47): CodeIgniter\CLI\Commands->run()
+#12 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Boot.php(442): CodeIgniter\CLI\Console->run()
+#13 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Boot.php(166): CodeIgniter\Boot::runCommand()
+#14 /home/gibekkk/Documents/GitHub/tes-ict/spark(87): CodeIgniter\Boot::bootSpark()
+#15 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: No such file or directory in /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php:231
+Stack trace:
+#0 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect()
+#1 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/BaseConnection.php(654): CodeIgniter\Database\BaseConnection->initialize()
+#2 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/BaseConnection.php(1565): CodeIgniter\Database\BaseConnection->query()
+#3 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/BaseConnection.php(1585): CodeIgniter\Database\BaseConnection->listTables()
+#4 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/MigrationRunner.php(821): CodeIgniter\Database\BaseConnection->tableExists()
+#5 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/MigrationRunner.php(173): CodeIgniter\Database\MigrationRunner->ensureTable()
+#6 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Commands/Database/Migrate.php(89): CodeIgniter\Database\MigrationRunner->latest()
+#7 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/CLI/SignalTrait.php(245): CodeIgniter\Commands\Database\Migrate::CodeIgniter\Commands\Database\{closure}()
+#8 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Commands/Database/Migrate.php(88): CodeIgniter\Commands\Database\Migrate->withSignalsBlocked()
+#9 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/CLI/Commands.php(74): CodeIgniter\Commands\Database\Migrate->run()
+#10 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/CLI/Console.php(47): CodeIgniter\CLI\Commands->run()
+#11 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Boot.php(442): CodeIgniter\CLI\Console->run()
+#12 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Boot.php(166): CodeIgniter\Boot::runCommand()
+#13 /home/gibekkk/Documents/GitHub/tes-ict/spark(87): CodeIgniter\Boot::bootSpark()
+#14 {main}
+ERROR - 2026-02-26 10:23:55 --> Error connecting to the database: mysqli_sql_exception: No such file or directory in /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php:201
+Stack trace:
+#0 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php(201): mysqli->real_connect()
+#1 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect()
+#2 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/BaseConnection.php(654): CodeIgniter\Database\BaseConnection->initialize()
+#3 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/BaseConnection.php(1565): CodeIgniter\Database\BaseConnection->query()
+#4 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/BaseConnection.php(1585): CodeIgniter\Database\BaseConnection->listTables()
+#5 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/MigrationRunner.php(821): CodeIgniter\Database\BaseConnection->tableExists()
+#6 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/MigrationRunner.php(173): CodeIgniter\Database\MigrationRunner->ensureTable()
+#7 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Commands/Database/Migrate.php(89): CodeIgniter\Database\MigrationRunner->latest()
+#8 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/CLI/SignalTrait.php(245): CodeIgniter\Commands\Database\Migrate::CodeIgniter\Commands\Database\{closure}()
+#9 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Commands/Database/Migrate.php(88): CodeIgniter\Commands\Database\Migrate->withSignalsBlocked()
+#10 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/CLI/Commands.php(74): CodeIgniter\Commands\Database\Migrate->run()
+#11 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/CLI/Console.php(47): CodeIgniter\CLI\Commands->run()
+#12 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Boot.php(442): CodeIgniter\CLI\Console->run()
+#13 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Boot.php(166): CodeIgniter\Boot::runCommand()
+#14 /home/gibekkk/Documents/GitHub/tes-ict/spark(87): CodeIgniter\Boot::bootSpark()
+#15 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: No such file or directory in /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php:231
+Stack trace:
+#0 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect()
+#1 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/BaseConnection.php(654): CodeIgniter\Database\BaseConnection->initialize()
+#2 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/BaseConnection.php(1565): CodeIgniter\Database\BaseConnection->query()
+#3 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/BaseConnection.php(1585): CodeIgniter\Database\BaseConnection->listTables()
+#4 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/MigrationRunner.php(821): CodeIgniter\Database\BaseConnection->tableExists()
+#5 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/MigrationRunner.php(173): CodeIgniter\Database\MigrationRunner->ensureTable()
+#6 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Commands/Database/Migrate.php(89): CodeIgniter\Database\MigrationRunner->latest()
+#7 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/CLI/SignalTrait.php(245): CodeIgniter\Commands\Database\Migrate::CodeIgniter\Commands\Database\{closure}()
+#8 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Commands/Database/Migrate.php(88): CodeIgniter\Commands\Database\Migrate->withSignalsBlocked()
+#9 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/CLI/Commands.php(74): CodeIgniter\Commands\Database\Migrate->run()
+#10 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/CLI/Console.php(47): CodeIgniter\CLI\Commands->run()
+#11 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Boot.php(442): CodeIgniter\CLI\Console->run()
+#12 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Boot.php(166): CodeIgniter\Boot::runCommand()
+#13 /home/gibekkk/Documents/GitHub/tes-ict/spark(87): CodeIgniter\Boot::bootSpark()
+#14 {main}
+ERROR - 2026-02-26 10:25:12 --> Error connecting to the database: mysqli_sql_exception: Unknown database 'tes_ict' in /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php:201
+Stack trace:
+#0 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php(201): mysqli->real_connect()
+#1 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect()
+#2 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/BaseConnection.php(654): CodeIgniter\Database\BaseConnection->initialize()
+#3 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/BaseConnection.php(1565): CodeIgniter\Database\BaseConnection->query()
+#4 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/BaseConnection.php(1585): CodeIgniter\Database\BaseConnection->listTables()
+#5 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/MigrationRunner.php(821): CodeIgniter\Database\BaseConnection->tableExists()
+#6 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/MigrationRunner.php(173): CodeIgniter\Database\MigrationRunner->ensureTable()
+#7 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Commands/Database/Migrate.php(89): CodeIgniter\Database\MigrationRunner->latest()
+#8 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/CLI/SignalTrait.php(245): CodeIgniter\Commands\Database\Migrate::CodeIgniter\Commands\Database\{closure}()
+#9 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Commands/Database/Migrate.php(88): CodeIgniter\Commands\Database\Migrate->withSignalsBlocked()
+#10 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/CLI/Commands.php(74): CodeIgniter\Commands\Database\Migrate->run()
+#11 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/CLI/Console.php(47): CodeIgniter\CLI\Commands->run()
+#12 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Boot.php(442): CodeIgniter\CLI\Console->run()
+#13 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Boot.php(166): CodeIgniter\Boot::runCommand()
+#14 /home/gibekkk/Documents/GitHub/tes-ict/spark(87): CodeIgniter\Boot::bootSpark()
+#15 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Unknown database 'tes_ict' in /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php:231
+Stack trace:
+#0 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect()
+#1 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/BaseConnection.php(654): CodeIgniter\Database\BaseConnection->initialize()
+#2 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/BaseConnection.php(1565): CodeIgniter\Database\BaseConnection->query()
+#3 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/BaseConnection.php(1585): CodeIgniter\Database\BaseConnection->listTables()
+#4 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/MigrationRunner.php(821): CodeIgniter\Database\BaseConnection->tableExists()
+#5 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/MigrationRunner.php(173): CodeIgniter\Database\MigrationRunner->ensureTable()
+#6 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Commands/Database/Migrate.php(89): CodeIgniter\Database\MigrationRunner->latest()
+#7 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/CLI/SignalTrait.php(245): CodeIgniter\Commands\Database\Migrate::CodeIgniter\Commands\Database\{closure}()
+#8 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Commands/Database/Migrate.php(88): CodeIgniter\Commands\Database\Migrate->withSignalsBlocked()
+#9 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/CLI/Commands.php(74): CodeIgniter\Commands\Database\Migrate->run()
+#10 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/CLI/Console.php(47): CodeIgniter\CLI\Commands->run()
+#11 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Boot.php(442): CodeIgniter\CLI\Console->run()
+#12 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Boot.php(166): CodeIgniter\Boot::runCommand()
+#13 /home/gibekkk/Documents/GitHub/tes-ict/spark(87): CodeIgniter\Boot::bootSpark()
+#14 {main}
+ERROR - 2026-02-26 10:25:41 --> Error connecting to the database: mysqli_sql_exception: Unknown database 'tes_ict' in /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php:201
+Stack trace:
+#0 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php(201): mysqli->real_connect()
+#1 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect()
+#2 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/BaseConnection.php(654): CodeIgniter\Database\BaseConnection->initialize()
+#3 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/BaseConnection.php(1565): CodeIgniter\Database\BaseConnection->query()
+#4 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/BaseConnection.php(1585): CodeIgniter\Database\BaseConnection->listTables()
+#5 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/MigrationRunner.php(821): CodeIgniter\Database\BaseConnection->tableExists()
+#6 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/MigrationRunner.php(173): CodeIgniter\Database\MigrationRunner->ensureTable()
+#7 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Commands/Database/Migrate.php(89): CodeIgniter\Database\MigrationRunner->latest()
+#8 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/CLI/SignalTrait.php(245): CodeIgniter\Commands\Database\Migrate::CodeIgniter\Commands\Database\{closure}()
+#9 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Commands/Database/Migrate.php(88): CodeIgniter\Commands\Database\Migrate->withSignalsBlocked()
+#10 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/CLI/Commands.php(74): CodeIgniter\Commands\Database\Migrate->run()
+#11 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/CLI/Console.php(47): CodeIgniter\CLI\Commands->run()
+#12 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Boot.php(442): CodeIgniter\CLI\Console->run()
+#13 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Boot.php(166): CodeIgniter\Boot::runCommand()
+#14 /home/gibekkk/Documents/GitHub/tes-ict/spark(87): CodeIgniter\Boot::bootSpark()
+#15 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Unknown database 'tes_ict' in /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php:231
+Stack trace:
+#0 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect()
+#1 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/BaseConnection.php(654): CodeIgniter\Database\BaseConnection->initialize()
+#2 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/BaseConnection.php(1565): CodeIgniter\Database\BaseConnection->query()
+#3 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/BaseConnection.php(1585): CodeIgniter\Database\BaseConnection->listTables()
+#4 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/MigrationRunner.php(821): CodeIgniter\Database\BaseConnection->tableExists()
+#5 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/MigrationRunner.php(173): CodeIgniter\Database\MigrationRunner->ensureTable()
+#6 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Commands/Database/Migrate.php(89): CodeIgniter\Database\MigrationRunner->latest()
+#7 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/CLI/SignalTrait.php(245): CodeIgniter\Commands\Database\Migrate::CodeIgniter\Commands\Database\{closure}()
+#8 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Commands/Database/Migrate.php(88): CodeIgniter\Commands\Database\Migrate->withSignalsBlocked()
+#9 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/CLI/Commands.php(74): CodeIgniter\Commands\Database\Migrate->run()
+#10 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/CLI/Console.php(47): CodeIgniter\CLI\Commands->run()
+#11 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Boot.php(442): CodeIgniter\CLI\Console->run()
+#12 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Boot.php(166): CodeIgniter\Boot::runCommand()
+#13 /home/gibekkk/Documents/GitHub/tes-ict/spark(87): CodeIgniter\Boot::bootSpark()
+#14 {main}
+ERROR - 2026-02-26 10:26:11 --> Error connecting to the database: mysqli_sql_exception: Unknown database 'tes_ict' in /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php:201
+Stack trace:
+#0 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php(201): mysqli->real_connect()
+#1 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect()
+#2 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/BaseConnection.php(654): CodeIgniter\Database\BaseConnection->initialize()
+#3 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/BaseConnection.php(1565): CodeIgniter\Database\BaseConnection->query()
+#4 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/BaseConnection.php(1585): CodeIgniter\Database\BaseConnection->listTables()
+#5 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/MigrationRunner.php(821): CodeIgniter\Database\BaseConnection->tableExists()
+#6 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/MigrationRunner.php(173): CodeIgniter\Database\MigrationRunner->ensureTable()
+#7 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Commands/Database/Migrate.php(89): CodeIgniter\Database\MigrationRunner->latest()
+#8 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/CLI/SignalTrait.php(245): CodeIgniter\Commands\Database\Migrate::CodeIgniter\Commands\Database\{closure}()
+#9 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Commands/Database/Migrate.php(88): CodeIgniter\Commands\Database\Migrate->withSignalsBlocked()
+#10 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/CLI/Commands.php(74): CodeIgniter\Commands\Database\Migrate->run()
+#11 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/CLI/Console.php(47): CodeIgniter\CLI\Commands->run()
+#12 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Boot.php(442): CodeIgniter\CLI\Console->run()
+#13 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Boot.php(166): CodeIgniter\Boot::runCommand()
+#14 /home/gibekkk/Documents/GitHub/tes-ict/spark(87): CodeIgniter\Boot::bootSpark()
+#15 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Unknown database 'tes_ict' in /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php:231
+Stack trace:
+#0 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect()
+#1 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/BaseConnection.php(654): CodeIgniter\Database\BaseConnection->initialize()
+#2 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/BaseConnection.php(1565): CodeIgniter\Database\BaseConnection->query()
+#3 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/BaseConnection.php(1585): CodeIgniter\Database\BaseConnection->listTables()
+#4 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/MigrationRunner.php(821): CodeIgniter\Database\BaseConnection->tableExists()
+#5 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/MigrationRunner.php(173): CodeIgniter\Database\MigrationRunner->ensureTable()
+#6 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Commands/Database/Migrate.php(89): CodeIgniter\Database\MigrationRunner->latest()
+#7 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/CLI/SignalTrait.php(245): CodeIgniter\Commands\Database\Migrate::CodeIgniter\Commands\Database\{closure}()
+#8 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Commands/Database/Migrate.php(88): CodeIgniter\Commands\Database\Migrate->withSignalsBlocked()
+#9 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/CLI/Commands.php(74): CodeIgniter\Commands\Database\Migrate->run()
+#10 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/CLI/Console.php(47): CodeIgniter\CLI\Commands->run()
+#11 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Boot.php(442): CodeIgniter\CLI\Console->run()
+#12 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Boot.php(166): CodeIgniter\Boot::runCommand()
+#13 /home/gibekkk/Documents/GitHub/tes-ict/spark(87): CodeIgniter\Boot::bootSpark()
+#14 {main}
+ERROR - 2026-02-26 10:26:37 --> Error connecting to the database: mysqli_sql_exception: Unknown database 'tes_ict' in /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php:201
+Stack trace:
+#0 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php(201): mysqli->real_connect()
+#1 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect()
+#2 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/BaseConnection.php(654): CodeIgniter\Database\BaseConnection->initialize()
+#3 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/BaseConnection.php(1565): CodeIgniter\Database\BaseConnection->query()
+#4 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/BaseConnection.php(1585): CodeIgniter\Database\BaseConnection->listTables()
+#5 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/MigrationRunner.php(821): CodeIgniter\Database\BaseConnection->tableExists()
+#6 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/MigrationRunner.php(173): CodeIgniter\Database\MigrationRunner->ensureTable()
+#7 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Commands/Database/Migrate.php(89): CodeIgniter\Database\MigrationRunner->latest()
+#8 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/CLI/SignalTrait.php(245): CodeIgniter\Commands\Database\Migrate::CodeIgniter\Commands\Database\{closure}()
+#9 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Commands/Database/Migrate.php(88): CodeIgniter\Commands\Database\Migrate->withSignalsBlocked()
+#10 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/CLI/Commands.php(74): CodeIgniter\Commands\Database\Migrate->run()
+#11 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/CLI/Console.php(47): CodeIgniter\CLI\Commands->run()
+#12 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Boot.php(442): CodeIgniter\CLI\Console->run()
+#13 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Boot.php(166): CodeIgniter\Boot::runCommand()
+#14 /home/gibekkk/Documents/GitHub/tes-ict/spark(87): CodeIgniter\Boot::bootSpark()
+#15 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Unknown database 'tes_ict' in /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php:231
+Stack trace:
+#0 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect()
+#1 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/BaseConnection.php(654): CodeIgniter\Database\BaseConnection->initialize()
+#2 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/BaseConnection.php(1565): CodeIgniter\Database\BaseConnection->query()
+#3 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/BaseConnection.php(1585): CodeIgniter\Database\BaseConnection->listTables()
+#4 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/MigrationRunner.php(821): CodeIgniter\Database\BaseConnection->tableExists()
+#5 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/MigrationRunner.php(173): CodeIgniter\Database\MigrationRunner->ensureTable()
+#6 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Commands/Database/Migrate.php(89): CodeIgniter\Database\MigrationRunner->latest()
+#7 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/CLI/SignalTrait.php(245): CodeIgniter\Commands\Database\Migrate::CodeIgniter\Commands\Database\{closure}()
+#8 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Commands/Database/Migrate.php(88): CodeIgniter\Commands\Database\Migrate->withSignalsBlocked()
+#9 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/CLI/Commands.php(74): CodeIgniter\Commands\Database\Migrate->run()
+#10 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/CLI/Console.php(47): CodeIgniter\CLI\Commands->run()
+#11 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Boot.php(442): CodeIgniter\CLI\Console->run()
+#12 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Boot.php(166): CodeIgniter\Boot::runCommand()
+#13 /home/gibekkk/Documents/GitHub/tes-ict/spark(87): CodeIgniter\Boot::bootSpark()
+#14 {main}
+DEBUG - 2026-02-26 10:30:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-26 10:30:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2026-02-26 10:30:18 --> ErrorException: Attempt to read property "admin" on null
+[Method: GET, Route: admin/home]
+in APPPATH/Controllers/AdminController.php on line 27.
+ 1 APPPATH/Controllers/AdminController.php(27): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\AdminController->home()
+ 3 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+ 4 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 5 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+ 7 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+ 8 SYSTEMPATH/rewrite.php(44): require_once('/home/gibekkk/Documents/GitHub/tes-ict/public/index.php')
+CRITICAL - 2026-02-26 10:30:55 --> Error: Call to a member function getAdmin() on null
+[Method: GET, Route: admin/home]
+in APPPATH/Controllers/AdminController.php on line 27.
+ 1 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\AdminController->home()
+ 2 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+ 3 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 4 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+ 6 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+ 7 SYSTEMPATH/rewrite.php(44): require_once('/home/gibekkk/Documents/GitHub/tes-ict/public/index.php')
+CRITICAL - 2026-02-26 10:30:56 --> Error: Call to a member function getAdmin() on null
+[Method: GET, Route: admin/home]
+in APPPATH/Controllers/AdminController.php on line 27.
+ 1 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\AdminController->home()
+ 2 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+ 3 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 4 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+ 6 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+ 7 SYSTEMPATH/rewrite.php(44): require_once('/home/gibekkk/Documents/GitHub/tes-ict/public/index.php')
+CRITICAL - 2026-02-26 10:30:56 --> Error: Call to a member function getAdmin() on null
+[Method: GET, Route: admin/home]
+in APPPATH/Controllers/AdminController.php on line 27.
+ 1 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\AdminController->home()
+ 2 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+ 3 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 4 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+ 6 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+ 7 SYSTEMPATH/rewrite.php(44): require_once('/home/gibekkk/Documents/GitHub/tes-ict/public/index.php')
+CRITICAL - 2026-02-26 10:30:56 --> Error: Call to a member function getAdmin() on null
+[Method: GET, Route: admin/home]
+in APPPATH/Controllers/AdminController.php on line 27.
+ 1 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\AdminController->home()
+ 2 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+ 3 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 4 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+ 6 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+ 7 SYSTEMPATH/rewrite.php(44): require_once('/home/gibekkk/Documents/GitHub/tes-ict/public/index.php')
+CRITICAL - 2026-02-26 10:30:56 --> Error: Call to a member function getAdmin() on null
+[Method: GET, Route: admin/home]
+in APPPATH/Controllers/AdminController.php on line 27.
+ 1 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\AdminController->home()
+ 2 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+ 3 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 4 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+ 6 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+ 7 SYSTEMPATH/rewrite.php(44): require_once('/home/gibekkk/Documents/GitHub/tes-ict/public/index.php')
+CRITICAL - 2026-02-26 10:32:52 --> Error: Call to a member function getAdmin() on null
+[Method: GET, Route: admin/home]
+in APPPATH/Controllers/AdminController.php on line 27.
+ 1 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\AdminController->home()
+ 2 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+ 3 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 4 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+ 6 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+ 7 SYSTEMPATH/rewrite.php(44): require_once('/home/gibekkk/Documents/GitHub/tes-ict/public/index.php')
+CRITICAL - 2026-02-26 10:32:56 --> Error: Call to a member function getAdmin() on null
+[Method: GET, Route: admin/home]
+in APPPATH/Controllers/AdminController.php on line 27.
+ 1 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\AdminController->home()
+ 2 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+ 3 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 4 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+ 6 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+ 7 SYSTEMPATH/rewrite.php(44): require_once('/home/gibekkk/Documents/GitHub/tes-ict/public/index.php')
+CRITICAL - 2026-02-26 10:32:57 --> Error: Call to a member function getAdmin() on null
+[Method: GET, Route: admin/home]
+in APPPATH/Controllers/AdminController.php on line 27.
+ 1 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\AdminController->home()
+ 2 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+ 3 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 4 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+ 6 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+ 7 SYSTEMPATH/rewrite.php(44): require_once('/home/gibekkk/Documents/GitHub/tes-ict/public/index.php')
+DEBUG - 2026-02-26 10:34:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-26 10:34:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2026-02-26 10:34:27 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "admin/dashboard.php"
+[Method: GET, Route: admin/home]
+in SYSTEMPATH/Exceptions/FrameworkException.php on line 39.
+ 1 SYSTEMPATH/View/View.php(226): CodeIgniter\Exceptions\FrameworkException::forInvalidFile()
+ 2 SYSTEMPATH/Common.php(1250): CodeIgniter\View\View->render()
+ 3 APPPATH/Controllers/AdminController.php(31): view()
+ 4 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\AdminController->home()
+ 5 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+ 6 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 7 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+ 9 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+10 SYSTEMPATH/rewrite.php(44): require_once('/home/gibekkk/Documents/GitHub/tes-ict/public/index.php')
+CRITICAL - 2026-02-26 10:35:58 --> ErrorException: Undefined variable $user
+[Method: GET, Route: admin/home]
+in APPPATH/Views/admin/dashboard.php on line 36.
+ 1 APPPATH/Views/admin/dashboard.php(36): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/View/View.php(238): include('/home/gibekkk/Documents/GitHub/tes-ict/app/Views/admin/dashboard.php')
+ 3 SYSTEMPATH/View/View.php(241): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1250): CodeIgniter\View\View->render()
+ 5 APPPATH/Controllers/AdminController.php(31): view()
+ 6 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\AdminController->home()
+ 7 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 9 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+11 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+12 SYSTEMPATH/rewrite.php(44): require_once('/home/gibekkk/Documents/GitHub/tes-ict/public/index.php')
+CRITICAL - 2026-02-26 10:35:58 --> ErrorException: Undefined variable $user
+[Method: GET, Route: admin/home]
+in APPPATH/Views/admin/dashboard.php on line 36.
+ 1 APPPATH/Views/admin/dashboard.php(36): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/View/View.php(238): include('/home/gibekkk/Documents/GitHub/tes-ict/app/Views/admin/dashboard.php')
+ 3 SYSTEMPATH/View/View.php(241): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1250): CodeIgniter\View\View->render()
+ 5 APPPATH/Controllers/AdminController.php(31): view()
+ 6 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\AdminController->home()
+ 7 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 9 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+11 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+12 SYSTEMPATH/rewrite.php(44): require_once('/home/gibekkk/Documents/GitHub/tes-ict/public/index.php')
+CRITICAL - 2026-02-26 10:35:59 --> ErrorException: Undefined variable $user
+[Method: GET, Route: admin/home]
+in APPPATH/Views/admin/dashboard.php on line 36.
+ 1 APPPATH/Views/admin/dashboard.php(36): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/View/View.php(238): include('/home/gibekkk/Documents/GitHub/tes-ict/app/Views/admin/dashboard.php')
+ 3 SYSTEMPATH/View/View.php(241): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1250): CodeIgniter\View\View->render()
+ 5 APPPATH/Controllers/AdminController.php(31): view()
+ 6 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\AdminController->home()
+ 7 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 9 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+11 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+12 SYSTEMPATH/rewrite.php(44): require_once('/home/gibekkk/Documents/GitHub/tes-ict/public/index.php')
+CRITICAL - 2026-02-26 10:35:59 --> ErrorException: Undefined variable $user
+[Method: GET, Route: admin/home]
+in APPPATH/Views/admin/dashboard.php on line 36.
+ 1 APPPATH/Views/admin/dashboard.php(36): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/View/View.php(238): include('/home/gibekkk/Documents/GitHub/tes-ict/app/Views/admin/dashboard.php')
+ 3 SYSTEMPATH/View/View.php(241): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1250): CodeIgniter\View\View->render()
+ 5 APPPATH/Controllers/AdminController.php(31): view()
+ 6 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\AdminController->home()
+ 7 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 9 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+11 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+12 SYSTEMPATH/rewrite.php(44): require_once('/home/gibekkk/Documents/GitHub/tes-ict/public/index.php')
+CRITICAL - 2026-02-26 10:35:59 --> ErrorException: Undefined variable $user
+[Method: GET, Route: admin/home]
+in APPPATH/Views/admin/dashboard.php on line 36.
+ 1 APPPATH/Views/admin/dashboard.php(36): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/View/View.php(238): include('/home/gibekkk/Documents/GitHub/tes-ict/app/Views/admin/dashboard.php')
+ 3 SYSTEMPATH/View/View.php(241): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1250): CodeIgniter\View\View->render()
+ 5 APPPATH/Controllers/AdminController.php(31): view()
+ 6 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\AdminController->home()
+ 7 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 9 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+11 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+12 SYSTEMPATH/rewrite.php(44): require_once('/home/gibekkk/Documents/GitHub/tes-ict/public/index.php')
+DEBUG - 2026-02-26 10:36:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-26 10:36:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-26 10:37:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-26 10:41:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-26 10:41:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-26 10:41:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-26 10:47:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-26 10:49:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-26 10:49:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-26 10:49:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-26 10:51:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-26 11:00:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2026-02-26 11:08:07 --> CodeIgniter\Database\Exceptions\DataException: There is no data to update.
+[Method: POST, Route: admin/edit/6ad16f6c-0823-4dda-85a4-45c541c3103d]
+in SYSTEMPATH/BaseModel.php on line 1056.
+ 1 SYSTEMPATH/BaseModel.php(1056): CodeIgniter\Database\Exceptions\DataException::forEmptyDataset()
+ 2 SYSTEMPATH/Model.php(706): CodeIgniter\BaseModel->update()
+ 3 APPPATH/Controllers/AdminController.php(109): CodeIgniter\Model->update()
+ 4 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\AdminController->edit()
+ 5 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+ 6 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 7 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+ 9 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+10 SYSTEMPATH/rewrite.php(44): require_once('/home/gibekkk/Documents/GitHub/tes-ict/public/index.php')
+CRITICAL - 2026-02-26 11:12:00 --> CodeIgniter\Database\Exceptions\DataException: There is no data to update.
+[Method: POST, Route: admin/edit/6ad16f6c-0823-4dda-85a4-45c541c3103d]
+in SYSTEMPATH/BaseModel.php on line 1056.
+ 1 SYSTEMPATH/BaseModel.php(1056): CodeIgniter\Database\Exceptions\DataException::forEmptyDataset()
+ 2 SYSTEMPATH/Model.php(706): CodeIgniter\BaseModel->update()
+ 3 APPPATH/Controllers/AdminController.php(110): CodeIgniter\Model->update()
+ 4 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\AdminController->edit()
+ 5 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+ 6 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 7 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+ 9 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+10 SYSTEMPATH/rewrite.php(44): require_once('/home/gibekkk/Documents/GitHub/tes-ict/public/index.php')
+DEBUG - 2026-02-26 11:12:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2026-02-26 11:12:12 --> CodeIgniter\Database\Exceptions\DataException: There is no data to update.
+[Method: POST, Route: admin/edit/6ad16f6c-0823-4dda-85a4-45c541c3103d]
+in SYSTEMPATH/BaseModel.php on line 1056.
+ 1 SYSTEMPATH/BaseModel.php(1056): CodeIgniter\Database\Exceptions\DataException::forEmptyDataset()
+ 2 SYSTEMPATH/Model.php(706): CodeIgniter\BaseModel->update()
+ 3 APPPATH/Controllers/AdminController.php(110): CodeIgniter\Model->update()
+ 4 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\AdminController->edit()
+ 5 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+ 6 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 7 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+ 9 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+10 SYSTEMPATH/rewrite.php(44): require_once('/home/gibekkk/Documents/GitHub/tes-ict/public/index.php')
+DEBUG - 2026-02-26 11:13:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-26 11:13:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-26 11:14:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-26 11:14:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-26 11:14:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-26 11:14:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-26 11:14:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-26 11:15:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-26 11:15:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-26 11:15:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-26 11:15:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-26 11:18:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-26 11:18:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-26 11:18:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-26 11:19:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-26 11:21:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-26 11:21:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-26 11:21:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-26 11:22:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-26 11:24:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-26 11:27:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-26 11:28:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-26 11:29:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2026-02-26 11:29:48 --> Error: Class "ZipArchive" not found
+[Method: POST, Route: admin/import]
+in VENDORPATH/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Shared/File.php on line 61.
+ 1 VENDORPATH/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Shared/File.php(174): PhpOffice\PhpSpreadsheet\Shared\File::fileExists()
+ 2 VENDORPATH/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Reader/Xlsx.php(93): PhpOffice\PhpSpreadsheet\Shared\File::testFileNoThrow()
+ 3 VENDORPATH/phpoffice/phpspreadsheet/src/PhpSpreadsheet/IOFactory.php(199): PhpOffice\PhpSpreadsheet\Reader\Xlsx->canRead()
+ 4 VENDORPATH/phpoffice/phpspreadsheet/src/PhpSpreadsheet/IOFactory.php(137): PhpOffice\PhpSpreadsheet\IOFactory::createReaderForFile()
+ 5 APPPATH/Controllers/AdminController.php(206): PhpOffice\PhpSpreadsheet\IOFactory::load()
+ 6 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\AdminController->import()
+ 7 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 9 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+11 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+12 SYSTEMPATH/rewrite.php(44): require_once('/home/gibekkk/Documents/GitHub/tes-ict/public/index.php')
+CRITICAL - 2026-02-26 11:35:33 --> Error: Class "ZipArchive" not found
+[Method: POST, Route: admin/import]
+in VENDORPATH/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Shared/File.php on line 61.
+ 1 VENDORPATH/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Shared/File.php(147): PhpOffice\PhpSpreadsheet\Shared\File::fileExists()
+ 2 VENDORPATH/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Reader/Xlsx.php(435): PhpOffice\PhpSpreadsheet\Shared\File::assertFile()
+ 3 VENDORPATH/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Reader/BaseReader.php(269): PhpOffice\PhpSpreadsheet\Reader\Xlsx->loadSpreadsheetFromFile()
+ 4 APPPATH/Controllers/AdminController.php(195): PhpOffice\PhpSpreadsheet\Reader\BaseReader->load()
+ 5 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\AdminController->import()
+ 6 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+ 7 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 8 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+10 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+11 SYSTEMPATH/rewrite.php(44): require_once('/home/gibekkk/Documents/GitHub/tes-ict/public/index.php')
+CRITICAL - 2026-02-26 11:38:26 --> Error: Class "ZipArchive" not found
+[Method: POST, Route: admin/import]
+in VENDORPATH/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Shared/File.php on line 61.
+ 1 VENDORPATH/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Shared/File.php(147): PhpOffice\PhpSpreadsheet\Shared\File::fileExists()
+ 2 VENDORPATH/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Reader/Xlsx.php(435): PhpOffice\PhpSpreadsheet\Shared\File::assertFile()
+ 3 VENDORPATH/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Reader/BaseReader.php(269): PhpOffice\PhpSpreadsheet\Reader\Xlsx->loadSpreadsheetFromFile()
+ 4 APPPATH/Controllers/AdminController.php(195): PhpOffice\PhpSpreadsheet\Reader\BaseReader->load()
+ 5 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\AdminController->import()
+ 6 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+ 7 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 8 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+10 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+11 SYSTEMPATH/rewrite.php(44): require_once('/home/gibekkk/Documents/GitHub/tes-ict/public/index.php')
+CRITICAL - 2026-02-26 11:38:27 --> Error: Class "ZipArchive" not found
+[Method: POST, Route: admin/import]
+in VENDORPATH/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Shared/File.php on line 61.
+ 1 VENDORPATH/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Shared/File.php(147): PhpOffice\PhpSpreadsheet\Shared\File::fileExists()
+ 2 VENDORPATH/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Reader/Xlsx.php(435): PhpOffice\PhpSpreadsheet\Shared\File::assertFile()
+ 3 VENDORPATH/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Reader/BaseReader.php(269): PhpOffice\PhpSpreadsheet\Reader\Xlsx->loadSpreadsheetFromFile()
+ 4 APPPATH/Controllers/AdminController.php(195): PhpOffice\PhpSpreadsheet\Reader\BaseReader->load()
+ 5 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\AdminController->import()
+ 6 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+ 7 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 8 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+10 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+11 SYSTEMPATH/rewrite.php(44): require_once('/home/gibekkk/Documents/GitHub/tes-ict/public/index.php')
+DEBUG - 2026-02-26 11:48:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-26 11:48:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-26 11:48:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-26 11:48:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-26 11:49:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-26 11:49:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-26 11:49:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-26 11:50:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-26 11:50:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-26 11:50:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-26 11:51:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-26 11:52:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-26 12:02:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-26 12:02:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-26 12:03:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-26 12:03:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-26 12:04:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2026-02-26 12:04:44 --> CodeIgniter\Database\Exceptions\DataException: There is no data to update.
+[Method: POST, Route: admin/edit/7df39466-3e9d-4dfd-9094-3cc1444eaad3]
+in SYSTEMPATH/BaseModel.php on line 1056.
+ 1 SYSTEMPATH/BaseModel.php(1056): CodeIgniter\Database\Exceptions\DataException::forEmptyDataset()
+ 2 SYSTEMPATH/Model.php(706): CodeIgniter\BaseModel->update()
+ 3 APPPATH/Controllers/AdminController.php(114): CodeIgniter\Model->update()
+ 4 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\AdminController->edit()
+ 5 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+ 6 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 7 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+ 9 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+10 SYSTEMPATH/rewrite.php(44): require_once('/home/gibekkk/Documents/GitHub/tes-ict/public/index.php')
+DEBUG - 2026-02-26 12:05:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-26 12:05:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-26 12:05:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-26 12:05:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-26 12:05:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-26 12:05:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-26 12:05:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-26 12:05:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-26 12:05:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-26 12:06:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2026-02-26 12:06:27 --> CodeIgniter\Database\Exceptions\DataException: There is no data to update.
+[Method: POST, Route: admin/edit/7df39466-3e9d-4dfd-9094-3cc1444eaad3]
+in SYSTEMPATH/BaseModel.php on line 1056.
+ 1 SYSTEMPATH/BaseModel.php(1056): CodeIgniter\Database\Exceptions\DataException::forEmptyDataset()
+ 2 SYSTEMPATH/Model.php(706): CodeIgniter\BaseModel->update()
+ 3 APPPATH/Controllers/AdminController.php(114): CodeIgniter\Model->update()
+ 4 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\AdminController->edit()
+ 5 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+ 6 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 7 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+ 9 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+10 SYSTEMPATH/rewrite.php(44): require_once('/home/gibekkk/Documents/GitHub/tes-ict/public/index.php')
+CRITICAL - 2026-02-26 12:08:08 --> CodeIgniter\Database\Exceptions\DataException: There is no data to update.
+[Method: POST, Route: admin/edit/7df39466-3e9d-4dfd-9094-3cc1444eaad3]
+in SYSTEMPATH/BaseModel.php on line 1056.
+ 1 SYSTEMPATH/BaseModel.php(1056): CodeIgniter\Database\Exceptions\DataException::forEmptyDataset()
+ 2 SYSTEMPATH/Model.php(706): CodeIgniter\BaseModel->update()
+ 3 SYSTEMPATH/BaseModel.php(749): CodeIgniter\Model->update()
+ 4 APPPATH/Controllers/AdminController.php(115): CodeIgniter\BaseModel->save()
+ 5 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\AdminController->edit()
+ 6 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+ 7 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 8 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+10 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+11 SYSTEMPATH/rewrite.php(44): require_once('/home/gibekkk/Documents/GitHub/tes-ict/public/index.php')
+DEBUG - 2026-02-26 12:08:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-26 12:08:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2026-02-26 12:08:16 --> CodeIgniter\Database\Exceptions\DataException: There is no data to update.
+[Method: POST, Route: admin/edit/7df39466-3e9d-4dfd-9094-3cc1444eaad3]
+in SYSTEMPATH/BaseModel.php on line 1056.
+ 1 SYSTEMPATH/BaseModel.php(1056): CodeIgniter\Database\Exceptions\DataException::forEmptyDataset()
+ 2 SYSTEMPATH/Model.php(706): CodeIgniter\BaseModel->update()
+ 3 SYSTEMPATH/BaseModel.php(749): CodeIgniter\Model->update()
+ 4 APPPATH/Controllers/AdminController.php(115): CodeIgniter\BaseModel->save()
+ 5 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\AdminController->edit()
+ 6 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+ 7 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 8 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+10 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+11 SYSTEMPATH/rewrite.php(44): require_once('/home/gibekkk/Documents/GitHub/tes-ict/public/index.php')
+DEBUG - 2026-02-26 12:08:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-26 12:08:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-26 12:08:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2026-02-26 12:08:28 --> CodeIgniter\Database\Exceptions\DataException: There is no data to update.
+[Method: POST, Route: admin/edit/7df39466-3e9d-4dfd-9094-3cc1444eaad3]
+in SYSTEMPATH/BaseModel.php on line 1056.
+ 1 SYSTEMPATH/BaseModel.php(1056): CodeIgniter\Database\Exceptions\DataException::forEmptyDataset()
+ 2 SYSTEMPATH/Model.php(706): CodeIgniter\BaseModel->update()
+ 3 SYSTEMPATH/BaseModel.php(749): CodeIgniter\Model->update()
+ 4 APPPATH/Controllers/AdminController.php(115): CodeIgniter\BaseModel->save()
+ 5 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\AdminController->edit()
+ 6 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+ 7 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 8 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+10 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+11 SYSTEMPATH/rewrite.php(44): require_once('/home/gibekkk/Documents/GitHub/tes-ict/public/index.php')
+DEBUG - 2026-02-26 12:08:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-26 12:08:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-26 12:08:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-26 12:10:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2026-02-26 12:10:55 --> CodeIgniter\Database\Exceptions\DataException: There is no data to update.
+[Method: POST, Route: admin/edit/7df39466-3e9d-4dfd-9094-3cc1444eaad3]
+in SYSTEMPATH/BaseModel.php on line 1056.
+ 1 SYSTEMPATH/BaseModel.php(1056): CodeIgniter\Database\Exceptions\DataException::forEmptyDataset()
+ 2 SYSTEMPATH/Model.php(706): CodeIgniter\BaseModel->update()
+ 3 SYSTEMPATH/BaseModel.php(749): CodeIgniter\Model->update()
+ 4 APPPATH/Controllers/AdminController.php(115): CodeIgniter\BaseModel->save()
+ 5 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\AdminController->edit()
+ 6 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+ 7 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 8 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+10 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+11 SYSTEMPATH/rewrite.php(44): require_once('/home/gibekkk/Documents/GitHub/tes-ict/public/index.php')
+DEBUG - 2026-02-26 12:11:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-26 12:11:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-26 12:11:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-26 12:11:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-26 12:11:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2026-02-26 12:11:57 --> Error: Class "ZipArchive" not found
+[Method: POST, Route: admin/import]
+in VENDORPATH/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Shared/File.php on line 61.
+ 1 VENDORPATH/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Shared/File.php(147): PhpOffice\PhpSpreadsheet\Shared\File::fileExists()
+ 2 VENDORPATH/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Reader/Xlsx.php(435): PhpOffice\PhpSpreadsheet\Shared\File::assertFile()
+ 3 VENDORPATH/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Reader/BaseReader.php(269): PhpOffice\PhpSpreadsheet\Reader\Xlsx->loadSpreadsheetFromFile()
+ 4 APPPATH/Controllers/AdminController.php(196): PhpOffice\PhpSpreadsheet\Reader\BaseReader->load()
+ 5 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\AdminController->import()
+ 6 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+ 7 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 8 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+10 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+11 SYSTEMPATH/rewrite.php(44): require_once('/home/gibekkk/Documents/GitHub/tes-ict/public/index.php')
+CRITICAL - 2026-02-26 12:15:30 --> ErrorException: Undefined array key 4
+[Method: POST, Route: admin/import]
+in APPPATH/Controllers/AdminController.php on line 212.
+ 1 APPPATH/Controllers/AdminController.php(212): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\AdminController->import()
+ 3 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+ 4 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 5 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+ 7 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+ 8 SYSTEMPATH/rewrite.php(44): require_once('/home/gibekkk/Documents/GitHub/tes-ict/public/index.php')
+DEBUG - 2026-02-26 12:15:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2026-02-26 12:15:37 --> ErrorException: Undefined array key 4
+[Method: POST, Route: admin/import]
+in APPPATH/Controllers/AdminController.php on line 212.
+ 1 APPPATH/Controllers/AdminController.php(212): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\AdminController->import()
+ 3 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+ 4 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 5 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+ 7 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+ 8 SYSTEMPATH/rewrite.php(44): require_once('/home/gibekkk/Documents/GitHub/tes-ict/public/index.php')
+DEBUG - 2026-02-26 12:15:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2026-02-26 12:16:28 --> Duplicate entry '0806022310002' for key 'nim'
+in SYSTEMPATH/Database/MySQLi/Connection.php on line 300.
+ 1 SYSTEMPATH/Database/MySQLi/Connection.php(300): mysqli->query()
+ 2 SYSTEMPATH/Database/BaseConnection.php(769): CodeIgniter\Database\MySQLi\Connection->execute()
+ 3 SYSTEMPATH/Database/BaseConnection.php(686): CodeIgniter\Database\BaseConnection->simpleQuery()
+ 4 SYSTEMPATH/Database/BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query()
+ 5 SYSTEMPATH/Model.php(356): CodeIgniter\Database\BaseBuilder->insert()
+ 6 SYSTEMPATH/BaseModel.php(898): CodeIgniter\Model->doInsert()
+ 7 SYSTEMPATH/Model.php(665): CodeIgniter\BaseModel->insert()
+ 8 APPPATH/Controllers/AdminController.php(207): CodeIgniter\Model->insert()
+ 9 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\AdminController->import()
+10 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+11 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+12 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+14 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+15 SYSTEMPATH/rewrite.php(44): require_once('/home/gibekkk/Documents/GitHub/tes-ict/public/index.php')
+CRITICAL - 2026-02-26 12:16:28 --> CodeIgniter\Database\Exceptions\DatabaseException: Duplicate entry '0806022310002' for key 'nim'
+[Method: POST, Route: admin/import]
+in SYSTEMPATH/Database/BaseConnection.php on line 724.
+ 1 SYSTEMPATH/Database/BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query()
+ 2 SYSTEMPATH/Model.php(356): CodeIgniter\Database\BaseBuilder->insert()
+ 3 SYSTEMPATH/BaseModel.php(898): CodeIgniter\Model->doInsert()
+ 4 SYSTEMPATH/Model.php(665): CodeIgniter\BaseModel->insert()
+ 5 APPPATH/Controllers/AdminController.php(207): CodeIgniter\Model->insert()
+ 6 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\AdminController->import()
+ 7 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 9 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+11 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+12 SYSTEMPATH/rewrite.php(44): require_once('/home/gibekkk/Documents/GitHub/tes-ict/public/index.php')
+CRITICAL - 2026-02-26 12:16:28 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Duplicate entry '0806022310002' for key 'nim'
+in SYSTEMPATH/Database/MySQLi/Connection.php on line 310.
+ 1 SYSTEMPATH/Database/BaseConnection.php(769): CodeIgniter\Database\MySQLi\Connection->execute()
+ 2 SYSTEMPATH/Database/BaseConnection.php(686): CodeIgniter\Database\BaseConnection->simpleQuery()
+ 3 SYSTEMPATH/Database/BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query()
+ 4 SYSTEMPATH/Model.php(356): CodeIgniter\Database\BaseBuilder->insert()
+ 5 SYSTEMPATH/BaseModel.php(898): CodeIgniter\Model->doInsert()
+ 6 SYSTEMPATH/Model.php(665): CodeIgniter\BaseModel->insert()
+ 7 APPPATH/Controllers/AdminController.php(207): CodeIgniter\Model->insert()
+ 8 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\AdminController->import()
+ 9 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+10 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+11 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+13 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+14 SYSTEMPATH/rewrite.php(44): require_once('/home/gibekkk/Documents/GitHub/tes-ict/public/index.php')
+CRITICAL - 2026-02-26 12:16:28 --> [Caused by] mysqli_sql_exception: Duplicate entry '0806022310002' for key 'nim'
+in SYSTEMPATH/Database/MySQLi/Connection.php on line 300.
+ 1 SYSTEMPATH/Database/MySQLi/Connection.php(300): mysqli->query()
+ 2 SYSTEMPATH/Database/BaseConnection.php(769): CodeIgniter\Database\MySQLi\Connection->execute()
+ 3 SYSTEMPATH/Database/BaseConnection.php(686): CodeIgniter\Database\BaseConnection->simpleQuery()
+ 4 SYSTEMPATH/Database/BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query()
+ 5 SYSTEMPATH/Model.php(356): CodeIgniter\Database\BaseBuilder->insert()
+ 6 SYSTEMPATH/BaseModel.php(898): CodeIgniter\Model->doInsert()
+ 7 SYSTEMPATH/Model.php(665): CodeIgniter\BaseModel->insert()
+ 8 APPPATH/Controllers/AdminController.php(207): CodeIgniter\Model->insert()
+ 9 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\AdminController->import()
+10 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+11 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+12 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+14 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+15 SYSTEMPATH/rewrite.php(44): require_once('/home/gibekkk/Documents/GitHub/tes-ict/public/index.php')
+DEBUG - 2026-02-26 12:16:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-26 12:16:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-26 12:16:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2026-02-26 12:24:56 --> Duplicate entry '0806022310002' for key 'nim'
+in SYSTEMPATH/Database/MySQLi/Connection.php on line 300.
+ 1 SYSTEMPATH/Database/MySQLi/Connection.php(300): mysqli->query()
+ 2 SYSTEMPATH/Database/BaseConnection.php(769): CodeIgniter\Database\MySQLi\Connection->execute()
+ 3 SYSTEMPATH/Database/BaseConnection.php(686): CodeIgniter\Database\BaseConnection->simpleQuery()
+ 4 SYSTEMPATH/Database/BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query()
+ 5 SYSTEMPATH/Model.php(356): CodeIgniter\Database\BaseBuilder->insert()
+ 6 SYSTEMPATH/BaseModel.php(898): CodeIgniter\Model->doInsert()
+ 7 SYSTEMPATH/Model.php(665): CodeIgniter\BaseModel->insert()
+ 8 APPPATH/Controllers/AdminController.php(207): CodeIgniter\Model->insert()
+ 9 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\AdminController->import()
+10 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+11 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+12 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+14 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+15 SYSTEMPATH/rewrite.php(44): require_once('/home/gibekkk/Documents/GitHub/tes-ict/public/index.php')
+DEBUG - 2026-02-26 12:24:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-26 12:24:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-26 12:28:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2026-02-26 12:28:03 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "admin/scan_qr.php"
+[Method: GET, Route: admin/scan]
+in SYSTEMPATH/Exceptions/FrameworkException.php on line 39.
+ 1 SYSTEMPATH/View/View.php(226): CodeIgniter\Exceptions\FrameworkException::forInvalidFile()
+ 2 SYSTEMPATH/Common.php(1250): CodeIgniter\View\View->render()
+ 3 APPPATH/Controllers/AdminController.php(228): view()
+ 4 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\AdminController->scan()
+ 5 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+ 6 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 7 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+ 9 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+10 SYSTEMPATH/rewrite.php(44): require_once('/home/gibekkk/Documents/GitHub/tes-ict/public/index.php')
+DEBUG - 2026-02-26 12:35:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.

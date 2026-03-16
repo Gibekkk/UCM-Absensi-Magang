@@ -1,0 +1,104 @@
+ERROR - 2026-02-27 01:54:52 --> Error connecting to the database: mysqli_sql_exception: No such file or directory in /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php:201
+Stack trace:
+#0 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php(201): mysqli->real_connect()
+#1 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect()
+#2 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/BaseConnection.php(654): CodeIgniter\Database\BaseConnection->initialize()
+#3 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query()
+#4 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Model.php(296): CodeIgniter\Database\BaseBuilder->get()
+#5 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/BaseModel.php(713): CodeIgniter\Model->doFirst()
+#6 /home/gibekkk/Documents/GitHub/tes-ict/app/Controllers/AuthController.php(32): CodeIgniter\BaseModel->first()
+#7 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/CodeIgniter.php(951): App\Controllers\AuthController->login()
+#8 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+#9 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+#10 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Boot.php(417): CodeIgniter\CodeIgniter->run()
+#11 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+#12 /home/gibekkk/Documents/GitHub/tes-ict/public/index.php(59): CodeIgniter\Boot::bootWeb()
+#13 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/rewrite.php(44): require_once('...')
+#14 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: No such file or directory in /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php:231
+Stack trace:
+#0 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect()
+#1 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/BaseConnection.php(654): CodeIgniter\Database\BaseConnection->initialize()
+#2 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query()
+#3 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Model.php(296): CodeIgniter\Database\BaseBuilder->get()
+#4 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/BaseModel.php(713): CodeIgniter\Model->doFirst()
+#5 /home/gibekkk/Documents/GitHub/tes-ict/app/Controllers/AuthController.php(32): CodeIgniter\BaseModel->first()
+#6 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/CodeIgniter.php(951): App\Controllers\AuthController->login()
+#7 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+#8 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+#9 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Boot.php(417): CodeIgniter\CodeIgniter->run()
+#10 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+#11 /home/gibekkk/Documents/GitHub/tes-ict/public/index.php(59): CodeIgniter\Boot::bootWeb()
+#12 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/rewrite.php(44): require_once('...')
+#13 {main}
+CRITICAL - 2026-02-27 01:54:52 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: No such file or directory
+[Method: POST, Route: login]
+in SYSTEMPATH/Database/BaseConnection.php on line 465.
+ 1 SYSTEMPATH/Database/BaseConnection.php(654): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query()
+ 3 SYSTEMPATH/Model.php(296): CodeIgniter\Database\BaseBuilder->get()
+ 4 SYSTEMPATH/BaseModel.php(713): CodeIgniter\Model->doFirst()
+ 5 APPPATH/Controllers/AuthController.php(32): CodeIgniter\BaseModel->first()
+ 6 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\AuthController->login()
+ 7 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 9 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+11 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+12 SYSTEMPATH/rewrite.php(44): require_once('/home/gibekkk/Documents/GitHub/tes-ict/public/index.php')
+ERROR - 2026-02-27 01:55:01 --> Error connecting to the database: mysqli_sql_exception: No such file or directory in /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php:201
+Stack trace:
+#0 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php(201): mysqli->real_connect()
+#1 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect()
+#2 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/BaseConnection.php(654): CodeIgniter\Database\BaseConnection->initialize()
+#3 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query()
+#4 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Model.php(296): CodeIgniter\Database\BaseBuilder->get()
+#5 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/BaseModel.php(713): CodeIgniter\Model->doFirst()
+#6 /home/gibekkk/Documents/GitHub/tes-ict/app/Controllers/AuthController.php(32): CodeIgniter\BaseModel->first()
+#7 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/CodeIgniter.php(951): App\Controllers\AuthController->login()
+#8 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+#9 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+#10 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Boot.php(417): CodeIgniter\CodeIgniter->run()
+#11 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+#12 /home/gibekkk/Documents/GitHub/tes-ict/public/index.php(59): CodeIgniter\Boot::bootWeb()
+#13 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/rewrite.php(44): require_once('...')
+#14 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: No such file or directory in /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php:231
+Stack trace:
+#0 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect()
+#1 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/BaseConnection.php(654): CodeIgniter\Database\BaseConnection->initialize()
+#2 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query()
+#3 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Model.php(296): CodeIgniter\Database\BaseBuilder->get()
+#4 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/BaseModel.php(713): CodeIgniter\Model->doFirst()
+#5 /home/gibekkk/Documents/GitHub/tes-ict/app/Controllers/AuthController.php(32): CodeIgniter\BaseModel->first()
+#6 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/CodeIgniter.php(951): App\Controllers\AuthController->login()
+#7 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+#8 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+#9 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Boot.php(417): CodeIgniter\CodeIgniter->run()
+#10 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+#11 /home/gibekkk/Documents/GitHub/tes-ict/public/index.php(59): CodeIgniter\Boot::bootWeb()
+#12 /home/gibekkk/Documents/GitHub/tes-ict/vendor/codeigniter4/framework/system/rewrite.php(44): require_once('...')
+#13 {main}
+CRITICAL - 2026-02-27 01:55:01 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: No such file or directory
+[Method: POST, Route: login]
+in SYSTEMPATH/Database/BaseConnection.php on line 465.
+ 1 SYSTEMPATH/Database/BaseConnection.php(654): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query()
+ 3 SYSTEMPATH/Model.php(296): CodeIgniter\Database\BaseBuilder->get()
+ 4 SYSTEMPATH/BaseModel.php(713): CodeIgniter\Model->doFirst()
+ 5 APPPATH/Controllers/AuthController.php(32): CodeIgniter\BaseModel->first()
+ 6 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\AuthController->login()
+ 7 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 9 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+11 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+12 SYSTEMPATH/rewrite.php(44): require_once('/home/gibekkk/Documents/GitHub/tes-ict/public/index.php')
+DEBUG - 2026-02-27 01:55:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-27 01:55:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-27 01:56:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-27 01:56:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.

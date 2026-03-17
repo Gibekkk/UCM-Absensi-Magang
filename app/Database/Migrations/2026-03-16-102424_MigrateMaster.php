@@ -136,6 +136,38 @@ class MigrateMaster extends Migration
         ]);
         $forge->addKey('id', true);
         $forge->createTable('m_user');
+
+        $forge->addField([
+            'id' => [
+                'type' => 'VARCHAR',
+                'constraint' => 36,
+                'null'    => false,
+                'default' => new RawSql('(UUID())'),
+            ],
+            'user_id' => [
+                'type' => 'VARCHAR',
+                'constraint' => 36,
+                'null' => false,
+            ],
+            'last_access' => [
+                'type' => 'DATETIME',
+                'null'    => false,
+                'default' => new RawSql('CURRENT_TIMESTAMP'),
+            ],
+            'created_date' => [
+                'type' => 'DATETIME',
+                'null'    => false,
+                'default' => new RawSql('CURRENT_TIMESTAMP'),
+            ],
+            'modified_date' => [
+                'type' => 'DATETIME',
+                'null'    => false,
+                'default' => new RawSql('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'),
+            ],
+        ]);
+        $forge->addKey('id', true);
+        $forge->addForeignKey('user_id', 'm_user', 'id', 'CASCADE', 'CASCADE');
+        $forge->createTable('m_session');
     }
 
     public function down()

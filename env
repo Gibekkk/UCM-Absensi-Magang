@@ -38,6 +38,14 @@
 # database.default.DBPrefix =
 # database.default.port = 3306
 
+# database.master.hostname = localhost
+# database.master.database = ci4
+# database.master.username = root
+# database.master.password = root
+# database.master.DBDriver = MySQLi
+# database.master.DBPrefix =
+# database.master.port = 3306
+
 # If you use MySQLi as tests, first update the values of Config\Database::$tests.
 # database.tests.hostname = localhost
 # database.tests.database = ci4_test

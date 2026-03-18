@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Internship;
 
 use CodeIgniter\Model;
-use App\Entities\InternshipEntity;
+use App\Entities\Internship\InternshipEntity;
+use Ramsey\Uuid\Uuid;
 
 class InternshipModel extends Model
 {
@@ -46,7 +47,7 @@ class InternshipModel extends Model
 
     // Callbacks
     protected $allowCallbacks = true;
-    protected $beforeInsert   = ['updateActiveStatus'];
+    protected $beforeInsert   = ['updateActiveStatus', 'generateId'];
     protected $afterInsert    = [];
     protected $beforeUpdate   = ['updateActiveStatus'];
     protected $afterUpdate    = [];
@@ -55,13 +56,20 @@ class InternshipModel extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
+    protected function generateId(array $data)
+    {
+        // Jika ID belum ada, buatkan manual (opsional jika database sudah punya default)
+        if (!isset($data['data']['id'])) {
+            $data['data']['id'] = Uuid::uuid7()->toString();
+        }
+        return $data;
+    }
+
     protected function updateActiveStatus(array $data)
     {
         if (isset($data['data']['end_date'])) {
             $data['data'] = $this->updateStatusIfExpired($data['data']);
-        } 
-        
-        elseif (isset($data['data'][0])) {
+        } elseif (isset($data['data'][0])) {
             foreach ($data['data'] as $key => $row) {
                 $data['data'][$key] = $this->updateStatusIfExpired($row);
             }

@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Internship;
 
 use CodeIgniter\Model;
 use Config\Database;
-use App\Entities\InternshipStudentEntity;
+use App\Entities\Internship\InternshipStudentEntity;
+use Ramsey\Uuid\Uuid;
 
 class InternshipStudentModel extends Model
 {
@@ -46,7 +47,7 @@ class InternshipStudentModel extends Model
 
     // Callbacks
     protected $allowCallbacks = true;
-    protected $beforeInsert   = ['autoFillDates', 'updateActiveStatus'];
+    protected $beforeInsert   = ['autoFillDates', 'updateActiveStatus', 'generateId'];
     protected $afterInsert    = [];
     protected $beforeUpdate   = ['updateActiveStatus'];
     protected $afterUpdate    = [];
@@ -54,6 +55,15 @@ class InternshipStudentModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    protected function generateId(array $data)
+    {
+        // Jika ID belum ada, buatkan manual (opsional jika database sudah punya default)
+        if (!isset($data['data']['id'])) {
+            $data['data']['id'] = Uuid::uuid7()->toString();
+        }
+        return $data;
+    }
 
     protected function autoFillDates(array $data)
     {
@@ -75,9 +85,7 @@ class InternshipStudentModel extends Model
     {
         if (isset($data['data']['end_date'])) {
             $data['data'] = $this->updateStatusIfExpired($data['data']);
-        } 
-        
-        elseif (isset($data['data'][0])) {
+        } elseif (isset($data['data'][0])) {
             foreach ($data['data'] as $key => $row) {
                 $data['data'][$key] = $this->updateStatusIfExpired($row);
             }

@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Master;
 
 use CodeIgniter\Model;
-use App\Entities\StudentEntity;
+use App\Entities\Master\StudentEntity;
+use Ramsey\Uuid\Uuid;
 
 class StudentModel extends Model
 {
@@ -45,7 +46,7 @@ class StudentModel extends Model
 
     // Callbacks
     protected $allowCallbacks = true;
-    protected $beforeInsert   = [];
+    protected $beforeInsert   = ['generateId'];
     protected $afterInsert    = [];
     protected $beforeUpdate   = [];
     protected $afterUpdate    = [];
@@ -53,4 +54,13 @@ class StudentModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    protected function generateId(array $data)
+    {
+        // Jika ID belum ada, buatkan manual (opsional jika database sudah punya default)
+        if (!isset($data['data']['id'])) {
+            $data['data']['id'] = Uuid::uuid7()->toString();
+        }
+        return $data;
+    }
 }

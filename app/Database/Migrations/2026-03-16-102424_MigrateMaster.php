@@ -89,7 +89,7 @@ class MigrateMaster extends Migration
             ],
             'password' => [
                 'type' => 'VARCHAR',
-                'constraint' => 50,
+                'constraint' => 255,
                 'null' => false,
             ],
             'full_name' => [

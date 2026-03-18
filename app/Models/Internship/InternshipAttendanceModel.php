@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Internship;
 
 use CodeIgniter\Model;
-use App\Entities\InternshipAttendanceEntity;
+use App\Entities\Internship\InternshipAttendanceEntity;
+use Ramsey\Uuid\Uuid;
 
 class InternshipAttendanceModel extends Model
 {
@@ -43,7 +44,7 @@ class InternshipAttendanceModel extends Model
 
     // Callbacks
     protected $allowCallbacks = true;
-    protected $beforeInsert   = ['determineAttendanceType'];
+    protected $beforeInsert   = ['determineAttendanceType', 'generateId'];
     protected $afterInsert    = [];
     protected $beforeUpdate   = [];
     protected $afterUpdate    = [];
@@ -51,6 +52,15 @@ class InternshipAttendanceModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    protected function generateId(array $data)
+    {
+        // Jika ID belum ada, buatkan manual (opsional jika database sudah punya default)
+        if (!isset($data['data']['id'])) {
+            $data['data']['id'] = Uuid::uuid7()->toString();
+        }
+        return $data;
+    }
 
     protected function determineAttendanceType(array $data)
     {

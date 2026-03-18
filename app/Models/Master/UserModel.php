@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Master;
 
 use CodeIgniter\Model;
-use App\Entities\UserEntity;
+use App\Entities\Master\UserEntity;
+use Ramsey\Uuid\Uuid;
 
 class UserModel extends Model
 {

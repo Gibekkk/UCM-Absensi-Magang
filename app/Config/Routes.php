@@ -13,5 +13,6 @@ $routes->group('auth', function ($routes) {
 });
 
 $routes->group('admin', ['filter' => 'auth'], function ($routes) {
-    $routes->get('dashboard', 'AdminController::home');
+    $routes->get('dashboard', 'AdminController::index');
+    $routes->get('students', 'AdminController::getStudents');
 });

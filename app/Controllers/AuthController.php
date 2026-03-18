@@ -27,7 +27,7 @@ class AuthController extends BaseController
             ])->setStatusCode(400);
         }
 
-        // 2. Cek user di database (Contoh)
+        // 2. Cek user di database
         $user = $userModel->where('username', $username)->first();
 
         if ($user && password_verify($password, $user->password)) {

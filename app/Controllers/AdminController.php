@@ -2,22 +2,14 @@
 
 namespace App\Controllers;
 
-use App\Models\Master\StudentModel;
-
 class AdminController extends BaseController
 {
     public function index()
     {
-        return view('Admin/dashboard');
+        return view('Admin/students');
     }
-
-    public function getStudents()
+    public function internship()
     {
-        $studentModel = new StudentModel();
-        $students = $studentModel->findAll();
-
-        return $this->response->setJSON([
-            'students' => $students
-        ]);
+        return view('Admin/internship');
     }
 }

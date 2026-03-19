@@ -153,7 +153,7 @@
                 .then(data => {
                     if (data.status === 'success') {
                         setCookie('token', data.token);
-                        window.location.href = '<?= base_url("/admin/dashboard"); ?>';
+                        window.location.href = '<?= base_url("/admin/students"); ?>';
                     } else {
                         showError('Login Error', data.message);
                     }

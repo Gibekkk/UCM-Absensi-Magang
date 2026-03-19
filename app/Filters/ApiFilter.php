@@ -7,7 +7,7 @@ use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use App\Models\Master\SessionModel;
 
-class AuthFilter implements FilterInterface
+class ApiFilter implements FilterInterface
 {
     /**
      * Do whatever processing this filter needs to do.
@@ -24,20 +24,19 @@ class AuthFilter implements FilterInterface
      *
      * @return RequestInterface|ResponseInterface|string|void
      */
+
     public function before(RequestInterface $request, $arguments = null)
     {
-        $token = $_COOKIE['token'] ?? $request->getHeaderLine('token') ?? null;
-        $sessionModel = new SessionModel();
-
-        // Cek apakah token ada di database
-        $session = $token ? $sessionModel->where('id', $token)->first() : null;
-
-        if (!$session) {
-            return redirect()->to(base_url('/auth/login'));
+        $apiHeader = $request->getHeaderLine('RequestType') ?? null;
+        if ($apiHeader) {
+            if ($apiHeader != "API") {
+                return redirect()->to(base_url('/errors/error_404'));
+            }
         } else {
-            $sessionModel->update($session->id, ['last_access' => date('Y-m-d H:i:s')]);
+            return redirect()->to(base_url('/errors/error_404'));
         }
     }
+
 
     /**
      * Allows After filters to inspect and modify the response

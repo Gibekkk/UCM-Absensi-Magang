@@ -31,7 +31,6 @@ class AuthController extends BaseController
         $user = $userModel->where('username', $username)->first();
 
         if ($user && password_verify($password, $user->password)) {
-            $user = $userModel->where('username', $username)->first();
 
             $token = Uuid::uuid7()->toString();
 
@@ -61,5 +60,25 @@ class AuthController extends BaseController
         $sessionModel = new SessionModel();
         $sessionModel->delete($token);
         return $this->response->setJSON(null);
+    }
+
+    public function getUserByToken()
+    {
+        $token = $this->request->getHeaderLine('token');;
+        $sessionModel = new SessionModel();
+        $session = $sessionModel->where('id', $token)->first();
+
+        if ($session) {
+            $user = $session->getUser();
+            return $this->response->setJSON([
+                'status' => 'success',
+                'user' => $user
+            ]);
+        }
+
+        return $this->response->setJSON([
+            'status' => 'error',
+            'message' => 'Token Not Found.'
+        ])->setStatusCode(404);
     }
 }

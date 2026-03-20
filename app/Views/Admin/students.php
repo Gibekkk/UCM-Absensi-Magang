@@ -20,8 +20,10 @@
                     <h3>Students Data</h3>
                     <div>
                         <button class="btn btn-primary" data-bs-toggle="modal" onclick="openAddModal()">Add Student</button>
-                        <button class="btn btn-success" onclick="$('#importFile').click()">Import</button>
-                        <input type="file" id="importFile" class="d-none" accept=".csv, .xlsx" onchange="importData(this)">
+                        <input type="file" id="fileInput" accept=".xlsx, .xls" class="d-none" onchange="importData(this)">
+                        <button class="btn btn-success" onclick="document.getElementById('fileInput').click()">
+                            Import Excel
+                        </button>
                     </div>
                 </div>
 
@@ -34,6 +36,8 @@
                                 <th>Name</th>
                                 <th>Major</th>
                                 <th>Sub Major</th>
+                                <th>Internship</th>
+                                <th>Department</th>
                                 <th>Is Active</th>
                                 <th>Action</th>
                             </tr>
@@ -52,6 +56,26 @@
     <script src="<?= base_url('js/app.js') ?>"></script>
 
     <script>
+        function populateInternship(id = null) {
+            $.ajax({
+                url: '<?= base_url("admin/api/internships"); ?>',
+                contentType: 'application/json',
+                headers: {
+                    'token': getCookie('token'),
+                    'RequestType': 'API',
+                    'X-CSRF-TOKEN': '<?= csrf_hash() ?>'
+                },
+                type: 'GET',
+                success: (res) => {
+                    $('#studentModal #studentForm #internship_id').empty();
+                    if (id == null) $('#studentModal #studentForm #internship_id').append(`<option value="" ${id == null ? "selected" : ""}>Select Department</Option>`);
+                    res.internships.forEach(internship => {
+                        $('#studentModal #studentForm #internship_id').append(`<option value="${internship.id}" ${id != null && id == internship.id ? "selected" : ""}>${internship.name}</Option>`);
+                    });
+                }
+            });
+        }
+
         $(document).ready(function() {
             // 1. RESTful DataTables Initialization
             $('#mhsTable').DataTable({
@@ -84,6 +108,12 @@
                     },
                     {
                         data: 'sub_major'
+                    },
+                    {
+                        data: 'internship_name'
+                    },
+                    {
+                        data: 'internship_department'
                     },
                     {
                         data: null,
@@ -126,6 +156,8 @@
                 },
                 error: (err) => console.error("Error Fetching Profile")
             });
+
+            $('#studentModal #studentForm #internship_id').focus(populateInternship());
         });
 
         // 2. Handle Submit Form (Add & Edit)
@@ -150,7 +182,7 @@
                     },
                     error: (res) => {
                         $('#studentModal').modal('hide');
-                        showError("Error Saving", res.message ?? "Unknown Error Occured.")
+                        showAlert("Error Saving", res.message ?? "Unknown Error Occured.")
                     }
                 });
             } else {
@@ -171,7 +203,7 @@
                     },
                     error: (res) => {
                         $('#studentModal').modal('hide');
-                        showError("Error Saving", res.message ?? "Unknown Error Occured.")
+                        showAlert("Error Saving", res.message ?? "Unknown Error Occured.")
                     }
                 });
             }
@@ -179,6 +211,7 @@
 
         // 3. Fungsi Buka Modal Add
         function openAddModal() {
+            populateInternship();
             $('#studentModal #modalTitle').text('Add Student');
             $('#studentModal #studentForm')[0].reset();
             $('#studentModal #studentId').val('');
@@ -204,11 +237,12 @@
                     $('#studentModal input[name="major"]').val(data.students.major);
                     $('#studentModal input[name="sub_major"]').val(data.students.sub_major);
                     $('#studentModal input[name="is_active"]').prop("checked", data.students.is_active == "1" ? true : false);
+                    populateInternship(data.students.internship_id);
                     $('#studentModal').modal('show');
                 },
                 error: (res) => {
                     $('#studentModal').modal('hide');
-                    showError("Error Saving", res.message ?? "Unknown Error Occured.")
+                    showAlert("Error Saving", res.message ?? "Unknown Error Occured.")
                 }
             });
         }
@@ -245,23 +279,35 @@
 
         // 7. RESTful Import
         function importData(input) {
+            let file = input.files[0];
+            if (!file) return;
+
             let formData = new FormData();
-            formData.append('file', input.files[0]);
+            formData.append('file_excel', file);
+
             $.ajax({
-                url: '<?= base_url("api/students/import"); ?>',
-                contentType: 'application/json',
+                url: '<?= base_url("admin/api/students/import"); ?>',
+                type: 'POST',
+                data: formData,
+                processData: false, // WAJIB
+                contentType: false, // WAJIB
                 headers: {
                     'token': getCookie('token'),
                     'RequestType': 'API',
                     'X-CSRF-TOKEN': '<?= csrf_hash() ?>'
                 },
-                type: 'POST',
-                data: formData,
-                processData: false,
-                contentType: false,
-                success: () => {
-                    console.error('Import Success');
-                    $('#mhsTable').DataTable().ajax.reload();
+                success: (res) => {
+                    if (res.status === 'success') {
+                        console.log(`Import Success! Imported: ${res.data.success}, Failed: ${res.data.failed}`);
+                        showAlert(`Import Success!`, `Imported: ${res.data.success}, Failed: ${res.data.failed}`);
+                        $('#mhsTable').DataTable().ajax.reload();
+                    } else {
+                        console.error('Error: ' + res.message);
+                    }
+                },
+                error: (xhr) => {
+                    let msg = xhr.responseJSON ? xhr.responseJSON.message : 'Terjadi kesalahan sistem';
+                    console.error('Import Failed: ' + msg);
                 }
             });
         }

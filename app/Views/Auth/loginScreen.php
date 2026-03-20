@@ -155,11 +155,11 @@
                         setCookie('token', data.token);
                         window.location.href = '<?= base_url("/admin/students"); ?>';
                     } else {
-                        showError('Login Error', data.message);
+                        showAlert('Login Error', data.message);
                     }
                 })
                 .catch(error => {
-                    showError('Unknown Login Error', 'An error occurred. Please try again');
+                    showAlert('Unknown Login Error', 'An error occurred. Please try again');
                 });
         });
     </script>

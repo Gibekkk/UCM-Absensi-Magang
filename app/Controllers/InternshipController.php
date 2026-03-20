@@ -18,9 +18,45 @@ class InternshipController extends BaseController
     public function getInternships($id = null)
     {
         if ($id != null) {
-            $internships = $this->internshipModel->find($id);
+            $queryRes = $this->internshipModel->where('id', $id)->findAll();
+
+            foreach ($queryRes as $internship) {
+                $students = $internship->getStudentInternships();
+
+                $internships = [
+                    'id' => $internship->id,
+                    'name' => $internship->name,
+                    'department' => $internship->department,
+                    'head_department' => $internship->head_department,
+                    'start_date' => $internship->start_date,
+                    'end_date' => $internship->end_date,
+                    'is_active' => $internship->is_active,
+                    'created_by' => $internship->created_by,
+                    'modified_by' => $internship->modified_by,
+                    'students_count' => count($students),
+                ];
+            }
         } else {
-            $internships = $this->internshipModel->findAll();
+            $queryRes = $this->internshipModel->findAll();
+
+            foreach ($queryRes as $internship) {
+                $students = $internship->getStudentInternships();
+
+                $row = [
+                    'id' => $internship->id,
+                    'name' => $internship->name,
+                    'department' => $internship->department,
+                    'head_department' => $internship->head_department,
+                    'start_date' => $internship->start_date,
+                    'end_date' => $internship->end_date,
+                    'is_active' => $internship->is_active,
+                    'created_by' => $internship->created_by,
+                    'modified_by' => $internship->modified_by,
+                    'students_count' => count($students),
+                ];
+
+                $internships[] = $row;
+            }
         }
 
         return $this->response->setJSON([
@@ -95,9 +131,7 @@ class InternshipController extends BaseController
 
     public function deleteInternship($id)
     {
-        $token = $this->request->getHeaderLine('token');;
-        $username = $this->sessionModel->where('id', $token)->first()->getUser()->username;
-
+        $token = $this->request->getHeaderLine('token');
 
         if ($this->internshipModel->find($id)) {
             if ($this->internshipModel->delete($id)) {

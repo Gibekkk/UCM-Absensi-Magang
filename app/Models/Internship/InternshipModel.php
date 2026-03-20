@@ -47,12 +47,12 @@ class InternshipModel extends Model
 
     // Callbacks
     protected $allowCallbacks = true;
-    protected $beforeInsert   = ['updateActiveStatus', 'generateId'];
+    protected $beforeInsert   = ['syncStatus', 'generateId'];
     protected $afterInsert    = [];
-    protected $beforeUpdate   = ['updateActiveStatus'];
+    protected $beforeUpdate   = ['syncStatus'];
     protected $afterUpdate    = [];
-    protected $beforeFind     = ['updateActiveStatus'];
-    protected $afterFind      = [];
+    protected $beforeFind     = [];
+    protected $afterFind      = ['syncStatusAfterFind'];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
@@ -65,27 +65,49 @@ class InternshipModel extends Model
         return $data;
     }
 
-    protected function updateActiveStatus(array $data)
+    protected function syncStatus(array $data)
     {
+        // Cek apakah 'end_date' ada dalam data yang akan disimpan
         if (isset($data['data']['end_date'])) {
-            $data['data'] = $this->updateStatusIfExpired($data['data']);
-        } elseif (isset($data['data'][0])) {
-            foreach ($data['data'] as $key => $row) {
-                $data['data'][$key] = $this->updateStatusIfExpired($row);
+            $today = date('Y-m-d');
+
+            // Jika end_date sudah lewat, paksa is_active jadi '0'
+            if ($data['data']['end_date'] < $today) {
+                $data['data']['is_active'] = '0';
             }
         }
         return $data;
     }
 
-    private function updateStatusIfExpired($row)
+    protected function syncStatusAfterFind(array $data)
     {
-        $row = (array) $row;
+        // Jika data kosong, langsung return
+        if (!isset($data['data'])) return $data;
+
         $today = date('Y-m-d');
 
-        if ($row['end_date'] < $today && $row['is_active'] == '1') {
-            $row['is_active'] = '0';
-            $this->db->table($this->table)->update(['is_active' => '0'], ['id' => $row['id']]);
+        // Fungsi untuk memproses satu baris data
+        $process = function ($row) use ($today) {
+            // Jika row adalah objek (karena returnType = entity)
+            if (is_object($row) && isset($row->end_date) && $row->end_date < $today && $row->is_active == '1') {
+                $row->is_active = '0';
+                // Update ke database agar sinkron (opsional, tapi disarankan)
+                $this->db->table($this->table)->update(['is_active' => '0'], ['id' => $row->id]);
+            }
+            return $row;
+        };
+
+        // Jika hasil find() (satu data)
+        if (!is_array($data['data'])) {
+            $data['data'] = $process($data['data']);
         }
-        return $row;
+        // Jika hasil findAll() (banyak data)
+        else {
+            foreach ($data['data'] as $key => $row) {
+                $data['data'][$key] = $process($row);
+            }
+        }
+
+        return $data;
     }
 }

@@ -33,6 +33,7 @@
                                 <th>Head of Department</th>
                                 <th>Start Date</th>
                                 <th>End Date</th>
+                                <th>Number of Students</th>
                                 <th>Is Active</th>
                                 <th>Action</th>
                             </tr>
@@ -94,9 +95,12 @@
                         `
                     },
                     {
+                        data: 'students_count'
+                    },
+                    {
                         data: null,
                         render: (data, type, row) => `
-                            ${row.is_active == "1" ? "True" : "False"}
+                        ${row.is_active == "1" ? "True" : "False"}
                         `
                     },
                     {
@@ -158,7 +162,7 @@
                     },
                     error: (res) => {
                         $('#internshipModal').modal('hide');
-                        showError("Error Saving", res.message ?? "Unknown Error Occured.")
+                        showAlert("Error Saving", res.message ?? "Unknown Error Occured.")
                     }
                 });
             } else {
@@ -179,7 +183,7 @@
                     },
                     error: (res) => {
                         $('#internshipModal').modal('hide');
-                        showError("Error Saving", res.message ?? "Unknown Error Occured.")
+                        showAlert("Error Saving", res.message ?? "Unknown Error Occured.")
                     }
                 });
             }
@@ -217,7 +221,7 @@
                 },
                 error: (res) => {
                     $('#internshipModal').modal('hide');
-                    showError("Error Saving", res.message ?? "Unknown Error Occured.")
+                    showAlert("Error Saving", res.message ?? "Unknown Error Occured.")
                 }
             });
         }

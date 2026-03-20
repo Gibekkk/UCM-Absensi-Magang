@@ -1,12 +1,12 @@
 <!-- Modal Error -->
-<div class="modal fade" id="errorModal" tabindex="-1" aria-hidden="true">
+<div class="modal fade" id="alertModal" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="errorModalTitle">Modal title</h5>
+        <h5 class="modal-title" id="alertModalTitle">Modal title</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
       </div>
-      <div class="modal-body" id="errorModalBody">
+      <div class="modal-body" id="alertModalBody">
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -17,10 +17,10 @@
 </div>
 
 <script>
-  function showError(title, message) {
-    document.getElementById('errorModalBody').innerText = message;
-    document.getElementById('errorModalTitle').innerText = title;
-    var myModal = new bootstrap.Modal(document.getElementById('errorModal'));
+  function showAlert(title, message) {
+    document.getElementById('alertModalBody').innerText = message;
+    document.getElementById('alertModalTitle').innerText = title;
+    var myModal = new bootstrap.Modal(document.getElementById('alertModal'));
     myModal.show();
   }
 </script>
@@ -52,6 +52,11 @@
           <div class="mb-3">
             <label>Sub Major</label>
             <input type="text" name="sub_major" id="sub_major" class="form-control" required>
+          </div>
+          <div class="mb-3">
+            <label for="internship_id">Internship Assignment</label>
+            <select name="internship_id" id="internship_id" class="form-control" required>
+            </select>
           </div>
           <div class="form-check">
             <input class="form-check-input" type="checkbox" value="" id="is_active_student" name="is_active">

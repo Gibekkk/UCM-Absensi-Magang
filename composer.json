@@ -12,6 +12,8 @@
     "require": {
         "php": "^8.2",
         "codeigniter4/framework": "^4.7",
+        "phpoffice/phpexcel": "^1.8",
+        "phpoffice/phpspreadsheet": "^5.5",
         "ramsey/uuid": "^4.9"
     },
     "require-dev": {

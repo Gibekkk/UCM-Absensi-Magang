@@ -21,6 +21,7 @@ $routes->group('admin', ['filter' => 'auth'], function ($routes) {
             $routes->post('/', 'StudentController::addStudent');
             $routes->put('(:any)', 'StudentController::editStudent/$1');
             $routes->delete('(:any)', 'StudentController::deleteStudent/$1');
+            $routes->post('import', 'StudentController::importStudents');
         });
         $routes->group('internships', function ($routes) {
             $routes->get('(:any)', 'InternshipController::getInternships/$1');

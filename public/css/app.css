@@ -26,3 +26,25 @@ body {
     border-radius: 15px;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
+
+.dashboard-container {
+    display: grid;
+    grid-template-columns: 300px 1fr 350px;
+    gap: 20px;
+    padding: 20px;
+    height: 100vh;
+    background: url('bg-campus.jpg') center/cover;
+}
+
+.glass-panel {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    padding: 20px;
+    color: white;
+}
+
+.big-number { font-size: 5rem; color: #ff9f43; }
+.grid-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.stat-item { background: rgba(0,0,0,0.2); padding: 10px; border-radius: 10px; }

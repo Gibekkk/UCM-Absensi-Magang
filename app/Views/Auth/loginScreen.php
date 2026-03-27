@@ -93,12 +93,6 @@
     <div class="glass-card glass-panel">
         <h2 class="text-center">Login</h2>
 
-        <?php if (isset($error)): ?>
-            <div class="alert alert-glass">
-                <?= $error; ?>
-            </div>
-        <?php endif; ?>
-
         <!-- Tambahkan id pada form -->
         <form id="loginForm">
             <div class="mb-3">

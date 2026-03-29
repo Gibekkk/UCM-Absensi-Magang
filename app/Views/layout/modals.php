@@ -138,3 +138,38 @@
     </div>
   </div>
 </div>
+
+<!-- Modal Container -->
+<div id="notifModal" class="modal-overlay" style="display: none;">
+    <div class="glass-card modal-content">
+        <!-- Icon Container -->
+        <div id="modalIcon" class="icon-box">
+            <!-- SVG akan diisi via JS -->
+        </div>
+        <h3 id="modalTitle">Success</h3>
+        <p id="modalMessage">Attendance recorded successfully!</p>
+        
+        <!-- Duration Bar -->
+        <div class="progress-container">
+            <div id="progressBar" class="progress-bar"></div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .modal-overlay {
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+        background: rgba(0,0,0,0.6); display: flex; align-items: center; justify-content: center;
+        z-index: 9999; backdrop-filter: blur(5px);
+    }
+    .modal-content {
+        padding: 2rem; text-align: center; color: white; width: 300px;
+        animation: fadeIn 0.3s ease-out;
+    }
+    .icon-box { font-size: 4rem; margin-bottom: 1rem; }
+    .progress-container { width: 100%; height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; margin-top: 15px; overflow: hidden; }
+    .progress-bar { height: 100%; width: 100%; background: #00ff88; animation: shrink 3s linear forwards; }
+    
+    @keyframes fadeIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+    @keyframes shrink { from { width: 100%; } to { width: 0%; } }
+</style>

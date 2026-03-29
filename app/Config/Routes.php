@@ -7,6 +7,17 @@ use CodeIgniter\Router\RouteCollection;
  */
 $routes->get('/', 'AttendanceController::index');
 $routes->get('scanner', 'AttendanceController::scanner');
+$routes->get('camera', 'AttendanceController::camera');
+
+$routes->group('api', ['filter' => 'api'], function ($routes) {
+    $routes->post('attend', 'AttendanceController::createAttendance');
+    $routes->group('attendance', function ($routes) {
+        $routes->get('today', 'AttendanceController::getTodayAttendances');
+        $routes->get('(:num)/(:num)/(:num)', 'AttendanceController::getDateAttendances/$1/$2/$3');
+        $routes->get('/', 'AttendanceController::getAttendances');
+        $routes->get('(:any)', 'AttendanceController::getAttendances/$1');
+    });
+});
 
 $routes->group('auth', function ($routes) {
     $routes->get('login', 'AuthController::index');
@@ -35,5 +46,6 @@ $routes->group('admin', ['filter' => 'auth'], function ($routes) {
     });
 
     $routes->get('students', 'AdminController::index');
+    $routes->get('attendance', 'AdminController::attendance');
     $routes->get('internships', 'AdminController::internship');
 });

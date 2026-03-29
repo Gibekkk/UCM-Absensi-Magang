@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Attendance Scanner</title>
+    <title>Student Attendance Camera Scanner</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/v/bs5/dt-1.13.4/datatables.min.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700&display=swap" rel="stylesheet">
@@ -108,12 +108,23 @@
             gap: 2rem;
         }
 
-        .top-container {
-            flex: 2;
+        .top-container .student-container {
+            flex: 1;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
+        }
+
+        .top-container .camera-container {
+            flex: 1;
+        }
+
+        .top-container {
+            flex: 2;
+            display: flex;
+            flex-direction: row;
+            gap: 2rem;
         }
 
         .bottom-container {
@@ -174,9 +185,14 @@
     <?= view('layout/modals') ?>
     <div class="content-container">
         <div class="left-container">
-            <div class="top-container glass-card">
-                <p class="title">Students</p>
-                <p class="count tabular-nums" id="inCount">0</p>
+            <div class="top-container">
+                <div class="camera-container glass-card flex-fill">
+                    
+                </div>
+                <div class="student-container glass-card flex-fill">
+                    <p class="title">Students</p>
+                    <p class="count tabular-nums" id="inCount">0</p>
+                </div>
             </div>
             <div class="bottom-container">
                 <div class="date-container glass-card flex-container flex-fill">
@@ -212,7 +228,7 @@
         let isModalOpen = false;
 
         $(document).on('keypress', function(e) {
-            if (now - lastKeyTime > 100 || isModalOpen) scannerBuffer = ""; 
+            if (now - lastKeyTime > 100 || isModalOpen) scannerBuffer = "";
             if (e.which === 13) {
                 if (scannerBuffer.length > 0) {
                     sendAttendance(scannerBuffer);

@@ -5,6 +5,7 @@ namespace App\Entities\Internship;
 use CodeIgniter\Entity\Entity;
 use Config\Database;
 use App\Entities\Internship\InternshipEntity;
+use App\Entities\Internship\InternshipAttendanceEntity;
 use App\Entities\Master\StudentEntity;
 
 class InternshipStudentEntity extends Entity
@@ -18,9 +19,9 @@ class InternshipStudentEntity extends Entity
         $db = Database::connect('default');
 
         return $db->table('m_internship')
-                  ->where('id', $this->attributes['internship_id'])
-                  ->get()
-                  ->getFirstRow(InternshipEntity::class);
+            ->where('id', $this->attributes['internship_id'])
+            ->get()
+            ->getFirstRow(InternshipEntity::class);
     }
 
     public function getStudent()
@@ -28,8 +29,18 @@ class InternshipStudentEntity extends Entity
         $db = Database::connect('master');
 
         return $db->table('m_student')
-                  ->where('id', $this->attributes['student_id'])
-                  ->get()
-                  ->getFirstRow(StudentEntity::class);
+            ->where('id', $this->attributes['student_id'])
+            ->get()
+            ->getFirstRow(StudentEntity::class);
+    }
+
+    public function getAttendances()
+    {
+        $db = Database::connect('default');
+
+        return $db->table('m_internship_attendance')
+            ->where('internship_student_id', $this->attributes['id'])
+            ->get()
+            ->getResult(InternshipAttendanceEntity::class);
     }
 }

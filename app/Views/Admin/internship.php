@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Data Mahasiswa - UC Internship</title>
+    <title>Internship Data - UC Internship</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/v/bs5/dt-1.13.4/datatables.min.css" rel="stylesheet" />
     <link href="<?= base_url('css/app.css') ?>" rel="stylesheet">
@@ -49,6 +49,7 @@
     <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
     <script src="<?= base_url('js/app.js') ?>"></script>
 
     <script>

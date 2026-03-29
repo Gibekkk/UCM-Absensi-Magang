@@ -74,10 +74,9 @@ class InternshipAttendanceModel extends Model
         if ($studentId) {
             $existing = $this->where('internship_student_id', $studentId)
                 ->where('scan_time', $today)
-                ->where('scan_time_type', 'IN')
-                ->first();
+                ->findAll();
 
-            $data['data']['scan_time_type'] = $existing ? 'OUT' : 'IN';
+            $data['data']['scan_time_type'] = count($existing) % 2 == 0 ? 'IN' : 'OUT';
         }
 
         return $data;

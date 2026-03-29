@@ -12,4 +12,8 @@ class AdminController extends BaseController
     {
         return view('Admin/internship');
     }
+    public function attendance()
+    {
+        return view('Admin/attendance');
+    }
 }

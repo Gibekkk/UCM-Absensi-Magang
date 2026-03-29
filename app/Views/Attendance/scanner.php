@@ -319,7 +319,7 @@
                     table = $('#attendanceTable').DataTable({
                         data: data,
                         paging: true,
-                        pageLength: 15,
+                        pageLength: 25,
                         ordering: true,
                         searching: false,
                         info: false,

@@ -116,8 +116,44 @@
             justify-content: center;
         }
 
-        .top-container .camera-container {
-            flex: 1;
+        /* Pastikan container kamera bersih */
+        .camera-container {
+            padding: 0 !important;
+            overflow: hidden;
+            position: relative;
+            border-radius: 16px;
+            /* Sesuaikan dengan glass-card */
+        }
+
+        /* Paksa reader dan video memenuhi area */
+        #reader {
+            width: 100% !important;
+            height: 100% !important;
+            border: none !important;
+        }
+
+        #reader video {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+            /* Ini kunci agar memenuhi container */
+        }
+
+        /* Sembunyikan elemen UI library yang mengganggu */
+        #reader__scan_region {
+            background: transparent !important;
+        }
+
+        #reader__dashboard_section {
+            display: none !important;
+        }
+
+        #reader__header_message {
+            display: none !important;
+        }
+
+        #reader img {
+            display: none !important;
         }
 
         .top-container {
@@ -187,7 +223,7 @@
         <div class="left-container">
             <div class="top-container">
                 <div class="camera-container glass-card flex-fill">
-                    
+                    <div id="reader"></div>
                 </div>
                 <div class="student-container glass-card flex-fill">
                     <p class="title">Students</p>
@@ -222,23 +258,24 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
+    <script src="https://unpkg.com/html5-qrcode"></script>
     <script>
-        let table;
-        let scannerBuffer = "";
-        let isModalOpen = false;
-
-        $(document).on('keypress', function(e) {
-            if (now - lastKeyTime > 100 || isModalOpen) scannerBuffer = "";
-            if (e.which === 13) {
-                if (scannerBuffer.length > 0) {
-                    sendAttendance(scannerBuffer);
-                    scannerBuffer = "";
-                }
-            } else {
-                scannerBuffer += String.fromCharCode(e.which);
+        let html5QrcodeScanner = new Html5QrcodeScanner(
+            "reader", {
+                fps: 10,
             }
-        });
+        );
 
+        function onScanSuccess(decodedText, decodedResult) {
+            if (isModalOpen) return;
+            sendAttendance(decodedText);
+        }
+
+        // Jalankan scanner pertama kali
+        html5QrcodeScanner.render(onScanSuccess);
+
+        let table;
+        let isModalOpen = false;
 
         // Modifikasi fungsi sendAttendance
         function sendAttendance(nim) {
@@ -335,7 +372,7 @@
                     table = $('#attendanceTable').DataTable({
                         data: data,
                         paging: true,
-                        pageLength: 15,
+                        pageLength: 25,
                         ordering: true,
                         searching: false,
                         info: false,

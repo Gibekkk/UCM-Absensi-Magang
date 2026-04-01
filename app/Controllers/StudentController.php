@@ -81,7 +81,7 @@ class StudentController extends BaseController
     public function addStudent()
     {
         $token = $this->request->getHeaderLine('token');
-        $username = $this->sessionModel->where('id', $token)->first()->getUser()->username;
+        $id = $this->sessionModel->where('id', $token)->first()->getUser()->id;
 
         $data = $this->request->getJSON(true);
         $student = [
@@ -90,8 +90,8 @@ class StudentController extends BaseController
             'major' => $data['major'],
             'sub_major' => $data['sub_major'],
             'is_active' => isset($data['is_active']) ? "1" : "0",
-            'created_by' => $username,
-            'modified_by' => $username,
+            'created_by' => $id,
+            'modified_by' => $id,
         ];
 
         if ($this->studentModel->insert($student)) {
@@ -100,8 +100,8 @@ class StudentController extends BaseController
                 "student_id" => $studentId,
                 "internship_id" => $data["internship_id"],
                 "is_active" => isset($data['is_active']) ? "1" : "0",
-                "created_by" => $username,
-                "modified_by" => $username,
+                "created_by" => $id,
+                "modified_by" => $id,
             ]);
 
             return $this->response->setJSON([
@@ -118,7 +118,7 @@ class StudentController extends BaseController
     public function editStudent($id)
     {
         $token = $this->request->getHeaderLine('token');
-        $username = $this->sessionModel->where('id', $token)->first()->getUser()->username;
+        $id = $this->sessionModel->where('id', $token)->first()->getUser()->id;
 
         $data = $this->request->getJSON(true);
         $student = [
@@ -127,7 +127,7 @@ class StudentController extends BaseController
             'major' => $data['major'],
             'sub_major' => $data['sub_major'],
             'is_active' => isset($data['is_active']) ? "1" : "0",
-            'modified_by' => $username,
+            'modified_by' => $id,
         ];
 
         $studentData = $this->studentModel->find($id);
@@ -138,7 +138,7 @@ class StudentController extends BaseController
                     $this->internshipStudentModel->update($studentData->getInternshipStudent()->id, [
                         "internship_id" => $data["internship_id"],
                         "is_active" => isset($data['is_active']) ? "1" : "0",
-                        "modified_by" => $username,
+                        "modified_by" => $id,
                     ]);
                 }
 
@@ -192,7 +192,7 @@ class StudentController extends BaseController
         if (!$session) {
             return $this->response->setStatusCode(401)->setJSON(['status' => 'error', 'message' => 'Unauthorized']);
         }
-        $username = $session->getUser()->username;
+        $id = $session->getUser()->id;
 
         // Validasi File
         if (!$file || !$file->isValid() || $file->hasMoved()) {
@@ -227,8 +227,8 @@ class StudentController extends BaseController
                         'major'       => $row[2],
                         'sub_major'   => $row[3],
                         'is_active'   => $row[5] ?? '1',
-                        'created_by'  => $username,
-                        'modified_by' => $username,
+                        'created_by'  => $id,
+                        'modified_by' => $id,
                     ]);
 
                     $student = $this->studentModel->where('nim', $nim)->first();
@@ -237,8 +237,8 @@ class StudentController extends BaseController
                         'student_id'    => $student->id,
                         'internship_id' => $internship->id,
                         'is_active'     => $row[5] ?? '1',
-                        'created_by'    => $username,
-                        'modified_by'   => $username,
+                        'created_by'    => $id,
+                        'modified_by'   => $id,
                     ]);
 
                     $db->transComplete();

@@ -45,8 +45,8 @@ class AttendanceController extends BaseController
             $attendanceData = [
                 'internship_student_id' => $internshipStudent->id,
                 'scan_time' => date("Y-m-d"),
-                'created_by' => 'admin',
-                'modified_by' => 'admin',
+                'created_by' => $internshipStudent->id,
+                'modified_by' => $internshipStudent->id,
             ];
             if ($this->internshipAttendanceModel->insert($attendanceData)) {
                 $todayAttendance = $this->internshipAttendanceModel

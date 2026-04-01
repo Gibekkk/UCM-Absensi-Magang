@@ -128,8 +128,8 @@
                         orderable: false,
                         render: (data, type, row) => `
                             <button class="btn btn-sm btn-outline-primary" onclick="openEditModal('${row.id}')">Edit</button>
-                            <button class="btn btn-sm btn-outline-danger" onclick="confirmDelete('${row.id}')">Delete</button>
                         `
+                        // <button class="btn btn-sm btn-outline-danger" onclick="confirmDelete('${row.id}')">Delete</button>
                     }
                 ],
                 "drawCallback": function(settings) {
@@ -251,32 +251,32 @@
         // 5. Fungsi Delete (Trigger Modal)
         let studentIdToDelete = null;
 
-        function confirmDelete(id) {
-            studentIdToDelete = id;
-            $('#deleteModalBody').html("Are you sure you want to delete this student? This action cannot be undone.");
-            $('#deleteModal').modal('show');
-        }
+        // function confirmDelete(id) {
+        //     studentIdToDelete = id;
+        //     $('#deleteModalBody').html("Are you sure you want to delete this student? This action cannot be undone.");
+        //     $('#deleteModal').modal('show');
+        // }
 
         // 6. Eksekusi Delete
-        $('#confirmDeleteBtn').on('click', function() {
-            if (studentIdToDelete) {
-                $.ajax({
-                    url: '<?= base_url("admin/api/students/"); ?>' + studentIdToDelete,
-                    contentType: 'application/json',
-                    headers: {
-                        'token': getCookie('token'),
-                        'RequestType': 'API',
-                        'X-CSRF-TOKEN': '<?= csrf_hash() ?>'
-                    },
-                    type: 'DELETE',
-                    success: () => {
-                        $('#deleteModal').modal('hide');
-                        $('#mhsTable').DataTable().ajax.reload();
-                        studentIdToDelete = null;
-                    }
-                });
-            }
-        });
+        // $('#confirmDeleteBtn').on('click', function() {
+        //     if (studentIdToDelete) {
+        //         $.ajax({
+        //             url: '<?= base_url("admin/api/students/"); ?>' + studentIdToDelete,
+        //             contentType: 'application/json',
+        //             headers: {
+        //                 'token': getCookie('token'),
+        //                 'RequestType': 'API',
+        //                 'X-CSRF-TOKEN': '<?= csrf_hash() ?>'
+        //             },
+        //             type: 'DELETE',
+        //             success: () => {
+        //                 $('#deleteModal').modal('hide');
+        //                 $('#mhsTable').DataTable().ajax.reload();
+        //                 studentIdToDelete = null;
+        //             }
+        //         });
+        //     }
+        // });
 
         // 7. RESTful Import
         function importData(input) {

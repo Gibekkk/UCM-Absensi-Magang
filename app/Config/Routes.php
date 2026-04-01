@@ -32,7 +32,7 @@ $routes->group('admin', ['filter' => 'auth'], function ($routes) {
             $routes->get('/', 'StudentController::getStudents');
             $routes->post('/', 'StudentController::addStudent');
             $routes->put('(:any)', 'StudentController::editStudent/$1');
-            $routes->delete('(:any)', 'StudentController::deleteStudent/$1');
+            // $routes->delete('(:any)', 'StudentController::deleteStudent/$1');
             $routes->post('import', 'StudentController::importStudents');
         });
         $routes->group('internships', function ($routes) {
@@ -40,7 +40,7 @@ $routes->group('admin', ['filter' => 'auth'], function ($routes) {
             $routes->get('/', 'InternshipController::getInternships');
             $routes->post('/', 'InternshipController::addInternship');
             $routes->put('(:any)', 'InternshipController::editInternship/$1');
-            $routes->delete('(:any)', 'InternshipController::deleteInternship/$1');
+            // // $routes->delete('(:any)', 'InternshipController::deleteInternship/$1');
         });
     });
 

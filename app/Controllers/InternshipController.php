@@ -67,7 +67,7 @@ class InternshipController extends BaseController
     public function addInternship()
     {
         $token = $this->request->getHeaderLine('token');
-        $username = $this->sessionModel->where('id', $token)->first()->getUser()->username;
+        $id = $this->sessionModel->where('id', $token)->first()->getUser()->id;
 
         $data = $this->request->getJSON(true);
         $internship = [
@@ -77,8 +77,8 @@ class InternshipController extends BaseController
             'start_date' => $data['start_date'],
             'end_date' => $data['end_date'],
             'is_active' => isset($data['is_active']) ? "1" : "0",
-            'created_by' => $username,
-            'modified_by' => $username,
+            'created_by' => $id,
+            'modified_by' => $id,
         ];
 
         if ($this->internshipModel->insert($internship)) {
@@ -96,7 +96,7 @@ class InternshipController extends BaseController
     public function editInternship($id)
     {
         $token = $this->request->getHeaderLine('token');
-        $username = $this->sessionModel->where('id', $token)->first()->getUser()->username;
+        $id = $this->sessionModel->where('id', $token)->first()->getUser()->id;
 
         $data = $this->request->getJSON(true);
         $internship = [
@@ -106,8 +106,7 @@ class InternshipController extends BaseController
             'start_date' => $data['start_date'],
             'end_date' => $data['end_date'],
             'is_active' => isset($data['is_active']) ? "1" : "0",
-            'created_by' => $username,
-            'modified_by' => $username,
+            'modified_by' => $id,
         ];
 
         if ($this->internshipModel->find($id)) {

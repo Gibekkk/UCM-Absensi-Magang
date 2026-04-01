@@ -110,8 +110,8 @@
                         orderable: false,
                         render: (data, type, row) => `
                             <button class="btn btn-sm btn-outline-primary" onclick="openEditModal('${row.id}')">Edit</button>
-                            <button class="btn btn-sm btn-outline-danger" onclick="confirmDelete('${row.id}')">Delete</button>
                         `
+                        // <button class="btn btn-sm btn-outline-danger" onclick="confirmDelete('${row.id}')">Delete</button>
                     }
                 ],
                 "drawCallback": function(settings) {
@@ -230,32 +230,32 @@
         // 5. Fungsi Delete (Trigger Modal)
         let internshipIdToDelete = null;
 
-        function confirmDelete(id) {
-            internshipIdToDelete = id;
-            $('#deleteModalBody').html("Are you sure you want to delete this internship? This action cannot be undone.");
-            $('#deleteModal').modal('show');
-        }
+        // function confirmDelete(id) {
+        //     internshipIdToDelete = id;
+        //     $('#deleteModalBody').html("Are you sure you want to delete this internship? This action cannot be undone.");
+        //     $('#deleteModal').modal('show');
+        // }
 
         // 6. Eksekusi Delete
-        $('#confirmDeleteBtn').on('click', function() {
-            if (internshipIdToDelete) {
-                $.ajax({
-                    url: '<?= base_url("admin/api/internships/"); ?>' + internshipIdToDelete,
-                    contentType: 'application/json',
-                    headers: {
-                        'token': getCookie('token'),
-                        'RequestType': 'API',
-                        'X-CSRF-TOKEN': '<?= csrf_hash() ?>'
-                    },
-                    type: 'DELETE',
-                    success: () => {
-                        $('#deleteModal').modal('hide');
-                        $('#internshipTable').DataTable().ajax.reload();
-                        internshipIdToDelete = null;
-                    }
-                });
-            }
-        });
+        // $('#confirmDeleteBtn').on('click', function() {
+        //     if (internshipIdToDelete) {
+        //         $.ajax({
+        //             url: '<?= base_url("admin/api/internships/"); ?>' + internshipIdToDelete,
+        //             contentType: 'application/json',
+        //             headers: {
+        //                 'token': getCookie('token'),
+        //                 'RequestType': 'API',
+        //                 'X-CSRF-TOKEN': '<?= csrf_hash() ?>'
+        //             },
+        //             type: 'DELETE',
+        //             success: () => {
+        //                 $('#deleteModal').modal('hide');
+        //                 $('#internshipTable').DataTable().ajax.reload();
+        //                 internshipIdToDelete = null;
+        //             }
+        //         });
+        //     }
+        // });
 
         // 7. RESTful Import
         function importData(input) {

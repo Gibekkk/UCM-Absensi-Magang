@@ -5,16 +5,19 @@ namespace App\Controllers;
 use App\Models\Internship\InternshipAttendanceModel;
 use App\Models\Internship\InternshipModel;
 use App\Models\Master\StudentModel;
+use App\Models\Master\SessionModel;
 
 class AttendanceController extends BaseController
 {
     protected $internshipModel;
     protected $internshipAttendanceModel;
+    protected $sessionModel;
     protected $studentModel;
 
     public function __construct()
     {
         $this->internshipModel = new InternshipModel();
+        $this->sessionModel = new SessionModel();
         $this->internshipAttendanceModel = new InternshipAttendanceModel();
         $this->studentModel = new StudentModel();
     }
@@ -77,7 +80,9 @@ class AttendanceController extends BaseController
     public function getAttendances($id = null)
     {
         $attendances = [];
-
+        $token = $this->request->getHeaderLine('token');
+        $user = $this->sessionModel->where('id', $token)->first()->getUser();
+        $queryRes = $this->internshipAttendanceModel->where('scan_time', date('Y-m-d'))->findAll();
         if ($id != null) {
             $queryRes = $this->internshipAttendanceModel->where('id', $id)->findAll();
 
@@ -85,23 +90,24 @@ class AttendanceController extends BaseController
                 $internshipStudent = $attendance->getInternshipStudent();
                 $student = $internshipStudent->getStudent();
                 $internship = $internshipStudent->getInternship();
-
-                $attendances = [
-                    'id' => $attendance->id,
-                    'nim' => $student->nim,
-                    'student_id' => $student->id,
-                    'student_name' => $student->full_name,
-                    'major' => $student->major,
-                    'sub_major' => $student->sub_major,
-                    'scan_time' => $attendance->scan_time,
-                    'scan_time_type' => $attendance->scan_time_type,
-                    'created_date' => $attendance->created_date,
-                    'created_by' => $attendance->created_by,
-                    'modified_date' => $attendance->modified_date,
-                    'modified_by' => $attendance->modified_by,
-                    'internship_name' => $internship->name,
-                    'internship_id' => $internship->id,
-                ];
+                if ($internship->created_by == $user->id || $user->is_super_admin == 1) {
+                    $attendances = [
+                        'id' => $attendance->id,
+                        'nim' => $student->nim,
+                        'student_id' => $student->id,
+                        'student_name' => $student->full_name,
+                        'major' => $student->major,
+                        'sub_major' => $student->sub_major,
+                        'scan_time' => $attendance->scan_time,
+                        'scan_time_type' => $attendance->scan_time_type,
+                        'created_date' => $attendance->created_date,
+                        'created_by' => $attendance->created_by,
+                        'modified_date' => $attendance->modified_date,
+                        'modified_by' => $attendance->modified_by,
+                        'internship_name' => $internship->name,
+                        'internship_id' => $internship->id,
+                    ];
+                }
             }
         } else {
             $queryRes = $this->internshipAttendanceModel->findAll();
@@ -110,7 +116,46 @@ class AttendanceController extends BaseController
                 $internshipStudent = $attendance->getInternshipStudent();
                 $student = $internshipStudent->getStudent();
                 $internship = $internshipStudent->getInternship();
+                if ($internship->created_by == $user->id || $user->is_super_admin == 1) {
+                    $row = [
+                        'id' => $attendance->id,
+                        'nim' => $student->nim,
+                        'student_id' => $student->id,
+                        'student_name' => $student->full_name,
+                        'major' => $student->major,
+                        'sub_major' => $student->sub_major,
+                        'scan_time' => $attendance->scan_time,
+                        'scan_time_type' => $attendance->scan_time_type,
+                        'created_date' => $attendance->created_date,
+                        'created_by' => $attendance->created_by,
+                        'modified_date' => $attendance->modified_date,
+                        'modified_by' => $attendance->modified_by,
+                        'internship_name' => $internship->name,
+                        'internship_id' => $internship->id,
+                    ];
 
+                    $attendances[] = $row;
+                }
+            }
+        }
+
+        return $this->response->setJSON([
+            'attendances' => $attendances
+        ]);
+    }
+
+    public function getTodayAttendances()
+    {
+        $token = $this->request->getHeaderLine('token');
+        $user = $this->sessionModel->where('id', $token)->first()->getUser();
+        $queryRes = $this->internshipAttendanceModel->where('scan_time', date('Y-m-d'))->findAll();
+        $attendances = [];
+
+        foreach ($queryRes as $attendance) {
+            $internshipStudent = $attendance->getInternshipStudent();
+            $student = $internshipStudent->getStudent();
+            $internship = $internshipStudent->getInternship();
+            if ($internship->created_by == $user->id || $user->is_super_admin == 1) {
                 $row = [
                     'id' => $attendance->id,
                     'nim' => $student->nim,
@@ -131,41 +176,6 @@ class AttendanceController extends BaseController
                 $attendances[] = $row;
             }
         }
-
-        return $this->response->setJSON([
-            'attendances' => $attendances
-        ]);
-    }
-
-    public function getTodayAttendances()
-    {
-        $queryRes = $this->internshipAttendanceModel->where('scan_time', date('Y-m-d'))->findAll();
-        $attendances = [];
-
-        foreach ($queryRes as $attendance) {
-            $internshipStudent = $attendance->getInternshipStudent();
-            $student = $internshipStudent->getStudent();
-            $internship = $internshipStudent->getInternship();
-
-            $row = [
-                'id' => $attendance->id,
-                'nim' => $student->nim,
-                'student_id' => $student->id,
-                'student_name' => $student->full_name,
-                'major' => $student->major,
-                'sub_major' => $student->sub_major,
-                'scan_time' => $attendance->scan_time,
-                'scan_time_type' => $attendance->scan_time_type,
-                'created_date' => $attendance->created_date,
-                'created_by' => $attendance->created_by,
-                'modified_date' => $attendance->modified_date,
-                'modified_by' => $attendance->modified_by,
-                'internship_name' => $internship->name,
-                'internship_id' => $internship->id,
-            ];
-
-            $attendances[] = $row;
-        }
         return $this->response->setJSON([
             'attendances' => $attendances
         ]);
@@ -173,6 +183,8 @@ class AttendanceController extends BaseController
 
     public function getDateAttendances($day, $month, $year)
     {
+        $token = $this->request->getHeaderLine('token');
+        $user = $this->sessionModel->where('id', $token)->first()->getUser();
         $queryRes = $this->internshipAttendanceModel->where('scan_time', date('Y-m-d', strtotime("$day-$month-$year")))->findAll();
         $attendances = [];
 
@@ -180,25 +192,26 @@ class AttendanceController extends BaseController
             $internshipStudent = $attendance->getInternshipStudent();
             $student = $internshipStudent->getStudent();
             $internship = $internshipStudent->getInternship();
+            if ($internship->created_by == $user->id || $user->is_super_admin == 1) {
+                $row = [
+                    'id' => $attendance->id,
+                    'nim' => $student->nim,
+                    'student_id' => $student->id,
+                    'student_name' => $student->full_name,
+                    'major' => $student->major,
+                    'sub_major' => $student->sub_major,
+                    'scan_time' => $attendance->scan_time,
+                    'scan_time_type' => $attendance->scan_time_type,
+                    'created_date' => $attendance->created_date,
+                    'created_by' => $attendance->created_by,
+                    'modified_date' => $attendance->modified_date,
+                    'modified_by' => $attendance->modified_by,
+                    'internship_name' => $internship->name,
+                    'internship_id' => $internship->id,
+                ];
 
-            $row = [
-                'id' => $attendance->id,
-                'nim' => $student->nim,
-                'student_id' => $student->id,
-                'student_name' => $student->full_name,
-                'major' => $student->major,
-                'sub_major' => $student->sub_major,
-                'scan_time' => $attendance->scan_time,
-                'scan_time_type' => $attendance->scan_time_type,
-                'created_date' => $attendance->created_date,
-                'created_by' => $attendance->created_by,
-                'modified_date' => $attendance->modified_date,
-                'modified_by' => $attendance->modified_by,
-                'internship_name' => $internship->name,
-                'internship_id' => $internship->id,
-            ];
-
-            $attendances[] = $row;
+                $attendances[] = $row;
+            }
         }
         return $this->response->setJSON([
             'attendances' => $attendances

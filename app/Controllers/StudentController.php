@@ -25,8 +25,15 @@ class StudentController extends BaseController
 
     public function getStudents($id = null)
     {
+        $students = [];
+        $token = $this->request->getHeaderLine('token');
+        $user = $this->sessionModel->where('id', $token)->first()->getUser();
         if ($id != null) {
-            $queryRes = $this->studentModel->where('id', $id)->findAll();
+            if ($user->is_super_admin == 1) {
+                $queryRes = $this->studentModel->where('id', $id)->findAll();
+            } else {
+                $queryRes = $this->studentModel->where('id', $id)->where('created_by', $user->id)->findAll();
+            }
 
             foreach ($queryRes as $student) {
                 $internship = $student->getInternshipStudent()->getInternship();
@@ -48,7 +55,11 @@ class StudentController extends BaseController
                 ];
             }
         } else {
-            $queryRes = $this->studentModel->findAll();
+            if ($user->is_super_admin == 1) {
+                $queryRes = $this->studentModel->findAll();
+            } else {
+                $queryRes = $this->studentModel->where('created_by', $user->id)->findAll();
+            }
 
             foreach ($queryRes as $student) {
                 $internship = $student->getInternshipStudent()->getInternship();
@@ -94,21 +105,33 @@ class StudentController extends BaseController
             'modified_by' => $id,
         ];
 
-        if ($this->studentModel->insert($student)) {
-            $studentId = $this->studentModel->where('nim', $data['nim'])->first()->id;
-            $this->internshipStudentModel->insert([
-                "student_id" => $studentId,
-                "internship_id" => $data["internship_id"],
-                "is_active" => isset($data['is_active']) ? "1" : "0",
-                "created_by" => $id,
-                "modified_by" => $id,
-            ]);
+        $internshipData = $this->internshipModel->find($data['internship_id']);
+        if ($internshipData) {
+            // Jika ini error, hal yang normal, kode ini bekerja dengan baik
+            if ($internshipData->created_by == $id || $user->is_super_admin == 1) {
+                if ($this->studentModel->insert($student)) {
+                    $studentId = $this->studentModel->where('nim', $data['nim'])->first()->id;
+                    $this->internshipStudentModel->insert([
+                        "student_id" => $studentId,
+                        "internship_id" => $data["internship_id"],
+                        "is_active" => isset($data['is_active']) ? "1" : "0",
+                        "created_by" => $id,
+                        "modified_by" => $id,
+                    ]);
 
-            return $this->response->setJSON([
-                'status' => 'success',
-                'message' => 'Student Added.'
-            ]);
+                    return $this->response->setJSON([
+                        'status' => 'success',
+                        'message' => 'Student Added.'
+                    ]);
+                }
+            } else {
+                return $this->response->setJSON([
+                    'status' => 'error',
+                    'message' => 'You Do Not Have Access.'
+                ])->setStatusCode(500);
+            }
         }
+
         return $this->response->setJSON([
             'status' => 'error',
             'message' => 'Unknown Error Occured.'
@@ -118,7 +141,8 @@ class StudentController extends BaseController
     public function editStudent($id)
     {
         $token = $this->request->getHeaderLine('token');
-        $id = $this->sessionModel->where('id', $token)->first()->getUser()->id;
+        $user = $this->sessionModel->where('id', $token)->first()->getUser();
+        $id = $user->id;
 
         $data = $this->request->getJSON(true);
         $student = [
@@ -132,20 +156,22 @@ class StudentController extends BaseController
 
         $studentData = $this->studentModel->find($id);
         if ($studentData) {
-            if ($this->studentModel->update($id, $student)) {
-                // Jika ini error, hal yang normal, kode ini bekerja dengan baik
-                if ($studentData->getInternshipStudent()->internship_id != $data['internship_id']) {
-                    $this->internshipStudentModel->update($studentData->getInternshipStudent()->id, [
-                        "internship_id" => $data["internship_id"],
-                        "is_active" => isset($data['is_active']) ? "1" : "0",
-                        "modified_by" => $id,
+            if ($user->is_super_admin || $studentData->created_by == $id) {
+                if ($this->studentModel->update($id, $student)) {
+                    // Jika ini error, hal yang normal, kode ini bekerja dengan baik
+                    if ($studentData->getInternshipStudent()->internship_id != $data['internship_id']) {
+                        $this->internshipStudentModel->update($studentData->getInternshipStudent()->id, [
+                            "internship_id" => $data["internship_id"],
+                            "is_active" => isset($data['is_active']) ? "1" : "0",
+                            "modified_by" => $id,
+                        ]);
+                    }
+
+                    return $this->response->setJSON([
+                        'status' => 'success',
+                        'message' => 'Student Edited.'
                     ]);
                 }
-
-                return $this->response->setJSON([
-                    'status' => 'success',
-                    'message' => 'Student Edited.'
-                ]);
             }
         } else {
             return $this->response->setJSON([

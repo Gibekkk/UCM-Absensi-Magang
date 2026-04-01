@@ -19,68 +19,11 @@ class MigrateMaster extends Migration
                 'null'    => false,
                 'default' => new RawSql('(UUID())'),
             ],
-            'cos_id' => [
-                'type' => 'VARCHAR',
-                'constraint' => 36,
-                'default' => '2b0e737b-2d3c-11ea-9dc8-000d3aa02732',
-                'null'    => false,
-            ],
-            'nim' => [
-                'type' => 'VARCHAR',
-                'constraint' => 24,
-                'null'    => false,
-            ],
-            'full_name' => [
-                'type' => 'VARCHAR',
-                'constraint' => 50,
-                'null'    => false,
-            ],
-            'major' => [
-                'type' => 'VARCHAR',
-                'constraint' => 50,
-                'null'    => false,
-            ],
-            'sub_major' => [
-                'type' => 'VARCHAR',
-                'constraint' => 50,
-                'null'    => false,
-            ],
-            'is_active' => [
+            'is_super_admin' => [
                 'type' => 'CHAR',
                 'constraint' => 1,
-                'null'    => false,
-                'default' => 1,
-            ],
-            'created_date' => [
-                'type' => 'DATETIME',
-                'null'    => false,
-                'default' => new RawSql('CURRENT_TIMESTAMP'),
-            ],
-            'created_by' => [
-                'type' => 'VARCHAR',
-                'constraint' => '36',
-                'null'    => false,
-            ],
-            'modified_date' => [
-                'type' => 'DATETIME',
-                'null'    => false,
-                'default' => new RawSql('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'),
-            ],
-            'modified_by' => [
-                'type' => 'VARCHAR',
-                'constraint' => '36',
-                'null'    => false,
-            ],
-        ]);
-        $forge->addKey('id', true);
-        $forge->createTable('m_student');
-
-        $forge->addField([
-            'id' => [
-                'type' => 'VARCHAR',
-                'constraint' => 36,
-                'null'    => false,
-                'default' => new RawSql('(UUID())'),
+                'null' => false,
+                'default' => 0,
             ],
             'username' => [
                 'type' => 'VARCHAR',
@@ -136,6 +79,71 @@ class MigrateMaster extends Migration
         ]);
         $forge->addKey('id', true);
         $forge->createTable('m_user');
+        
+        $forge->addField([
+            'id' => [
+                'type' => 'VARCHAR',
+                'constraint' => 36,
+                'null'    => false,
+                'default' => new RawSql('(UUID())'),
+            ],
+            'cos_id' => [
+                'type' => 'VARCHAR',
+                'constraint' => 36,
+                'default' => '2b0e737b-2d3c-11ea-9dc8-000d3aa02732',
+                'null'    => false,
+            ],
+            'nim' => [
+                'type' => 'VARCHAR',
+                'constraint' => 24,
+                'null'    => false,
+            ],
+            'full_name' => [
+                'type' => 'VARCHAR',
+                'constraint' => 50,
+                'null'    => false,
+            ],
+            'major' => [
+                'type' => 'VARCHAR',
+                'constraint' => 50,
+                'null'    => false,
+            ],
+            'sub_major' => [
+                'type' => 'VARCHAR',
+                'constraint' => 50,
+                'null'    => false,
+            ],
+            'is_active' => [
+                'type' => 'CHAR',
+                'constraint' => 1,
+                'null'    => false,
+                'default' => 1,
+            ],
+            'created_date' => [
+                'type' => 'DATETIME',
+                'null'    => false,
+                'default' => new RawSql('CURRENT_TIMESTAMP'),
+            ],
+            'created_by' => [
+                'type' => 'VARCHAR',
+                'constraint' => '36',
+                'null'    => false,
+            ],
+            'modified_date' => [
+                'type' => 'DATETIME',
+                'null'    => false,
+                'default' => new RawSql('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'),
+            ],
+            'modified_by' => [
+                'type' => 'VARCHAR',
+                'constraint' => '36',
+                'null'    => false,
+            ],
+        ]);
+        $forge->addKey('id', true);
+        $forge->addForeignKey('created_by', 'm_user', 'id', 'CASCADE', 'CASCADE');
+        $forge->addForeignKey('modified_by', 'm_user', 'id', 'CASCADE', 'CASCADE');
+        $forge->createTable('m_student');
 
         $forge->addField([
             'id' => [

@@ -6,6 +6,7 @@ use App\Models\Internship\InternshipAttendanceModel;
 use App\Models\Internship\InternshipModel;
 use App\Models\Master\StudentModel;
 use App\Models\Master\SessionModel;
+use DateTime;
 
 class AttendanceController extends BaseController
 {
@@ -42,9 +43,21 @@ class AttendanceController extends BaseController
         $data = $this->request->getJSON(true);
         $rawInput = $data['input'];
         $nim = explode('+', $rawInput)[0];
-        $student = $this->studentModel->where("NIM", $nim)->first();
+        $student = $this->studentModel->where("NIM", $nim)->where('is_active', 1)->first();
         if ($student) {
             $internshipStudent = $student->getInternshipStudent();
+
+            $lastAttendance = $internshipStudent->getLastAttendance();
+            if ($lastAttendance != null) {
+                $lastScanTime = new DateTime($lastAttendance->created_date);
+                $lastScanTime->modify("+10 minutes");
+                if ($lastScanTime > new DateTime())
+                    return  $this->response->setJSON([
+                        'status' => 'error',
+                        'message' => 'Please Wait Before Scanning Again.'
+                    ])->setStatusCode(400);
+            }
+
             $attendanceData = [
                 'internship_student_id' => $internshipStudent->id,
                 'scan_time' => date("Y-m-d"),
@@ -63,6 +76,7 @@ class AttendanceController extends BaseController
                     'name' => $student->full_name,
                     'nim' => $student->nim,
                     'status' => $attendance->scan_time_type,
+                    'created' => $attendance->created_date,
                 ]);
             } else {
                 return $this->response->setJSON([
@@ -144,6 +158,39 @@ class AttendanceController extends BaseController
         ]);
     }
 
+    public function viewTodayAttendances()
+    {
+        $queryRes = $this->internshipAttendanceModel->where('scan_time', date('Y-m-d'))->findAll();
+        $attendances = [];
+
+        foreach ($queryRes as $attendance) {
+            $internshipStudent = $attendance->getInternshipStudent();
+            $student = $internshipStudent->getStudent();
+            $internship = $internshipStudent->getInternship();
+            $row = [
+                'id' => $attendance->id,
+                'nim' => $student->nim,
+                'student_id' => $student->id,
+                'student_name' => $student->full_name,
+                'major' => $student->major,
+                'sub_major' => $student->sub_major,
+                'scan_time' => $attendance->scan_time,
+                'scan_time_type' => $attendance->scan_time_type,
+                'created_date' => $attendance->created_date,
+                'created_by' => $attendance->created_by,
+                'modified_date' => $attendance->modified_date,
+                'modified_by' => $attendance->modified_by,
+                'internship_name' => $internship->name,
+                'internship_id' => $internship->id,
+            ];
+
+            $attendances[] = $row;
+        }
+        return $this->response->setJSON([
+            'attendances' => $attendances
+        ]);
+    }
+
     public function getTodayAttendances()
     {
         $token = $this->request->getHeaderLine('token');
@@ -186,6 +233,43 @@ class AttendanceController extends BaseController
         $token = $this->request->getHeaderLine('token');
         $user = $this->sessionModel->where('id', $token)->first()->getUser();
         $queryRes = $this->internshipAttendanceModel->where('scan_time', date('Y-m-d', strtotime("$day-$month-$year")))->findAll();
+        $attendances = [];
+
+        foreach ($queryRes as $attendance) {
+            $internshipStudent = $attendance->getInternshipStudent();
+            $student = $internshipStudent->getStudent();
+            $internship = $internshipStudent->getInternship();
+            if ($internship->created_by == $user->id || $user->is_super_admin == 1) {
+                $row = [
+                    'id' => $attendance->id,
+                    'nim' => $student->nim,
+                    'student_id' => $student->id,
+                    'student_name' => $student->full_name,
+                    'major' => $student->major,
+                    'sub_major' => $student->sub_major,
+                    'scan_time' => $attendance->scan_time,
+                    'scan_time_type' => $attendance->scan_time_type,
+                    'created_date' => $attendance->created_date,
+                    'created_by' => $attendance->created_by,
+                    'modified_date' => $attendance->modified_date,
+                    'modified_by' => $attendance->modified_by,
+                    'internship_name' => $internship->name,
+                    'internship_id' => $internship->id,
+                ];
+
+                $attendances[] = $row;
+            }
+        }
+        return $this->response->setJSON([
+            'attendances' => $attendances
+        ]);
+    }
+
+    public function getDateRangeAttendances($year1, $month1, $day1, $year2, $month2, $day2)
+    {
+        $token = $this->request->getHeaderLine('token');
+        $user = $this->sessionModel->where('id', $token)->first()->getUser();
+        $queryRes = $this->internshipAttendanceModel->where('scan_time >=', date('Y-m-d', strtotime("$day1-$month1-$year1")))->where('scan_time <=', date('Y-m-d', strtotime("$day2-$month2-$year2")))->findAll();
         $attendances = [];
 
         foreach ($queryRes as $attendance) {

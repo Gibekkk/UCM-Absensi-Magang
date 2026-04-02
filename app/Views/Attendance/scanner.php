@@ -327,6 +327,11 @@
                         showModal(true, "Success", (res.status == "IN" ? "Welcome, " : "See You Later, ") + res.name.split(" ")[0]);
                         refreshDataTable();
                     },
+                    400: function(xhr) {
+                        // Bad Request (misal: Absensi terlalu cepat)
+                        const res = xhr.responseJSON;
+                        showModal(false, "Failed", res.message || "Please Wait Before Scanning Again.");
+                    },
                     404: function(xhr) {
                         // Bad Request (misal: NIM tidak ditemukan)
                         const res = xhr.responseJSON;
@@ -380,7 +385,7 @@
 
         function refreshDataTable() {
             $.ajax({
-                url: '<?= base_url("api/attendance/today"); ?>',
+                url: '<?= base_url("api/attendance/viewToday"); ?>',
                 headers: {
                     'RequestType': 'API'
                 },

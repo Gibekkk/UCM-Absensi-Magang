@@ -11,7 +11,9 @@ $routes->get('camera', 'AttendanceController::camera');
 $routes->group('api', ['filter' => 'api'], function ($routes) {
     $routes->post('attend', 'AttendanceController::createAttendance');
     $routes->group('attendance', function ($routes) {
+        $routes->get('viewToday', 'AttendanceController::viewTodayAttendances');
         $routes->get('today', 'AttendanceController::getTodayAttendances');
+        $routes->get('(:num)/(:num)/(:num)/(:num)/(:num)/(:num)', 'AttendanceController::getDateRangeAttendances/$1/$2/$3/$4/$5/$6');
         $routes->get('(:num)/(:num)/(:num)', 'AttendanceController::getDateAttendances/$1/$2/$3');
         $routes->get('/', 'AttendanceController::getAttendances');
         $routes->get('(:any)', 'AttendanceController::getAttendances/$1');
@@ -36,6 +38,8 @@ $routes->group('admin', ['filter' => 'auth'], function ($routes) {
             $routes->post('import', 'StudentController::importStudents');
         });
         $routes->group('internships', function ($routes) {
+            $routes->get('department', 'InternshipController::getDepartments');
+            $routes->get('department/(:any)', 'InternshipController::findInternshipByDepartment/$1');
             $routes->get('(:any)', 'InternshipController::getInternships/$1');
             $routes->get('/', 'InternshipController::getInternships');
             $routes->post('/', 'InternshipController::addInternship');

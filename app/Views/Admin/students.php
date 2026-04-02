@@ -57,9 +57,30 @@
     <script src="<?= base_url('js/app.js') ?>"></script>
 
     <script>
+        function populateDepartment(name = null, id = null) {
+            $.ajax({
+                url: '<?= base_url("admin/api/internships/department"); ?>',
+                contentType: 'application/json',
+                headers: {
+                    'token': getCookie('token'),
+                    'RequestType': 'API',
+                    'X-CSRF-TOKEN': '<?= csrf_hash() ?>'
+                },
+                type: 'GET',
+                success: (res) => {
+                    $('#studentModal #studentForm #department_name').empty();
+                    if (name == null) $('#studentModal #studentForm #department_name').append(`<option value="" ${name == null ? "selected" : ""}>Select Department</Option>`);
+                    res.departments.forEach(department => {
+                        $('#studentModal #studentForm #department_name').append(`<option value="${department.name}" ${name != null && name == department.name ? "selected" : ""}>${department.name}</Option>`);
+                    });
+                    populateInternship(id);
+                }
+            });
+        }
+
         function populateInternship(id = null) {
             $.ajax({
-                url: '<?= base_url("admin/api/internships"); ?>',
+                url: '<?= base_url("admin/api/internships/department/"); ?>' + $('#studentModal #studentForm #department_name').val(),
                 contentType: 'application/json',
                 headers: {
                     'token': getCookie('token'),
@@ -69,7 +90,7 @@
                 type: 'GET',
                 success: (res) => {
                     $('#studentModal #studentForm #internship_id').empty();
-                    if (id == null) $('#studentModal #studentForm #internship_id').append(`<option value="" ${id == null ? "selected" : ""}>Select Department</Option>`);
+                    if (id == null) $('#studentModal #studentForm #internship_id').append(`<option value="" ${id == null ? "selected" : ""}>Select Internship</Option>`);
                     res.internships.forEach(internship => {
                         $('#studentModal #studentForm #internship_id').append(`<option value="${internship.id}" ${id != null && id == internship.id ? "selected" : ""}>${internship.name}</Option>`);
                     });
@@ -158,7 +179,8 @@
                 error: (err) => console.error("Error Fetching Profile")
             });
 
-            $('#studentModal #studentForm #internship_id').focus(populateInternship());
+            $('#studentModal #studentForm #department_name').focus(populateDepartment());
+            $('#studentModal #studentForm #department_name').change(populateInternship());
         });
 
         // 2. Handle Submit Form (Add & Edit)
@@ -212,7 +234,7 @@
 
         // 3. Fungsi Buka Modal Add
         function openAddModal() {
-            populateInternship();
+            populateDepartment();
             $('#studentModal #modalTitle').text('Add Student');
             $('#studentModal #studentForm')[0].reset();
             $('#studentModal #studentId').val('');
@@ -238,7 +260,7 @@
                     $('#studentModal input[name="major"]').val(data.students.major);
                     $('#studentModal input[name="sub_major"]').val(data.students.sub_major);
                     $('#studentModal input[name="is_active"]').prop("checked", data.students.is_active == "1" ? true : false);
-                    populateInternship(data.students.internship_id);
+                    populateDepartment(data.students.internship_department, data.students.internship_id);
                     $('#studentModal').modal('show');
                 },
                 error: (res) => {
@@ -249,7 +271,7 @@
         }
 
         // 5. Fungsi Delete (Trigger Modal)
-        let studentIdToDelete = null;
+        // let studentIdToDelete = null;
 
         // function confirmDelete(id) {
         //     studentIdToDelete = id;

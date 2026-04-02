@@ -35,6 +35,12 @@ class StudentController extends BaseController
                 $queryRes = $this->studentModel->where('id', $id)->where('created_by', $user->id)->findAll();
             }
 
+            if (count($queryRes) == 0)
+                return $this->response->setJSON([
+                    'status' => 'error',
+                    'message' => 'Student Not Found.'
+                ])->setStatusCode(404);
+
             foreach ($queryRes as $student) {
                 $internship = $student->getInternshipStudent()->getInternship();
 
@@ -142,7 +148,7 @@ class StudentController extends BaseController
     {
         $token = $this->request->getHeaderLine('token');
         $user = $this->sessionModel->where('id', $token)->first()->getUser();
-        $id = $user->id;
+        $userId = $user->id;
 
         $data = $this->request->getJSON(true);
         $student = [
@@ -151,19 +157,19 @@ class StudentController extends BaseController
             'major' => $data['major'],
             'sub_major' => $data['sub_major'],
             'is_active' => isset($data['is_active']) ? "1" : "0",
-            'modified_by' => $id,
+            'modified_by' => $userId,
         ];
 
         $studentData = $this->studentModel->find($id);
         if ($studentData) {
-            if ($user->is_super_admin || $studentData->created_by == $id) {
+            if ($user->is_super_admin || $studentData->created_by == $userId) {
                 if ($this->studentModel->update($id, $student)) {
                     // Jika ini error, hal yang normal, kode ini bekerja dengan baik
                     if ($studentData->getInternshipStudent()->internship_id != $data['internship_id']) {
                         $this->internshipStudentModel->update($studentData->getInternshipStudent()->id, [
                             "internship_id" => $data["internship_id"],
                             "is_active" => isset($data['is_active']) ? "1" : "0",
-                            "modified_by" => $id,
+                            "modified_by" => $userId,
                         ]);
                     }
 

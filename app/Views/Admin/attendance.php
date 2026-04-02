@@ -17,8 +17,12 @@
             <div class="p-4">
                 <!-- Toolbar -->
                 <div class="d-flex justify-content-between mb-3">
-                    <h3>Attendance Data</h3>
-                    <input type="date" id="dateFilter" class="form-control w-auto">
+                    <form id="searchForm">
+                        <h3>Attendance Data</h3>
+                        <input type="date" id="startDate" class="form-control w-auto">
+                        <input type="date" id="endDate" class="form-control w-auto">
+                        <input type="submit" value="Search">
+                    </form>
                 </div>
 
                 <div class="table-responsive">
@@ -66,7 +70,11 @@
             table = $('#attendanceTable').DataTable({
                 ajax: {
                     url: url,
-                    beforeSend: (xhr) => xhr.setRequestHeader('RequestType', 'API'),
+                    "beforeSend": function(xhr) {
+                        xhr.setRequestHeader('token', getCookie('token'));
+                        xhr.setRequestHeader('RequestType', 'API');
+                        xhr.setRequestHeader('X-CSRF-TOKEN', '<?= csrf_hash() ?>');
+                    },
                     dataSrc: 'attendances'
                 },
                 ordering: true,
@@ -125,20 +133,14 @@
                 error: (err) => console.error("Error Fetching Profile")
             });
 
-            $('#dateFilter').val(dayjs().format('YYYY-MM-DD'));
-            refreshDataTable('today');
-
             // Event listener saat tanggal berubah
-            $('#dateFilter').on('change', function() {
-                const val = $(this).val(); // Format input date: YYYY-MM-DD
-                if (val) {
-                    // Ubah YYYY-MM-DD menjadi YYYY/MM/DD untuk route Anda
-                    const dateLink = val.replace(/-/g, '/');
-                    refreshDataTable(dateLink);
-                } else {
-                    // Jika tanggal dihapus, tampilkan semua
-                    refreshDataTable();
-                }
+            $('#searchForm').on('submit', function(e) {
+                e.preventDefault();
+                const startDate = $('#startDate').val();
+                const endDate = $('#endDate').val();
+
+                const dateLink = startDate.replace(/-/g, '/') + "/" + endDate.replace(/-/g, '/');
+                refreshDataTable(dateLink);
             });
         });
     </script>

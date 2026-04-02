@@ -29,6 +29,7 @@ class MigrateMaster extends Migration
                 'type' => 'VARCHAR',
                 'constraint' => 50,
                 'null' => false,
+                'unique' => true,
             ],
             'password' => [
                 'type' => 'VARCHAR',
@@ -79,7 +80,7 @@ class MigrateMaster extends Migration
         ]);
         $forge->addKey('id', true);
         $forge->createTable('m_user');
-        
+
         $forge->addField([
             'id' => [
                 'type' => 'VARCHAR',

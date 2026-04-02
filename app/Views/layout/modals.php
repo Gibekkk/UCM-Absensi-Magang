@@ -54,7 +54,12 @@
             <input type="text" name="sub_major" id="sub_major" class="form-control" required>
           </div>
           <div class="mb-3">
-            <label for="internship_id">Internship Assignment</label>
+            <label for="department_name">Departments</label>
+            <select name="department_name" id="department_name" class="form-control" required>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="internship_id">Internship Name</label>
             <select name="internship_id" id="internship_id" class="form-control" required>
             </select>
           </div>

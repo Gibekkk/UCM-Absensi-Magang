@@ -27,6 +27,12 @@ class InternshipController extends BaseController
                 $queryRes = $this->internshipModel->where('id', $id)->where('created_by', $user->id)->findAll();
             }
 
+            if (count($queryRes) == 0)
+                return $this->response->setJSON([
+                    'status' => 'error',
+                    'message' => 'Internship Not Found.'
+                ])->setStatusCode(404);
+
             foreach ($queryRes as $internship) {
                 $students = $internship->getStudentInternships();
 
@@ -111,6 +117,32 @@ class InternshipController extends BaseController
         ]);
     }
 
+    public function getDepartments()
+    {
+        $departments = [];
+        $token = $this->request->getHeaderLine('token');
+        $user = $this->sessionModel->where('id', $token)->first()->getUser();
+
+        if ($user->is_super_admin == 1) {
+            $queryRes = $this->internshipModel->select('department')->groupBy('department')->findAll();
+        } else {
+            $queryRes = $this->internshipModel->select('department')->groupBy('department')->where('created_by', $user->id)->findAll();
+        }
+
+        foreach ($queryRes as $rows) {
+
+            $row = [
+                'name' => $rows->department,
+            ];
+
+            $departments[] = $row;
+        }
+
+        return $this->response->setJSON([
+            'departments' => $departments
+        ]);
+    }
+
     public function addInternship()
     {
         $token = $this->request->getHeaderLine('token');
@@ -144,7 +176,7 @@ class InternshipController extends BaseController
     {
         $token = $this->request->getHeaderLine('token');
         $user = $this->sessionModel->where('id', $token)->first()->getUser();
-        $id = $user->id;
+        $userId = $user->id;
 
         $data = $this->request->getJSON(true);
         $internship = [
@@ -154,12 +186,12 @@ class InternshipController extends BaseController
             'start_date' => $data['start_date'],
             'end_date' => $data['end_date'],
             'is_active' => isset($data['is_active']) ? "1" : "0",
-            'modified_by' => $id,
+            'modified_by' => $userId,
         ];
         $internshipData = $this->internshipModel->find($id);
         if ($internshipData) {
             // Jika ini error, hal yang normal, kode ini bekerja dengan baik
-            if ($user->is_super_admin || $internshipData->created_by == $id) {
+            if ($user->is_super_admin || $internshipData->created_by == $userId) {
                 if ($this->internshipModel->update($id, $internship)) {
                     return $this->response->setJSON([
                         'status' => 'success',

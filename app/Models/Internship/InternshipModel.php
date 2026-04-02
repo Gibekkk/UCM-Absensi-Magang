@@ -5,6 +5,7 @@ namespace App\Models\Internship;
 use CodeIgniter\Model;
 use App\Entities\Internship\InternshipEntity;
 use Ramsey\Uuid\Uuid;
+use Config\Database;
 
 class InternshipModel extends Model
 {
@@ -50,7 +51,7 @@ class InternshipModel extends Model
     protected $beforeInsert   = ['syncStatus', 'generateId'];
     protected $afterInsert    = [];
     protected $beforeUpdate   = ['syncStatus'];
-    protected $afterUpdate    = [];
+    protected $afterUpdate    = ['setStatusStudentInternships'];
     protected $beforeFind     = [];
     protected $afterFind      = ['syncStatusAfterFind'];
     protected $beforeDelete   = [];
@@ -77,6 +78,17 @@ class InternshipModel extends Model
             }
         }
         return $data;
+    }
+
+    protected function setStatusStudentInternships(array $data)
+    {
+        if($data['data']['is_active'] == 0){
+        $db = Database::connect($this->DBGroup);
+            $studentInternships = $db->table('m_internship_student')->where('internship_id', $data['id'])->get()->getResult();
+            foreach($studentInternships as $studentInternship){
+                $db->table('m_internship_student')->where('id', $studentInternship->id)->update(['is_active'=> 0]);
+            }
+        }
     }
 
     protected function syncStatusAfterFind(array $data)

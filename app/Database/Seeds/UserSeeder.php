@@ -21,6 +21,26 @@ class UserSeeder extends Seeder
                 'modified_by' => 'seeder',
                 'email' => 'email@example.com',
             ],
+            [
+                'full_name' => 'Admin1',
+                'is_super_admin' => 0,
+                'password' => password_hash('admin1234', PASSWORD_DEFAULT),
+                'username' => 'admin1',
+                'phone_number' => '08123456789',
+                'created_by' => 'seeder',
+                'modified_by' => 'seeder',
+                'email' => 'email@example.com',
+            ],
+            [
+                'full_name' => 'Admin2',
+                'is_super_admin' => 0,
+                'password' => password_hash('admin1234', PASSWORD_DEFAULT),
+                'username' => 'admin2',
+                'phone_number' => '08123456789',
+                'created_by' => 'seeder',
+                'modified_by' => 'seeder',
+                'email' => 'email@example.com',
+            ],
         ];
         $this->db->table('m_user')->insertBatch($data);
     }

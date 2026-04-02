@@ -43,4 +43,19 @@ class InternshipStudentEntity extends Entity
             ->get()
             ->getResult(InternshipAttendanceEntity::class);
     }
+
+    public function getLastAttendance()
+    {
+        $db = Database::connect('default');
+
+        $attendances = $db->table('t_internship_attendance')
+            ->where('internship_student_id', $this->attributes['id'])
+            ->orderBy('created_date', 'DESC')
+            ->get()
+            ->getResult(InternshipAttendanceEntity::class);
+
+        if (count($attendances) > 0)
+            return $attendances[0];
+        return null;
+    }
 }

@@ -50,7 +50,7 @@ class InternshipStudentModel extends Model
     protected $beforeInsert   = ['syncStatus', 'autoFillDates', 'generateId'];
     protected $afterInsert    = [];
     protected $beforeUpdate   = ['syncStatus'];
-    protected $afterUpdate    = [];
+    protected $afterUpdate    = ['setStatusStudents'];
     protected $beforeFind     = [];
     protected $afterFind      = ['syncStatusAfterFind'];
     protected $beforeDelete   = [];
@@ -93,6 +93,14 @@ class InternshipStudentModel extends Model
             }
         }
         return $data;
+    }
+
+    protected function setStatusStudents(array $data)
+    {
+        if($data['data']['is_active'] == 0){
+        $db = Database::connect('master');
+            $db->table('m_student')->where('id', $data['data']['student_id'])->update(['is_active'=> 0]);
+        }
     }
 
     protected function syncStatusAfterFind(array $data)

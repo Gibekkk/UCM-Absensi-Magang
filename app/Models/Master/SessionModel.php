@@ -8,8 +8,7 @@ use Ramsey\Uuid\Uuid;
 
 class SessionModel extends Model
 {
-    protected $table            = 'm_session';
-    protected $DBGroup          = 'master';
+    protected $table            = 'db_mstr.m_session';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = false;
     protected $returnType       = SessionEntity::class;

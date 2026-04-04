@@ -8,8 +8,7 @@ use Ramsey\Uuid\Uuid;
 
 class UserModel extends Model
 {
-    protected $table            = 'm_user';
-    protected $DBGroup          = 'master';
+    protected $table            = 'db_mstr.m_user';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = false;
     protected $returnType       = UserEntity::class;
@@ -47,7 +46,7 @@ class UserModel extends Model
 
     // Callbacks
     protected $allowCallbacks = true;
-    protected $beforeInsert   = [];
+    protected $beforeInsert   = ['generateId'];
     protected $afterInsert    = [];
     protected $beforeUpdate   = [];
     protected $afterUpdate    = [];
@@ -55,4 +54,13 @@ class UserModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    protected function generateId(array $data)
+    {
+        // Jika ID belum ada, buatkan manual (opsional jika database sudah punya default)
+        if (!isset($data['data']['id'])) {
+            $data['data']['id'] = Uuid::uuid7()->toString();
+        }
+        return $data;
+    }
 }

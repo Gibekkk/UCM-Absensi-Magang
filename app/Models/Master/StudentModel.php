@@ -8,8 +8,7 @@ use Ramsey\Uuid\Uuid;
 
 class StudentModel extends Model
 {
-    protected $table            = 'm_student';
-    protected $DBGroup          = 'master';
+    protected $table            = 'db_mstr.m_student';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = false;
     protected $returnType       = StudentEntity::class;

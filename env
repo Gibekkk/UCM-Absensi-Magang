@@ -38,13 +38,13 @@
 # database.default.DBPrefix =
 # database.default.port = 3306
 
-# database.master.hostname = localhost
-# database.master.database = ci4
-# database.master.username = root
-# database.master.password = root
-# database.master.DBDriver = MySQLi
-# database.master.DBPrefix =
-# database.master.port = 3306
+# database.internship.hostname = localhost
+# database.internship.database = ci4
+# database.internship.username = root
+# database.internship.password = root
+# database.internship.DBDriver = MySQLi
+# database.internship.DBPrefix =
+# database.internship.port = 3306
 
 # If you use MySQLi as tests, first update the values of Config\Database::$tests.
 # database.tests.hostname = localhost

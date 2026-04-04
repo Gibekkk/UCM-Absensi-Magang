@@ -50,8 +50,7 @@ class Database extends Config
             'time'     => 'H:i:s',
         ],
     ];
-
-    public array $master = [
+    public array $internship = [
         'DSN'          => '',
         'hostname'     => 'localhost',
         'username'     => '',

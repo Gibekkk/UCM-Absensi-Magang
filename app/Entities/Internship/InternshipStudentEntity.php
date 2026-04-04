@@ -3,22 +3,31 @@
 namespace App\Entities\Internship;
 
 use CodeIgniter\Entity\Entity;
-use Config\Database;
 use App\Entities\Internship\InternshipEntity;
 use App\Entities\Internship\InternshipAttendanceEntity;
 use App\Entities\Master\StudentEntity;
+use App\Models\Internship\InternshipModel;
+use App\Models\Internship\InternshipAttendanceModel;
+use App\Models\Master\StudentModel;
 
 class InternshipStudentEntity extends Entity
 {
     protected $datamap = [];
     protected $dates   = ['created_date', 'modified_date', 'start_date', 'end_date'];
     protected $casts   = [];
+    protected $internshipModel;
+    protected $internshipAttendanceModel;
+    protected $studentModel;
+    public function __construct()
+    {
+        $this->internshipModel = new InternshipModel();
+        $this->internshipAttendanceModel = new InternshipAttendanceModel();
+        $this->studentModel = new StudentModel();
+    }
 
     public function getInternship()
     {
-        $db = Database::connect('default');
-
-        return $db->table('m_internship')
+        return $this->internshipModel
             ->where('id', $this->attributes['internship_id'])
             ->get()
             ->getFirstRow(InternshipEntity::class);
@@ -26,9 +35,7 @@ class InternshipStudentEntity extends Entity
 
     public function getStudent()
     {
-        $db = Database::connect('master');
-
-        return $db->table('m_student')
+        return $this->studentModel
             ->where('id', $this->attributes['student_id'])
             ->get()
             ->getFirstRow(StudentEntity::class);
@@ -36,9 +43,7 @@ class InternshipStudentEntity extends Entity
 
     public function getAttendances()
     {
-        $db = Database::connect('default');
-
-        return $db->table('m_internship_attendance')
+        return $this->internshipAttendanceModel
             ->where('internship_student_id', $this->attributes['id'])
             ->get()
             ->getResult(InternshipAttendanceEntity::class);
@@ -46,9 +51,7 @@ class InternshipStudentEntity extends Entity
 
     public function getLastAttendance()
     {
-        $db = Database::connect('default');
-
-        $attendances = $db->table('t_internship_attendance')
+        $attendances = $this->internshipAttendanceModel
             ->where('internship_student_id', $this->attributes['id'])
             ->orderBy('created_date', 'DESC')
             ->get()

@@ -5,12 +5,10 @@ namespace App\Models\Internship;
 use CodeIgniter\Model;
 use App\Entities\Internship\InternshipEntity;
 use Ramsey\Uuid\Uuid;
-use Config\Database;
 
 class InternshipModel extends Model
 {
-    protected $table            = 'm_internship';
-    protected $DBGroup          = 'default';
+    protected $table            = 'db_internship.m_internship';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = false;
     protected $returnType       = InternshipEntity::class;
@@ -82,12 +80,9 @@ class InternshipModel extends Model
 
     protected function setStatusStudentInternships(array $data)
     {
-        if($data['data']['is_active'] == 0){
-        $db = Database::connect($this->DBGroup);
-            $studentInternships = $db->table('m_internship_student')->where('internship_id', $data['id'])->get()->getResult();
-            foreach($studentInternships as $studentInternship){
-                $db->table('m_internship_student')->where('id', $studentInternship->id)->update(['is_active'=> 0]);
-            }
+        $internshipStudentModel = new InternshipStudentModel();
+        if ($data['data']['is_active'] == 0) {
+            $internshipStudentModel->where('internship_id', $data['id'])->update(['is_active' => 0]);
         }
     }
 
@@ -96,15 +91,15 @@ class InternshipModel extends Model
         // Jika data kosong, langsung return
         if (!isset($data['data'])) return $data;
 
+        $idsToUpdate = [];
         $today = date('Y-m-d');
 
         // Fungsi untuk memproses satu baris data
-        $process = function ($row) use ($today) {
+        $process = function ($row) use (&$idsToUpdate, $today) {
             // Jika row adalah objek (karena returnType = entity)
             if (is_object($row) && isset($row->end_date) && $row->end_date < $today && $row->is_active == '1') {
                 $row->is_active = '0';
-                // Update ke database agar sinkron (opsional, tapi disarankan)
-                $this->db->table($this->table)->update(['is_active' => '0'], ['id' => $row->id]);
+                $idsToUpdate[] = $row->id;
             }
             return $row;
         };
@@ -118,6 +113,9 @@ class InternshipModel extends Model
             foreach ($data['data'] as $key => $row) {
                 $data['data'][$key] = $process($row);
             }
+        }
+        if (count($idsToUpdate) > 0) {
+            $this->whereIn('id', $idsToUpdate)->update(['is_active' => 0]);
         }
 
         return $data;

@@ -216,6 +216,8 @@ class StudentController extends BaseController
 
     public function importStudents()
     {
+        // TODO: Buat koneksi jadi 1 dengan yang sudah jalan
+        // TODO: Buat filter student lebih akurat dengan sistem yang baru
         $file = $this->request->getFile('file_excel');
         $token = $this->request->getHeaderLine('token');
 

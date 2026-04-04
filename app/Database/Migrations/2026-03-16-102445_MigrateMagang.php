@@ -4,15 +4,13 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 use CodeIgniter\Database\RawSql;
-use Config\Database;
 
 class MigrateMagang extends Migration
 {
+    protected $DBGroup = 'internship';
     public function up()
     {
-        $forge = Database::forge('default');
-
-        $forge->addField([
+        $this->forge->addField([
             'id' => [
                 'type' => 'VARCHAR',
                 'constraint' => 36,
@@ -69,10 +67,12 @@ class MigrateMagang extends Migration
                 'null'    => false,
             ],
         ]);
-        $forge->addKey('id', true);
-        $forge->createTable('m_internship');
+        $this->forge->addKey('id', true);
+        $this->forge->addForeignKey('created_by', 'db_mstr.m_user', 'id', 'CASCADE', 'CASCADE');
+        $this->forge->addForeignKey('modified_by', 'db_mstr.m_user', 'id', 'CASCADE', 'CASCADE');
+        $this->forge->createTable('m_internship');
 
-        $forge->addField([
+        $this->forge->addField([
             'id' => [
                 'type' => 'VARCHAR',
                 'constraint' => 36,
@@ -124,11 +124,13 @@ class MigrateMagang extends Migration
                 'null'    => false,
             ],
         ]);
-        $forge->addKey('id', true);
-        $forge->addForeignKey('internship_id', 'm_internship', 'id', 'CASCADE', 'CASCADE');
-        $forge->createTable('m_internship_student');
+        $this->forge->addKey('id', true);
+        $this->forge->addForeignKey('internship_id', 'm_internship', 'id', 'CASCADE', 'CASCADE');
+        $this->forge->addForeignKey('created_by', 'db_mstr.m_user', 'id', 'CASCADE', 'CASCADE');
+        $this->forge->addForeignKey('modified_by', 'db_mstr.m_user', 'id', 'CASCADE', 'CASCADE');
+        $this->forge->createTable('m_internship_student');
 
-        $forge->addField([
+        $this->forge->addField([
             'id' => [
                 'type' => 'VARCHAR',
                 'constraint' => 36,
@@ -171,16 +173,17 @@ class MigrateMagang extends Migration
                 'null'    => false,
             ],
         ]);
-        $forge->addKey('id', true);
-        $forge->addForeignKey('internship_student_id', 'm_internship_student', 'id', 'CASCADE', 'CASCADE');
-        $forge->createTable('t_internship_attendance');
+        $this->forge->addKey('id', true);
+        $this->forge->addForeignKey('internship_student_id', 'm_internship_student', 'id', 'CASCADE', 'CASCADE');
+        $this->forge->addForeignKey('created_by', 'm_internship_student', 'id', 'CASCADE', 'CASCADE');
+        $this->forge->addForeignKey('modified_by', 'm_internship_student', 'id', 'CASCADE', 'CASCADE');
+        $this->forge->createTable('t_internship_attendance');
     }
 
     public function down()
     {
-        $forge = Database::forge('default');
-        $forge->dropTable('m_internship');
-        $forge->dropTable('m_internship_student');
-        $forge->dropTable('t_internship_attendance');
+        $this->forge->dropTable('m_internship');
+        $this->forge->dropTable('m_internship_student');
+        $this->forge->dropTable('t_internship_attendance');
     }
 }

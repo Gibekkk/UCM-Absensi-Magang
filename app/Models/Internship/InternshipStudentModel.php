@@ -3,14 +3,13 @@
 namespace App\Models\Internship;
 
 use CodeIgniter\Model;
-use Config\Database;
 use App\Entities\Internship\InternshipStudentEntity;
+use App\Models\Master\StudentModel;
 use Ramsey\Uuid\Uuid;
 
 class InternshipStudentModel extends Model
 {
-    protected $table            = 'm_internship_student';
-    protected $DBGroup          = 'default';
+    protected $table            = 'db_internship.m_internship_student';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = false;
     protected $returnType       = InternshipStudentEntity::class;
@@ -67,11 +66,11 @@ class InternshipStudentModel extends Model
 
     protected function autoFillDates(array $data)
     {
+        $internshipModel = new InternshipModel();
         $internshipId = $data['data']['internship_id'] ?? null;
 
         if ($internshipId && (empty($data['data']['start_date']) || empty($data['data']['end_date']))) {
-            $db = Database::connect($this->DBGroup);
-            $internship = $db->table('m_internship')->where('id', $internshipId)->get()->getRow();
+            $internship = $internshipModel->where('id', $internshipId)->get()->getRow();
 
             if ($internship) {
                 if (empty($data['data']['start_date'])) $data['data']['start_date'] = $internship->start_date;
@@ -97,9 +96,9 @@ class InternshipStudentModel extends Model
 
     protected function setStatusStudents(array $data)
     {
-        if($data['data']['is_active'] == 0){
-        $db = Database::connect('master');
-            $db->table('m_student')->where('id', $data['data']['student_id'])->update(['is_active'=> 0]);
+        $studentModel = new StudentModel();
+        if ($data['data']['is_active'] == 0) {
+            $studentModel->where('id', $data['data']['student_id'])->update(['is_active' => 0]);
         }
     }
 
@@ -108,15 +107,15 @@ class InternshipStudentModel extends Model
         // Jika data kosong, langsung return
         if (!isset($data['data'])) return $data;
 
+        $idsToUpdate = [];
         $today = date('Y-m-d');
 
         // Fungsi untuk memproses satu baris data
-        $process = function ($row) use ($today) {
+        $process = function ($row) use (&$idsToUpdate, $today) {
             // Jika row adalah objek (karena returnType = entity)
             if (is_object($row) && isset($row->end_date) && $row->end_date < $today && $row->is_active == '1') {
                 $row->is_active = '0';
-                // Update ke database agar sinkron (opsional, tapi disarankan)
-                $this->db->table($this->table)->update(['is_active' => '0'], ['id' => $row->id]);
+                $idsToUpdate[] = $row->id;
             }
             return $row;
         };
@@ -130,6 +129,9 @@ class InternshipStudentModel extends Model
             foreach ($data['data'] as $key => $row) {
                 $data['data'][$key] = $process($row);
             }
+        }
+        if (count($idsToUpdate) > 0) {
+            $this->whereIn('id', $idsToUpdate)->update(['is_active' => 0]);
         }
 
         return $data;

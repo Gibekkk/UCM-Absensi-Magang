@@ -6,8 +6,6 @@ use CodeIgniter\Database\Seeder;
 
 class UserSeeder extends Seeder
 {
-    protected $DBGroup = 'master';
-
     public function run()
     {
         $data = [
@@ -42,6 +40,6 @@ class UserSeeder extends Seeder
                 'email' => 'email@example.com',
             ],
         ];
-        $this->db->table('m_user')->insertBatch($data);
+        $this->db->table('db_mstr.m_user')->insertBatch($data);
     }
 }

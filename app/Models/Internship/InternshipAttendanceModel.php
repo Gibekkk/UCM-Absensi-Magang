@@ -8,8 +8,7 @@ use Ramsey\Uuid\Uuid;
 
 class InternshipAttendanceModel extends Model
 {
-    protected $table            = 't_internship_attendance';
-    protected $DBGroup          = 'default';
+    protected $table            = 'db_internship.t_internship_attendance';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = false;
     protected $returnType       = InternshipAttendanceEntity::class;

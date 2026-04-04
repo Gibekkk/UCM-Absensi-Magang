@@ -10,10 +10,14 @@ class SessionEntity extends Entity
     protected $datamap = [];
     protected $dates   = ['created_date', 'modified_date', 'last_access'];
     protected $casts   = [];
+    protected $userModel;
+    public function __construct()
+    {
+        $this->userModel = new UserModel();
+    }
 
     public function getUser()
     {
-        $userModel = new UserModel();
-        return $userModel->find($this->attributes['user_id']);
+        return $this->userModel->find($this->attributes['user_id']);
     }
 }

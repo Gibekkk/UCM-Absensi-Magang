@@ -4,15 +4,12 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 use CodeIgniter\Database\RawSql;
-use Config\Database;
 
 class MigrateMaster extends Migration
 {
     public function up()
     {
-        $forge = Database::forge('master');
-
-        $forge->addField([
+        $this->forge->addField([
             'id' => [
                 'type' => 'VARCHAR',
                 'constraint' => 36,
@@ -78,10 +75,10 @@ class MigrateMaster extends Migration
                 'null'    => false,
             ],
         ]);
-        $forge->addKey('id', true);
-        $forge->createTable('m_user');
+        $this->forge->addKey('id', true);
+        $this->forge->createTable('m_user');
 
-        $forge->addField([
+        $this->forge->addField([
             'id' => [
                 'type' => 'VARCHAR',
                 'constraint' => 36,
@@ -141,12 +138,12 @@ class MigrateMaster extends Migration
                 'null'    => false,
             ],
         ]);
-        $forge->addKey('id', true);
-        $forge->addForeignKey('created_by', 'm_user', 'id', 'CASCADE', 'CASCADE');
-        $forge->addForeignKey('modified_by', 'm_user', 'id', 'CASCADE', 'CASCADE');
-        $forge->createTable('m_student');
+        $this->forge->addKey('id', true);
+        $this->forge->addForeignKey('created_by', 'm_user', 'id', 'CASCADE', 'CASCADE');
+        $this->forge->addForeignKey('modified_by', 'm_user', 'id', 'CASCADE', 'CASCADE');
+        $this->forge->createTable('m_student');
 
-        $forge->addField([
+        $this->forge->addField([
             'id' => [
                 'type' => 'VARCHAR',
                 'constraint' => 36,
@@ -174,15 +171,15 @@ class MigrateMaster extends Migration
                 'default' => new RawSql('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'),
             ],
         ]);
-        $forge->addKey('id', true);
-        $forge->addForeignKey('user_id', 'm_user', 'id', 'CASCADE', 'CASCADE');
-        $forge->createTable('m_session');
+        $this->forge->addKey('id', true);
+        $this->forge->addForeignKey('user_id', 'm_user', 'id', 'CASCADE', 'CASCADE');
+        $this->forge->createTable('m_session');
     }
 
     public function down()
     {
-        $forge = Database::forge('master');
-        $forge->dropTable('m_user');
-        $forge->dropTable('m_student');
+        $this->forge->dropTable('m_user');
+        $this->forge->dropTable('m_student');
+        $this->forge->dropTable('m_session');
     }
 }

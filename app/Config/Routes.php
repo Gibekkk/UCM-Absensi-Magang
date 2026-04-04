@@ -34,6 +34,7 @@ $routes->group('admin', ['filter' => 'auth'], function ($routes) {
             $routes->get('/', 'StudentController::getStudents');
             $routes->post('/', 'StudentController::addStudent');
             $routes->put('(:any)', 'StudentController::editStudent/$1');
+            $routes->patch('setIsActive/(:any)/(:any)', 'StudentController::setIsActive/$1/$2');
             // $routes->delete('(:any)', 'StudentController::deleteStudent/$1');
             $routes->post('import', 'StudentController::importStudents');
         });
@@ -43,6 +44,7 @@ $routes->group('admin', ['filter' => 'auth'], function ($routes) {
             $routes->get('(:any)', 'InternshipController::getInternships/$1');
             $routes->get('/', 'InternshipController::getInternships');
             $routes->post('/', 'InternshipController::addInternship');
+            $routes->patch('setIsActive/(:any)/(:any)', 'InternshipController::setIsActive/$1/$2');
             $routes->put('(:any)', 'InternshipController::editInternship/$1');
             // // $routes->delete('(:any)', 'InternshipController::deleteInternship/$1');
         });

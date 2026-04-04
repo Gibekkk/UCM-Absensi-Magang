@@ -216,6 +216,45 @@ class InternshipController extends BaseController
         ])->setStatusCode(500);
     }
 
+    public function setIsActive($id, $isActive)
+    {
+        $token = $this->request->getHeaderLine('token');
+        $user = $this->sessionModel->where('id', $token)->first()->getUser();
+        $userId = $user->id;
+
+        $data = $this->request->getJSON(true);
+        $internship = [
+            'is_active' => $isActive,
+            'modified_by' => $userId,
+        ];
+        $internshipData = $this->internshipModel->find($id);
+        if ($internshipData) {
+            // Jika ini error, hal yang normal, kode ini bekerja dengan baik
+            if ($user->is_super_admin || $internshipData->created_by == $userId) {
+                if ($this->internshipModel->update($id, $internship)) {
+                    return $this->response->setJSON([
+                        'status' => 'success',
+                        'message' => 'Internship Edited.'
+                    ]);
+                }
+            } else {
+                return $this->response->setJSON([
+                    'status' => 'error',
+                    'message' => 'You Do Not Have Access.'
+                ])->setStatusCode(402);
+            }
+        } else {
+            return $this->response->setJSON([
+                'status' => 'error',
+                'message' => 'Internship Not Found.'
+            ])->setStatusCode(404);
+        }
+        return $this->response->setJSON([
+            'status' => 'error',
+            'message' => 'Unknown Error Occured.'
+        ])->setStatusCode(500);
+    }
+
     public function deleteInternship($id)
     {
         $token = $this->request->getHeaderLine('token');

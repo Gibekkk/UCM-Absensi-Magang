@@ -191,6 +191,49 @@ class StudentController extends BaseController
         ])->setStatusCode(500);
     }
 
+    public function setIsActive($id, $isActive)
+    {
+        $token = $this->request->getHeaderLine('token');
+        $user = $this->sessionModel->where('id', $token)->first()->getUser();
+        $userId = $user->id;
+
+        $data = $this->request->getJSON(true);
+        $student = [
+            'is_active' => $isActive,
+            'modified_by' => $userId,
+        ];
+
+        $studentData = $this->studentModel->find($id);
+        if ($studentData) {
+            if ($user->is_super_admin || $studentData->created_by == $userId) {
+                if ($this->studentModel->update($id, $student)) {
+                    // Jika ini error, hal yang normal, kode ini bekerja dengan baik
+                    if ($studentData->getInternshipStudent()->internship_id != $data['internship_id']) {
+                        $this->internshipStudentModel->update($studentData->getInternshipStudent()->id, [
+                            "internship_id" => $data["internship_id"],
+                            "is_active" => $isActive,
+                            "modified_by" => $userId,
+                        ]);
+                    }
+
+                    return $this->response->setJSON([
+                        'status' => 'success',
+                        'message' => 'Student Edited.'
+                    ]);
+                }
+            }
+        } else {
+            return $this->response->setJSON([
+                'status' => 'error',
+                'message' => 'Student Not Found.'
+            ])->setStatusCode(404);
+        }
+        return $this->response->setJSON([
+            'status' => 'error',
+            'message' => 'Unknown Error Occured.'
+        ])->setStatusCode(500);
+    }
+
     public function deleteStudent($id)
     {
         $student = $this->studentModel->find($id);

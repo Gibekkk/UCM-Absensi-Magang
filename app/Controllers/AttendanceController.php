@@ -54,7 +54,7 @@ class AttendanceController extends BaseController
                 if ($lastScanTime > new DateTime())
                     return  $this->response->setJSON([
                         'status' => 'error',
-                        'message' => 'Please Wait Before Scanning Again.'
+                        'message' => 'You Have Been Absent.'
                     ])->setStatusCode(400);
             }
 

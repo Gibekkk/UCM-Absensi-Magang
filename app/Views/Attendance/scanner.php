@@ -330,7 +330,7 @@
                     400: function(xhr) {
                         // Bad Request (misal: Absensi terlalu cepat)
                         const res = xhr.responseJSON;
-                        showModal(false, "Failed", res.message || "Please Wait Before Scanning Again.");
+                        showModal(false, "Failed", res.message || "You Have Been Absent.");
                     },
                     404: function(xhr) {
                         // Bad Request (misal: NIM tidak ditemukan)

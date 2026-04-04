@@ -50,7 +50,7 @@ class AttendanceController extends BaseController
             $lastAttendance = $internshipStudent->getLastAttendance();
             if ($lastAttendance != null) {
                 $lastScanTime = new DateTime($lastAttendance->created_date);
-                $lastScanTime->modify("+30 seconds");
+                $lastScanTime->modify("+10 minutes");
                 if ($lastScanTime > new DateTime())
                     return  $this->response->setJSON([
                         'status' => 'error',

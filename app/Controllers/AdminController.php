@@ -16,4 +16,8 @@ class AdminController extends BaseController
     {
         return view('Admin/attendance');
     }
+    public function users()
+    {
+        return view('Admin/users');
+    }
 }

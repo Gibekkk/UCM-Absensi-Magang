@@ -46,9 +46,9 @@ class UserModel extends Model
 
     // Callbacks
     protected $allowCallbacks = true;
-    protected $beforeInsert   = ['generateId'];
+    protected $beforeInsert   = ['generateId', 'hashPassword'];
     protected $afterInsert    = [];
-    protected $beforeUpdate   = [];
+    protected $beforeUpdate   = ['hashPassword'];
     protected $afterUpdate    = [];
     protected $beforeFind     = [];
     protected $afterFind      = [];
@@ -60,6 +60,15 @@ class UserModel extends Model
         // Jika ID belum ada, buatkan manual (opsional jika database sudah punya default)
         if (!isset($data['data']['id'])) {
             $data['data']['id'] = Uuid::uuid7()->toString();
+        }
+        return $data;
+    }
+
+    protected function hashPassword(array $data)
+    {
+        if (isset($data['data']['password'])) {
+            // Lakukan hashing password menggunakan algoritma default (BCRYPT)
+            $data['data']['password'] = password_hash($data['data']['password'], PASSWORD_DEFAULT);
         }
         return $data;
     }

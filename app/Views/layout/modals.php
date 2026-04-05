@@ -63,12 +63,6 @@
             <select name="internship_id" id="internship_id" class="form-control" required>
             </select>
           </div>
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="is_active_student" name="is_active">
-            <label class="form-check-label" for="is_active_student">
-              Is Active
-            </label>
-          </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -110,11 +104,46 @@
             <label>End Date</label>
             <input type="date" name="end_date" id="end_date" class="form-control" required>
           </div>
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="is_active_internship" name="is_active">
-            <label class="form-check-label" for="is_active_internship">
-              Is Active
-            </label>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Save Changes</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- User Modal (Add & Edit) -->
+<div class="modal fade" id="userModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <form id="userForm">
+        <input type="hidden" name="userId" id="userId" value="">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalTitle">Add User</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label>Name</label>
+            <input type="text" name="full_name" id="full_name" class="form-control" required>
+          </div>
+          <div class="mb-3">
+            <label>Username</label>
+            <input type="text" name="username" id="username" class="form-control" required>
+          </div>
+          <div class="mb-3">
+            <label>Email</label>
+            <input type="email" name="email" id="email" class="form-control" required>
+          </div>
+          <div class="mb-3">
+            <label>Phone Number</label>
+            <input type="tel" name="phone_number" id="phone_number" class="form-control" required>
+          </div>
+          <div class="mb-3">
+            <label>Password</label>
+            <input type="password" name="password" id="password" class="form-control">
           </div>
         </div>
         <div class="modal-footer">

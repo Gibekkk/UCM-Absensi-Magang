@@ -8,12 +8,7 @@
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.84.0">
 
-    <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/headers/">
-
-
-
-    <!-- Bootstrap core CSS -->
-    <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
         .bd-placeholder-img {
@@ -45,7 +40,7 @@
                 <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
                     <img class="bi me-2 d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none" width="40" height="40" role="img" aria-label="UC Makassar" src="<?= base_url('img/logo.png') ?>">
 
-                    <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                    <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0" id="navbar">
                         <li><a href="<?= base_url('admin/students') ?>" class="nav-link px-2 link-<?= ($page == "students") ? "dark" : "secondary" ?>">Students</a></li>
                         <li><a href="<?= base_url('admin/internships') ?>" class="nav-link px-2 link-<?= ($page == "internships") ? "dark" : "secondary" ?>">Internships</a></li>
                         <li><a href="<?= base_url('admin/attendance') ?>" class="nav-link px-2 link-<?= ($page == "attendance") ? "dark" : "secondary" ?>">Attendance</a></li>
@@ -69,9 +64,37 @@
 
     </main>
 
-
-    <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
-
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="<?= base_url('js/app.js') ?>"></script>
+    <script>
+        $(document).ready(function() {
+            $.ajax({
+                url: '<?= base_url("auth/me"); ?>',
+                type: 'GET',
+                contentType: 'application/json',
+                headers: {
+                    'token': getCookie('token'),
+                    'RequestType': 'API',
+                    'X-CSRF-TOKEN': '<?= csrf_hash() ?>'
+                },
+                success: (res) => {
+                    $('#username').text(res.username);
+                    if (res.is_super_admin == 1) {
+                        $('#navbar').append(`
+                    <li>
+                        <a href="<?= base_url('admin/users') ?>" 
+                           class="nav-link px-2 link-<?= ($page == "users") ? "dark" : "secondary" ?>">
+                           Users
+                        </a>
+                    </li>
+                `);
+                    }
+                },
+                error: (err) => console.error("Error Fetching Profile")
+            });
+        });
+    </script>
 
 </body>
 

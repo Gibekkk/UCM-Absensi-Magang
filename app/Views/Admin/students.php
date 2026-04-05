@@ -57,6 +57,24 @@
     <script src="<?= base_url('js/app.js') ?>"></script>
 
     <script>
+        function updateIsActive(id, element) {
+            $.ajax({
+                url: '<?= base_url("admin/api/internships/setIsActive/"); ?>' + id + '/' + (element.checked ? "1" : "0"),
+                contentType: 'application/json',
+                headers: {
+                    'token': getCookie('token'),
+                    'RequestType': 'API',
+                    'X-CSRF-TOKEN': '<?= csrf_hash() ?>'
+                },
+                type: 'PATCH',
+                success: (data) => {},
+                error: (res) => {
+                    $('#internshipModal').modal('hide');
+                    showAlert("Error Saving", res.message ?? "Unknown Error Occured.")
+                }
+            });
+        }
+
         function populateDepartment(name = null, id = null) {
             $.ajax({
                 url: '<?= base_url("admin/api/internships/department"); ?>',
@@ -140,7 +158,7 @@
                     {
                         data: null,
                         render: (data, type, row) => `
-                            ${row.is_active == "1" ? "True" : "False"}
+                            <input type="checkbox" onclick="updateIsActive('${row.id}', this)" ${row.is_active == "1" ? "checked" : ""}>
                         `
                     },
                     {
@@ -162,21 +180,6 @@
                         cell.innerHTML = i + 1;
                     });
                 }
-            });
-
-            $.ajax({
-                url: '<?= base_url("auth/me"); ?>',
-                type: 'GET',
-                contentType: 'application/json',
-                headers: {
-                    'token': getCookie('token'),
-                    'RequestType': 'API',
-                    'X-CSRF-TOKEN': '<?= csrf_hash() ?>'
-                },
-                success: (res) => {
-                    $('#username').text(res.user.username);
-                },
-                error: (err) => console.error("Error Fetching Profile")
             });
 
             $('#studentModal #studentForm #department_name').focus(populateDepartment());
@@ -259,7 +262,6 @@
                     $('#studentModal input[name="full_name"]').val(data.students.full_name);
                     $('#studentModal input[name="major"]').val(data.students.major);
                     $('#studentModal input[name="sub_major"]').val(data.students.sub_major);
-                    $('#studentModal input[name="is_active"]').prop("checked", data.students.is_active == "1" ? true : false);
                     populateDepartment(data.students.internship_department, data.students.internship_id);
                     $('#studentModal').modal('show');
                 },

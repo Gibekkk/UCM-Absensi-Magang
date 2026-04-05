@@ -106,7 +106,7 @@ class StudentController extends BaseController
             'full_name' => $data['full_name'],
             'major' => $data['major'],
             'sub_major' => $data['sub_major'],
-            'is_active' => isset($data['is_active']) ? "1" : "0",
+            'is_active' => "1",
             'created_by' => $id,
             'modified_by' => $id,
         ];
@@ -120,7 +120,7 @@ class StudentController extends BaseController
                     $this->internshipStudentModel->insert([
                         "student_id" => $studentId,
                         "internship_id" => $data["internship_id"],
-                        "is_active" => isset($data['is_active']) ? "1" : "0",
+                        "is_active" => "1",
                         "created_by" => $id,
                         "modified_by" => $id,
                     ]);
@@ -156,7 +156,6 @@ class StudentController extends BaseController
             'full_name' => $data['full_name'],
             'major' => $data['major'],
             'sub_major' => $data['sub_major'],
-            'is_active' => isset($data['is_active']) ? "1" : "0",
             'modified_by' => $userId,
         ];
 
@@ -168,7 +167,6 @@ class StudentController extends BaseController
                     if ($studentData->getInternshipStudent()->internship_id != $data['internship_id']) {
                         $this->internshipStudentModel->update($studentData->getInternshipStudent()->id, [
                             "internship_id" => $data["internship_id"],
-                            "is_active" => isset($data['is_active']) ? "1" : "0",
                             "modified_by" => $userId,
                         ]);
                     }
@@ -197,7 +195,6 @@ class StudentController extends BaseController
         $user = $this->sessionModel->where('id', $token)->first()->getUser();
         $userId = $user->id;
 
-        $data = $this->request->getJSON(true);
         $student = [
             'is_active' => $isActive,
             'modified_by' => $userId,
@@ -208,9 +205,8 @@ class StudentController extends BaseController
             if ($user->is_super_admin || $studentData->created_by == $userId) {
                 if ($this->studentModel->update($id, $student)) {
                     // Jika ini error, hal yang normal, kode ini bekerja dengan baik
-                    if ($studentData->getInternshipStudent()->internship_id != $data['internship_id']) {
+                    if ($studentData->getInternshipStudent()->is_active != $isActive) {
                         $this->internshipStudentModel->update($studentData->getInternshipStudent()->id, [
-                            "internship_id" => $data["internship_id"],
                             "is_active" => $isActive,
                             "modified_by" => $userId,
                         ]);

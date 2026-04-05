@@ -155,7 +155,7 @@ class InternshipController extends BaseController
             'head_department' => $data['head_department'],
             'start_date' => $data['start_date'],
             'end_date' => $data['end_date'],
-            'is_active' => isset($data['is_active']) ? "1" : "0",
+            'is_active' => "1",
             'created_by' => $id,
             'modified_by' => $id,
         ];
@@ -185,7 +185,6 @@ class InternshipController extends BaseController
             'head_department' => $data['head_department'],
             'start_date' => $data['start_date'],
             'end_date' => $data['end_date'],
-            'is_active' => isset($data['is_active']) ? "1" : "0",
             'modified_by' => $userId,
         ];
         $internshipData = $this->internshipModel->find($id);
@@ -222,7 +221,6 @@ class InternshipController extends BaseController
         $user = $this->sessionModel->where('id', $token)->first()->getUser();
         $userId = $user->id;
 
-        $data = $this->request->getJSON(true);
         $internship = [
             'is_active' => $isActive,
             'modified_by' => $userId,

@@ -13,27 +13,25 @@
     <div class="d-flex">
         <?= view('layout/sidebar') ?>
         <div class="flex-grow-1">
-            <?= view('layout/header', ["page" => "internships"]) ?>
+            <?= view('layout/header', ["page" => "users"]) ?>
             <div class="p-4">
                 <!-- Toolbar -->
                 <div class="d-flex justify-content-between mb-3">
                     <h3>Internship Data</h3>
                     <div>
-                        <button class="btn btn-primary" data-bs-toggle="modal" onclick="openAddModal()">Add Internship</button>
+                        <button class="btn btn-primary" data-bs-toggle="modal" onclick="openAddModal()">Add User</button>
                     </div>
                 </div>
 
                 <div class="table-responsive">
-                    <table id="internshipTable" class="table table-striped table-hover w-100">
+                    <table id="userTable" class="table table-striped table-hover w-100">
                         <thead>
                             <tr>
                                 <th>No</th>
                                 <th>Name</th>
-                                <th>Department</th>
-                                <th>Head of Department</th>
-                                <th>Start Date</th>
-                                <th>End Date</th>
-                                <th>Number of Students</th>
+                                <th>Username</th>
+                                <th>Email</th>
+                                <th>Phone Number</th>
                                 <th>Is Active</th>
                                 <th>Action</th>
                             </tr>
@@ -55,7 +53,7 @@
     <script>
         function updateIsActive(id, element) {
             $.ajax({
-                url: '<?= base_url("admin/api/internships/setIsActive/"); ?>' + id + '/' + (element.checked ? "1" : "0"),
+                url: '<?= base_url("admin/api/users/setIsActive/"); ?>' + id + '/' + (element.checked ? "1" : "0"),
                 contentType: 'application/json',
                 headers: {
                     'token': getCookie('token'),
@@ -65,22 +63,22 @@
                 type: 'PATCH',
                 success: (data) => {},
                 error: (res) => {
-                    $('#internshipModal').modal('hide');
+                    $('#userModal').modal('hide');
                     showAlert("Error Saving", res.message ?? "Unknown Error Occured.")
                 }
             });
         }
         $(document).ready(function() {
             // 1. RESTful DataTables Initialization
-            $('#internshipTable').DataTable({
+            $('#userTable').DataTable({
                 ajax: {
-                    url: '<?= base_url("admin/api/internships"); ?>',
+                    url: '<?= base_url("admin/api/users"); ?>',
                     "beforeSend": function(xhr) {
                         xhr.setRequestHeader('token', getCookie('token'));
                         xhr.setRequestHeader('RequestType', 'API');
                         xhr.setRequestHeader('X-CSRF-TOKEN', '<?= csrf_hash() ?>');
                     },
-                    dataSrc: 'internships'
+                    dataSrc: 'users'
                 },
                 ordering: true,
                 order: [
@@ -92,28 +90,16 @@
                         orderable: false
                     },
                     {
-                        data: 'name'
+                        data: 'full_name'
                     },
                     {
-                        data: 'department'
+                        data: 'username'
                     },
                     {
-                        data: 'head_department'
+                        data: 'email'
                     },
                     {
-                        data: null,
-                        render: (data, type, row) => `
-                            ${new Date(row.start_date.date.split(" ")[0]).toDateString()}
-                        `
-                    },
-                    {
-                        data: null,
-                        render: (data, type, row) => `
-                            ${new Date(row.end_date.date.split(" ")[0]).toDateString()}
-                        `
-                    },
-                    {
-                        data: 'students_count'
+                        data: 'phone_number'
                     },
                     {
                         data: null,
@@ -141,16 +127,15 @@
                     });
                 }
             });
-
         });
 
         // 2. Handle Submit Form (Add & Edit)
-        $('#internshipModal #internshipForm').on('submit', function(e) {
+        $('#userModal #userForm').on('submit', function(e) {
             e.preventDefault();
-            let formData = Object.fromEntries(new FormData($('#internshipModal #internshipForm')[0]));
-            if (!$('#internshipModal #internshipForm #internshipId').val()) {
+            let formData = Object.fromEntries(new FormData($('#userModal #userForm')[0]));
+            if (!$('#userModal #userForm #userId').val()) {
                 $.ajax({
-                    url: '<?= base_url("admin/api/internships"); ?>',
+                    url: '<?= base_url("admin/api/users"); ?>',
                     contentType: 'application/json',
                     headers: {
                         'token': getCookie('token'),
@@ -160,18 +145,18 @@
                     type: 'POST',
                     data: JSON.stringify(formData),
                     success: (res) => {
-                        $('#internshipModal').modal('hide');
-                        $('#internshipModal #internshipForm')[0].reset();
-                        $('#internshipTable').DataTable().ajax.reload();
+                        $('#userModal').modal('hide');
+                        $('#userModal #userForm')[0].reset();
+                        $('#userTable').DataTable().ajax.reload();
                     },
                     error: (res) => {
-                        $('#internshipModal').modal('hide');
+                        $('#userModal').modal('hide');
                         showAlert("Error Saving", res.message ?? "Unknown Error Occured.")
                     }
                 });
             } else {
                 $.ajax({
-                    url: '<?= base_url("admin/api/internships/"); ?>' + $('#internshipModal #internshipForm #internshipId').val(),
+                    url: '<?= base_url("admin/api/users/"); ?>' + $('#userModal #userForm #userId').val(),
                     contentType: 'application/json',
                     headers: {
                         'token': getCookie('token'),
@@ -181,12 +166,12 @@
                     type: 'PUT',
                     data: JSON.stringify(formData),
                     success: (res) => {
-                        $('#internshipModal').modal('hide');
-                        $('#internshipForm')[0].reset();
-                        $('#internshipTable').DataTable().ajax.reload();
+                        $('#userModal').modal('hide');
+                        $('#userForm')[0].reset();
+                        $('#userTable').DataTable().ajax.reload();
                     },
                     error: (res) => {
-                        $('#internshipModal').modal('hide');
+                        $('#userModal').modal('hide');
                         showAlert("Error Saving", res.message ?? "Unknown Error Occured.")
                     }
                 });
@@ -195,16 +180,17 @@
 
         // 3. Fungsi Buka Modal Add
         function openAddModal() {
-            $('#internshipModal #modalTitle').text('Add Internship');
-            $('#internshipModal #internshipForm')[0].reset();
-            $('#internshipModal #internshipId').val('');
-            $('#internshipModal').modal('show');
+            $('#userModal #modalTitle').text('Add Internship');
+            $('#userModal #userForm')[0].reset();
+            $('#userModal #userId').val('');
+            $('#userModal #password').prop('required', true);
+            $('#userModal').modal('show');
         }
 
         // 4. Fungsi Edit (Get Data)
         function openEditModal(id) {
             $.ajax({
-                url: '<?= base_url("admin/api/internships/"); ?>' + id,
+                url: '<?= base_url("admin/api/users/"); ?>' + id,
                 contentType: 'application/json',
                 headers: {
                     'token': getCookie('token'),
@@ -213,36 +199,36 @@
                 },
                 type: 'GET',
                 success: (data) => {
-                    $('#internshipModal #modalTitle').text('Edit Internship');
-                    $('#internshipModal #internshipId').val(data.internships.id);
-                    $('#internshipModal input[name="name"]').val(data.internships.name);
-                    $('#internshipModal input[name="department"]').val(data.internships.department);
-                    $('#internshipModal input[name="head_department"]').val(data.internships.head_department);
-                    $('#internshipModal input[name="start_date"]').val(data.internships.start_date.date.split(" ")[0]);
-                    $('#internshipModal input[name="end_date"]').val(data.internships.end_date.date.split(" ")[0]);
-                    $('#internshipModal').modal('show');
+                    $('#userModal #modalTitle').text('Edit User');
+                    $('#userModal #userId').val(data.users.id);
+                    $('#userModal #password').prop('required', false);
+                    $('#userModal input[name="full_name"]').val(data.users.full_name);
+                    $('#userModal input[name="username"]').val(data.users.username);
+                    $('#userModal input[name="email"]').val(data.users.email);
+                    $('#userModal input[name="phone_number"]').val(data.users.phone_number);
+                    $('#userModal').modal('show');
                 },
                 error: (res) => {
-                    $('#internshipModal').modal('hide');
+                    $('#userModal').modal('hide');
                     showAlert("Error Saving", res.message ?? "Unknown Error Occured.")
                 }
             });
         }
 
         // 5. Fungsi Delete (Trigger Modal)
-        let internshipIdToDelete = null;
+        let userIdToDelete = null;
 
         // function confirmDelete(id) {
-        //     internshipIdToDelete = id;
-        //     $('#deleteModalBody').html("Are you sure you want to delete this internship? This action cannot be undone.");
+        //     userIdToDelete = id;
+        //     $('#deleteModalBody').html("Are you sure you want to delete this user? This action cannot be undone.");
         //     $('#deleteModal').modal('show');
         // }
 
         // 6. Eksekusi Delete
         // $('#confirmDeleteBtn').on('click', function() {
-        //     if (internshipIdToDelete) {
+        //     if (userIdToDelete) {
         //         $.ajax({
-        //             url: '<?= base_url("admin/api/internships/"); ?>' + internshipIdToDelete,
+        //             url: '<?= base_url("admin/api/users/"); ?>' + userIdToDelete,
         //             contentType: 'application/json',
         //             headers: {
         //                 'token': getCookie('token'),
@@ -252,8 +238,8 @@
         //             type: 'DELETE',
         //             success: () => {
         //                 $('#deleteModal').modal('hide');
-        //                 $('#internshipTable').DataTable().ajax.reload();
-        //                 internshipIdToDelete = null;
+        //                 $('#userTable').DataTable().ajax.reload();
+        //                 userIdToDelete = null;
         //             }
         //         });
         //     }
@@ -264,7 +250,7 @@
             let formData = new FormData();
             formData.append('file', input.files[0]);
             $.ajax({
-                url: '<?= base_url("api/internships/import"); ?>',
+                url: '<?= base_url("api/users/import"); ?>',
                 contentType: 'application/json',
                 headers: {
                     'token': getCookie('token'),
@@ -277,7 +263,7 @@
                 contentType: false,
                 success: () => {
                     console.error('Import Success');
-                    $('#internshipTable').DataTable().ajax.reload();
+                    $('#userTable').DataTable().ajax.reload();
                 }
             });
         }

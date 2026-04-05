@@ -16,13 +16,40 @@
             <?= view('layout/header', ["page" => "attendance"]) ?>
             <div class="p-4">
                 <!-- Toolbar -->
-                <div class="d-flex justify-content-between mb-3">
-                    <form id="searchForm">
-                        <h3>Attendance Data</h3>
-                        <input type="date" id="startDate" class="form-control w-auto">
-                        <input type="date" id="endDate" class="form-control w-auto">
-                        <input type="submit" value="Search">
-                    </form>
+                <div class="mb-4">
+                    <h3>Attendance Data</h3>
+                    <div class="d-flex align-items-center gap-2 bg-light p-3 rounded shadow-sm">
+                        <div class="d-flex align-items-center gap-2">
+                            <label class="fw-bold">Filter By:</label>
+                            <select id="filterSelector" class="form-select w-auto">
+                                <option value="Date">Date Range</option>
+                                <option value="NIM">NIM</option>
+                                <option value="Department">Department</option>
+                                <option value="Internship">Internship</option>
+                            </select>
+                        </div>
+
+                        <form id="searchForm" class="d-flex align-items-center gap-2 flex-grow-1">
+                            <!-- Container untuk input yang berubah-ubah -->
+                            <div id="dynamicInputContainer" class="d-flex gap-2 flex-grow-1">
+                                <!-- Default: Date Range -->
+                                <input type="date" id="startDate" class="form-control flex-grow-1" required>
+                                <input type="date" id="endDate" class="form-control flex-grow-1" required>
+                            </div>
+
+                            <!-- Selector Jenis Absensi (Selalu Ada) -->
+                            <div class="d-flex align-items-center gap-2">
+                                <label class="fw-bold">Type:</label>
+                                <select id="attendanceType" class="form-select w-auto">
+                                    <option value="both">Both (In/Out)</option>
+                                    <option value="in">In Only</option>
+                                    <option value="out">Out Only</option>
+                                </select>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary px-4">Search</button>
+                        </form>
+                    </div>
                 </div>
 
                 <div class="table-responsive">
@@ -52,19 +79,92 @@
     <script src="<?= base_url('js/app.js') ?>"></script>
 
     <script>
-        // Simpan referensi tabel agar bisa di-destroy
         let table;
 
-        function refreshDataTable(dateLink = null) {
-            // Jika tabel sudah ada, hancurkan dulu
+        function populateDepartment() {
+            $.ajax({
+                url: '<?= base_url("admin/api/internships/department"); ?>',
+                contentType: 'application/json',
+                headers: {
+                    'token': getCookie('token'),
+                    'RequestType': 'API',
+                    'X-CSRF-TOKEN': '<?= csrf_hash() ?>'
+                },
+                type: 'GET',
+                success: (res) => {
+                    $('#deptInput').empty();
+                    $('#deptInput').append(`<option value="" selected>Select Department</Option>`);
+                    res.departments.forEach(department => {
+                        $('#deptInput').append(`<option value="${department.name}">${department.name}</Option>`);
+                    });
+                }
+            });
+        }
+
+        function populateInternship() {
+            $.ajax({
+                url: '<?= base_url("admin/api/internships"); ?>',
+                contentType: 'application/json',
+                headers: {
+                    'token': getCookie('token'),
+                    'RequestType': 'API',
+                    'X-CSRF-TOKEN': '<?= csrf_hash() ?>'
+                },
+                type: 'GET',
+                success: (res) => {
+                    $('#internshipInput').empty();
+                    $('#internshipInput').append(`<option value="" selected>Select Internship</Option>`);
+                    res.internships.forEach(internship => {
+                        $('#internshipInput').append(`<option value="${internship.id}">${internship.name}</Option>`);
+                    });
+                }
+            });
+        }
+
+        // Fungsi untuk mengganti input field berdasarkan filterSelector
+        function updateFilterUI(filterType) {
+            const container = $('#dynamicInputContainer');
+            container.empty();
+
+            switch (filterType) {
+                case 'Date':
+                    container.append(`
+                        <input type="date" id="startDate" class="form-control flex-grow-1" required>
+                        <input type="date" id="endDate" class="form-control flex-grow-1" required>
+                    `);
+                    break;
+                case 'NIM':
+                    container.append(`
+                        <input type="text" id="nimInput" class="form-control" placeholder="Enter NIM (e.g. 070601...)" required>
+                    `);
+                    break;
+                case 'Department':
+                    container.append(`
+                        <select id="deptInput" class="form-select" required>
+                        </select>
+                    `);
+                    populateDepartment();
+                    break;
+                case 'Internship':
+                    container.append(`
+                        <select id="internshipInput" class="form-select" required>
+                        </select>
+                    `);
+                    populateInternship();
+                    break;
+            }
+        }
+
+        function refreshDataTable(params = null) {
             if (table) {
                 table.destroy();
             }
 
-            // Tentukan URL berdasarkan input tanggal
             let url = '<?= base_url("api/attendance"); ?>';
-            if (dateLink) {
-                url += `/${dateLink}`;
+            
+            // Logika URL/Parameter diserahkan kepada Anda sesuai kebutuhan backend
+            if (params) {
+                url += `/${params}`;
             }
 
             table = $('#attendanceTable').DataTable({
@@ -117,30 +217,37 @@
         }
 
         $(document).ready(function() {
-            // Inisialisasi awal
-            $.ajax({
-                url: '<?= base_url("auth/me"); ?>',
-                type: 'GET',
-                contentType: 'application/json',
-                headers: {
-                    'token': getCookie('token'),
-                    'RequestType': 'API',
-                    'X-CSRF-TOKEN': '<?= csrf_hash() ?>'
-                },
-                success: (res) => {
-                    $('#username').text(res.user.username);
-                },
-                error: (err) => console.error("Error Fetching Profile")
+            // Event listener saat filter selector berubah
+            $('#filterSelector').on('change', function() {
+                updateFilterUI($(this).val());
             });
 
-            // Event listener saat tanggal berubah
+            // Event listener saat form disubmit
             $('#searchForm').on('submit', function(e) {
                 e.preventDefault();
-                const startDate = $('#startDate').val();
-                const endDate = $('#endDate').val();
+                
+                const filterType = $('#filterSelector').val();
+                const attendanceType = $('#attendanceType').val(); // in/out/both
+                let filterValue = "";
 
-                const dateLink = startDate.replace(/-/g, '/') + "/" + endDate.replace(/-/g, '/');
-                refreshDataTable(dateLink);
+                // Mengambil value berdasarkan input yang sedang aktif
+                if (filterType === 'Date') {
+                    filterValue = "dateRange/";
+                    const start = $('#startDate').val().replace(/-/g, '/');
+                    const end = $('#endDate').val().replace(/-/g, '/');
+                    filterValue += `${start}/${end}`;
+                } else if (filterType === 'NIM') {
+                    filterValue = "nim/";
+                    filterValue += $('#nimInput').val();
+                } else if (filterType === 'Department') {
+                    filterValue = "department/";
+                    filterValue += $('#deptInput').val();
+                } else if (filterType === 'Internship') {
+                    filterValue = "internship/";
+                    filterValue += $('#internshipInput').val();
+                }
+                    filterValue += "/" + attendanceType;
+                refreshDataTable(filterValue); 
             });
         });
     </script>

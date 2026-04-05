@@ -191,14 +191,22 @@ class AttendanceController extends BaseController
         ]);
     }
 
-    public function getTodayAttendances()
+    public function getAttendancesByDateRange($year1, $month1, $day1, $year2, $month2, $day2, $type)
     {
         $token = $this->request->getHeaderLine('token');
         $user = $this->sessionModel->where('id', $token)->first()->getUser();
-        $queryRes = $this->internshipAttendanceModel->where('scan_time', date('Y-m-d'))->findAll();
+        $queryRes = $this->internshipAttendanceModel
+            ->where('scan_time >=', date('Y-m-d', strtotime("$day1-$month1-$year1")))
+            ->where('scan_time <=', date('Y-m-d', strtotime("$day2-$month2-$year2")))
+            ->findAll();
         $attendances = [];
 
         foreach ($queryRes as $attendance) {
+            if ($type == "in") {
+                if ($attendance->scan_time_type != "IN") continue;
+            } else if ($type == "out")
+                if ($attendance->scan_time_type != "OUT") continue;
+
             $internshipStudent = $attendance->getInternshipStudent();
             $student = $internshipStudent->getStudent();
             $internship = $internshipStudent->getInternship();
@@ -228,14 +236,24 @@ class AttendanceController extends BaseController
         ]);
     }
 
-    public function getDateAttendances($day, $month, $year)
+    public function getAttendancesByNIM($nim, $type)
     {
         $token = $this->request->getHeaderLine('token');
         $user = $this->sessionModel->where('id', $token)->first()->getUser();
-        $queryRes = $this->internshipAttendanceModel->where('scan_time', date('Y-m-d', strtotime("$day-$month-$year")))->findAll();
+        $queryRes = $this->internshipAttendanceModel
+            ->select('t_internship_attendance.*')
+            ->join('db_internship.m_internship_student as internship_student', 'internship_student.id = t_internship_attendance.internship_student_id')
+            ->join('db_mstr.m_student as student', 'student.id = internship_student.student_id')
+            ->where('student.nim', $nim)
+            ->findAll();
         $attendances = [];
 
         foreach ($queryRes as $attendance) {
+            if ($type == "in") {
+                if ($attendance->scan_time_type != "IN") continue;
+            } else if ($type == "out")
+                if ($attendance->scan_time_type != "OUT") continue;
+
             $internshipStudent = $attendance->getInternshipStudent();
             $student = $internshipStudent->getStudent();
             $internship = $internshipStudent->getInternship();
@@ -265,14 +283,71 @@ class AttendanceController extends BaseController
         ]);
     }
 
-    public function getDateRangeAttendances($year1, $month1, $day1, $year2, $month2, $day2)
+    public function getAttendancesByDepartment($department, $type)
     {
         $token = $this->request->getHeaderLine('token');
         $user = $this->sessionModel->where('id', $token)->first()->getUser();
-        $queryRes = $this->internshipAttendanceModel->where('scan_time >=', date('Y-m-d', strtotime("$day1-$month1-$year1")))->where('scan_time <=', date('Y-m-d', strtotime("$day2-$month2-$year2")))->findAll();
+        $queryRes = $this->internshipAttendanceModel
+            ->select('t_internship_attendance.*')
+            ->join('db_internship.m_internship_student as internship_student', 'internship_student.id = t_internship_attendance.internship_student_id')
+            ->join('db_internship.m_internship as internship', 'internship.id = internship_student.internship_id')
+            ->where('internship.department', $department)
+            ->findAll();
         $attendances = [];
 
         foreach ($queryRes as $attendance) {
+            if ($type == "in") {
+                if ($attendance->scan_time_type != "IN") continue;
+            } else if ($type == "out")
+                if ($attendance->scan_time_type != "OUT") continue;
+
+            $internshipStudent = $attendance->getInternshipStudent();
+            $student = $internshipStudent->getStudent();
+            $internship = $internshipStudent->getInternship();
+            if ($internship->created_by == $user->id || $user->is_super_admin == 1) {
+                $row = [
+                    'id' => $attendance->id,
+                    'nim' => $student->nim,
+                    'student_id' => $student->id,
+                    'student_name' => $student->full_name,
+                    'major' => $student->major,
+                    'sub_major' => $student->sub_major,
+                    'scan_time' => $attendance->scan_time,
+                    'scan_time_type' => $attendance->scan_time_type,
+                    'created_date' => $attendance->created_date,
+                    'created_by' => $attendance->created_by,
+                    'modified_date' => $attendance->modified_date,
+                    'modified_by' => $attendance->modified_by,
+                    'internship_name' => $internship->name,
+                    'internship_id' => $internship->id,
+                ];
+
+                $attendances[] = $row;
+            }
+        }
+        return $this->response->setJSON([
+            'attendances' => $attendances
+        ]);
+    }
+
+    public function getAttendancesByInternship($internship_id, $type)
+    {
+        $token = $this->request->getHeaderLine('token');
+        $user = $this->sessionModel->where('id', $token)->first()->getUser();
+        $queryRes = $this->internshipAttendanceModel
+            ->select('t_internship_attendance.*')
+            ->join('db_internship.m_internship_student as internship_student', 'internship_student.id = t_internship_attendance.internship_student_id')
+            ->join('db_internship.m_internship as internship', 'internship.id = internship_student.internship_id')
+            ->where('internship.id', $internship_id)
+            ->findAll();
+        $attendances = [];
+
+        foreach ($queryRes as $attendance) {
+            if ($type == "in") {
+                if ($attendance->scan_time_type != "IN") continue;
+            } else if ($type == "out")
+                if ($attendance->scan_time_type != "OUT") continue;
+
             $internshipStudent = $attendance->getInternshipStudent();
             $student = $internshipStudent->getStudent();
             $internship = $internshipStudent->getInternship();

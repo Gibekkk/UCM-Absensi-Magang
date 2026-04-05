@@ -28,7 +28,7 @@ class AuthController extends BaseController
         }
 
         // 2. Cek user di database
-        $user = $userModel->where('username', $username)->first();
+        $user = $userModel->where('username', $username)->where('is_active', 1)->first();
 
         if ($user && password_verify($password, $user->password)) {
 
@@ -72,7 +72,8 @@ class AuthController extends BaseController
             $user = $session->getUser();
             return $this->response->setJSON([
                 'status' => 'success',
-                'user' => $user
+                'username' => $user->username,
+                "is_super_admin" => $user->is_super_admin
             ]);
         }
 

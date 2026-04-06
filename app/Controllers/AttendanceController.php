@@ -53,7 +53,6 @@ class AttendanceController extends BaseController
                 $lastScanTime->modify("+10 minutes");
                 if ($lastScanTime > new DateTime())
                     return  $this->response->setJSON([
-            'status' => 'success',
                         'status' => 'error',
                         'message' => 'You Have Been Absent.'
                     ])->setStatusCode(400);
@@ -74,22 +73,20 @@ class AttendanceController extends BaseController
                 $attendance = end($todayAttendance);
 
                 return $this->response->setJSON([
-            'status' => 'success',
+                    'status' => 'success',
                     'name' => $student->full_name,
                     'nim' => $student->nim,
-                    'status' => $attendance->scan_time_type,
+                    'scan_status' => $attendance->scan_time_type,
                     'created' => $attendance->created_date,
                 ]);
             } else {
                 return $this->response->setJSON([
-            'status' => 'success',
                     'status' => 'error',
                     'message' => 'Attendance Insertion Failed.'
                 ])->setStatusCode(500);
             }
         }
         return $this->response->setJSON([
-            'status' => 'success',
             'status' => 'error',
             'message' => 'Student Not Found.'
         ])->setStatusCode(404);

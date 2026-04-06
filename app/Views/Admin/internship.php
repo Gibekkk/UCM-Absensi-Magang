@@ -63,7 +63,8 @@
                     'X-CSRF-TOKEN': '<?= csrf_hash() ?>'
                 },
                 type: 'PATCH',
-                success: (res) => {
+                complete: (xhr) => {
+    const res = JSON.parse(xhr.responseText);
                     if (res.status !== "success") {
                         showAlert("Error", res.message || "Unknown Error Occurred");
                         element.checked = !element.checked; // Revert checkbox
@@ -168,7 +169,8 @@
                 },
                 type: type,
                 data: JSON.stringify(formData),
-                success: (res) => {
+                complete: (xhr) => {
+    const res = JSON.parse(xhr.responseText);
                     if (res.status === "success") {
                         $('#internshipModal').modal('hide');
                         $('#internshipModal #internshipForm')[0].reset();
@@ -197,7 +199,8 @@
                     'X-CSRF-TOKEN': '<?= csrf_hash() ?>'
                 },
                 type: 'GET',
-                success: (res) => {
+                complete: (xhr) => {
+    const res = JSON.parse(xhr.responseText);
                     if (res.status === "success") {
                         $('#internshipModal #modalTitle').text('Edit Internship');
                         $('#internshipModal #internshipId').val(res.internships.id);
@@ -228,7 +231,8 @@
                 data: formData,
                 processData: false,
                 contentType: false,
-                success: (res) => {
+                complete: (xhr) => {
+    const res = JSON.parse(xhr.responseText);
                     if (res.status === "success") {
                         $('#internshipTable').DataTable().ajax.reload();
                     } else {

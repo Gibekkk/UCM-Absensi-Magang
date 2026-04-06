@@ -37,7 +37,6 @@ class StudentController extends BaseController
 
             if (count($queryRes) == 0)
                 return $this->response->setJSON([
-            'status' => 'success',
                     'status' => 'error',
                     'message' => 'Student Not Found.'
                 ])->setStatusCode(404);
@@ -136,21 +135,18 @@ class StudentController extends BaseController
                         ]);
 
                         return $this->response->setJSON([
-            'status' => 'success',
                             'status' => 'success',
                             'message' => 'Student Added.'
                         ]);
                     }
                 } else {
                     return $this->response->setJSON([
-            'status' => 'success',
                         'status' => 'error',
                         'message' => 'This User is Still Active'
                     ])->setStatusCode(403);
                 }
             } else {
                 return $this->response->setJSON([
-            'status' => 'success',
                     'status' => 'error',
                     'message' => 'You Do Not Have Access.'
                 ])->setStatusCode(402);
@@ -158,7 +154,6 @@ class StudentController extends BaseController
         }
 
         return $this->response->setJSON([
-            'status' => 'success',
             'status' => 'error',
             'message' => 'Unknown Error Occured.'
         ])->setStatusCode(500);
@@ -203,14 +198,12 @@ class StudentController extends BaseController
                             }
 
                             return $this->response->setJSON([
-            'status' => 'success',
                                 'status' => 'success',
                                 'message' => 'Student Edited.'
                             ]);
                         }
                     } else {
                         return $this->response->setJSON([
-            'status' => 'success',
                             'status' => 'error',
                             'message' => 'This User is Still Active.'
                         ])->setStatusCode(403);
@@ -218,20 +211,17 @@ class StudentController extends BaseController
                 }
             } else {
                 return $this->response->setJSON([
-            'status' => 'success',
                     'status' => 'error',
                     'message' => 'Internship Not Found.'
                 ])->setStatusCode(404);
             }
         } else {
             return $this->response->setJSON([
-            'status' => 'success',
                 'status' => 'error',
                 'message' => 'Student Not Found.'
             ])->setStatusCode(404);
         }
         return $this->response->setJSON([
-            'status' => 'success',
             'status' => 'error',
             'message' => 'Unknown Error Occured.'
         ])->setStatusCode(500);
@@ -272,14 +262,12 @@ class StudentController extends BaseController
                             }
 
                             return $this->response->setJSON([
-            'status' => 'success',
                                 'status' => 'success',
                                 'message' => 'Student Edited.'
                             ]);
                         }
                     } else {
                         return $this->response->setJSON([
-            'status' => 'success',
                             'status' => 'error',
                             'message' => 'Internship Not Active.'
                         ])->setStatusCode(403);
@@ -287,20 +275,17 @@ class StudentController extends BaseController
                 }
             } else {
                 return $this->response->setJSON([
-            'status' => 'success',
                     'status' => 'error',
                     'message' => 'Student Already Exist.'
                 ])->setStatusCode(403);
             }
         } else {
             return $this->response->setJSON([
-            'status' => 'success',
                 'status' => 'error',
                 'message' => 'Student Not Found.'
             ])->setStatusCode(404);
         }
         return $this->response->setJSON([
-            'status' => 'success',
             'status' => 'error',
             'message' => 'Unknown Error Occured.'
         ])->setStatusCode(500);
@@ -313,20 +298,17 @@ class StudentController extends BaseController
             $internshipStudent = $student->getInternshipStudent();
             if ($this->studentModel->delete($id) && $this->internshipStudentModel->delete($internshipStudent->id)) {
                 return $this->response->setJSON([
-            'status' => 'success',
                     'status' => 'success',
                     'message' => 'Student Deleted.'
                 ]);
             }
         } else {
             return $this->response->setJSON([
-            'status' => 'success',
                 'status' => 'error',
                 'message' => 'Student Not Found.'
             ])->setStatusCode(404);
         }
         return $this->response->setJSON([
-            'status' => 'success',
             'status' => 'error',
             'message' => 'Unknown Error Occured.'
         ])->setStatusCode(500);

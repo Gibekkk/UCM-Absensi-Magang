@@ -27,14 +27,14 @@ class ApiFilter implements FilterInterface
 
     public function before(RequestInterface $request, $arguments = null)
     {
-        // $apiHeader = $request->getHeaderLine('RequestType') ?? null;
-        // if ($apiHeader) {
-        //     if ($apiHeader != "API") {
-        //         return redirect()->to(base_url('/errors/error_404'));
-        //     }
-        // } else {
-        //     return redirect()->to(base_url('/errors/error_404'));
-        // }
+        $apiHeader = $request->getHeaderLine('RequestType') ?? null;
+        if ($apiHeader) {
+            if ($apiHeader != "API") {
+                return redirect()->to(base_url('/errors/error_404'));
+            }
+        } else {
+            return redirect()->to(base_url('/errors/error_404'));
+        }
     }
 
 

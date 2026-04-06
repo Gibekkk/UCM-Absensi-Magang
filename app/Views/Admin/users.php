@@ -61,8 +61,9 @@
                     'X-CSRF-TOKEN': '<?= csrf_hash() ?>'
                 },
                 type: 'PATCH',
-                success: (res) => {
-                    if (res.status === 'success') {
+                complete: (xhr) => {
+    const res = JSON.parse(xhr.responseText);
+                    if (res.status == 'success') {
                         showAlert("Error Saving", res.message || "Unknown Error Occurred.");
                         element.checked = !element.checked; // Revert toggle
                     }
@@ -80,7 +81,7 @@
                         xhr.setRequestHeader('X-CSRF-TOKEN', '<?= csrf_hash() ?>');
                     },
                     dataSrc: function(res) {
-                        if (res.status === 'success') {
+                        if (res.status == 'success') {
                             return res.users;
                         } else {
                             showAlert("Error", res.message || "Unknown Error Occurred.");
@@ -154,8 +155,9 @@
                 },
                 type: type,
                 data: JSON.stringify(formData),
-                success: (res) => {
-                    if (res.status === 'success') {
+                complete: (xhr) => {
+    const res = JSON.parse(xhr.responseText);
+                    if (res.status == 'success') {
                         $('#userModal').modal('hide');
                         $('#userForm')[0].reset();
                         $('#userTable').DataTable().ajax.reload();
@@ -185,8 +187,9 @@
                     'X-CSRF-TOKEN': '<?= csrf_hash() ?>'
                 },
                 type: 'GET',
-                success: (res) => {
-                    if (res.status === 'success') {
+                complete: (xhr) => {
+    const res = JSON.parse(xhr.responseText);
+                    if (res.status == 'success') {
                         $('#userModal #modalTitle').text('Edit User');
                         $('#userModal #userId').val(res.users.id);
                         $('#userModal #password').prop('required', false);
@@ -216,8 +219,9 @@
                 data: formData,
                 processData: false,
                 contentType: false,
-                success: (res) => {
-                    if (res.status === 'success') {
+                complete: (xhr) => {
+    const res = JSON.parse(xhr.responseText);
+                    if (res.status == 'success') {
                         $('#userTable').DataTable().ajax.reload();
                     } else {
                         showAlert("Import Error", res.message || "Unknown Error Occurred.");

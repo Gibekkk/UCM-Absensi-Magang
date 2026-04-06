@@ -49,7 +49,7 @@ class InternshipStudentModel extends Model
     protected $beforeInsert   = ['syncStatus', 'autoFillDates', 'generateId'];
     protected $afterInsert    = [];
     protected $beforeUpdate   = ['syncStatus'];
-    protected $afterUpdate    = ['setStatusStudents'];
+    protected $afterUpdate    = [];
     protected $beforeFind     = [];
     protected $afterFind      = ['syncStatusAfterFind'];
     protected $beforeDelete   = [];
@@ -90,18 +90,6 @@ class InternshipStudentModel extends Model
             if ($data['data']['end_date'] < $today) {
                 $data['data']['is_active'] = '0';
             }
-        }
-        return $data;
-    }
-
-    protected function setStatusStudents(array $data)
-    {
-        $studentModel = new StudentModel();
-        if ($data['data']['is_active'] == 0) {
-            $editedInternshipStudent = $this->find($data);
-            $studentModel->builder()
-             ->whereIn('id', $editedInternshipStudent->student_id)
-             ->update(['is_active' => 0]);
         }
         return $data;
     }

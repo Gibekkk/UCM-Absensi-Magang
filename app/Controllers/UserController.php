@@ -25,7 +25,6 @@ class UserController extends BaseController
 
             if (count($queryRes) == 0)
                 return $this->response->setJSON([
-            'status' => 'success',
                     'status' => 'error',
                     'message' => 'User Not Found.'
                 ])->setStatusCode(404);
@@ -90,20 +89,17 @@ class UserController extends BaseController
         if (count($userSameUsername) == 0) {
             if ($this->userModel->insert($user)) {
                 return $this->response->setJSON([
-            'status' => 'success',
                     'status' => 'success',
                     'message' => 'User Added.'
                 ]);
             }
         } else {
             return $this->response->setJSON([
-            'status' => 'success',
                 'status' => 'error',
                 'message' => 'User Already Exist.'
             ])->setStatusCode(403);
         }
         return $this->response->setJSON([
-            'status' => 'success',
             'status' => 'error',
             'message' => 'Unknown Error Occured.'
         ])->setStatusCode(500);
@@ -134,27 +130,23 @@ class UserController extends BaseController
                 // Jika ini error, hal yang normal, kode ini bekerja dengan baik
                 if ($this->userModel->update($id, $user)) {
                     return $this->response->setJSON([
-            'status' => 'success',
                         'status' => 'success',
                         'message' => 'User Edited.'
                     ]);
                 }
             } else {
                 return $this->response->setJSON([
-            'status' => 'success',
                     'status' => 'error',
                     'message' => 'User Already Exist.'
                 ])->setStatusCode(403);
             }
         } else {
             return $this->response->setJSON([
-            'status' => 'success',
                 'status' => 'error',
                 'message' => 'User Not Found.'
             ])->setStatusCode(404);
         }
         return $this->response->setJSON([
-            'status' => 'success',
             'status' => 'error',
             'message' => 'Unknown Error Occured.'
         ])->setStatusCode(500);
@@ -175,20 +167,17 @@ class UserController extends BaseController
             // Jika ini error, hal yang normal, kode ini bekerja dengan baik
             if ($this->userModel->update($id, $user)) {
                 return $this->response->setJSON([
-            'status' => 'success',
                     'status' => 'success',
                     'message' => 'User Edited.'
                 ]);
             }
         } else {
             return $this->response->setJSON([
-            'status' => 'success',
                 'status' => 'error',
                 'message' => 'User Not Found.'
             ])->setStatusCode(404);
         }
         return $this->response->setJSON([
-            'status' => 'success',
             'status' => 'error',
             'message' => 'Unknown Error Occured.'
         ])->setStatusCode(500);
@@ -201,20 +190,17 @@ class UserController extends BaseController
         if ($this->userModel->find($id)) {
             if ($this->userModel->delete($id)) {
                 return $this->response->setJSON([
-            'status' => 'success',
                     'status' => 'success',
                     'message' => 'User Deleted.'
                 ]);
             }
         } else {
             return $this->response->setJSON([
-            'status' => 'success',
                 'status' => 'error',
                 'message' => 'User Not Found.'
             ])->setStatusCode(404);
         }
         return $this->response->setJSON([
-            'status' => 'success',
             'status' => 'error',
             'message' => 'Unknown Error Occured.'
         ])->setStatusCode(500);

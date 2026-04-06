@@ -112,7 +112,7 @@
                     })
                     .then(response => response.json())
                     .then(res => {
-                        if (res.status === 'success') {
+                        if (res.status == 'success') {
                             console.log("Logged out from server");
                         } else {
                             console.error(res.message || "Unknown Error Occurred");
@@ -133,7 +133,7 @@
                 })
                 .then(response => response.json())
                 .then(res => {
-                    if (res.status === 'success') {
+                    if (res.status == 'success') {
                         setCookie('token', res.token);
                         window.location.href = '<?= base_url("/admin/students"); ?>';
                     } else {

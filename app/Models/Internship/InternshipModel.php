@@ -81,9 +81,34 @@ class InternshipModel extends Model
     protected function setStatusStudentInternships(array $data)
     {
         $internshipStudentModel = new InternshipStudentModel();
+
         if (isset($data['data']['is_active']) && $data['data']['is_active'] == 0) {
-            $internshipStudentModel->builder()->where('internship_id', $data['id'])->update(['is_active' => 0]);
+
+            // 1. Ambil semua student_id dulu SEBELUM update
+            $rows = $internshipStudentModel
+                ->where('internship_id', $data['id'])
+                ->findAll();
+
+            // 2. Update internship_student
+            $internshipStudentModel
+                ->where('internship_id', $data['id'])
+                ->update(null, ['is_active' => 0]);
+
+            // 3. Update student langsung di sini
+            if (!empty($rows)) {
+                $studentIds = array_unique(array_filter(
+                    array_map(fn($r) => $r->student_id, $rows)
+                ));
+
+                if (!empty($studentIds)) {
+                    $db = \Config\Database::connect();
+                    $db->table('db_mstr.m_student')
+                        ->whereIn('id', $studentIds)
+                        ->update(['is_active' => 0]);
+                }
+            }
         }
+
         return $data;
     }
 

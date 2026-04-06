@@ -22,7 +22,6 @@ class AuthController extends BaseController
         // 1. Validasi input
         if (empty($username) || empty($password)) {
             return $this->response->setJSON([
-            'status' => 'success',
                 'status' => 'error',
                 'message' => 'Username and password are required.'
             ])->setStatusCode(400);
@@ -42,7 +41,6 @@ class AuthController extends BaseController
             ]);
 
             return $this->response->setJSON([
-            'status' => 'success',
                 'status' => 'success',
                 'message' => 'Login successful, redirecting...',
                 'token' => $token
@@ -51,7 +49,6 @@ class AuthController extends BaseController
 
         // 3. Jika gagal
         return $this->response->setJSON([
-            'status' => 'success',
             'status' => 'error',
             'message' => 'Invalid username or password.'
         ])->setStatusCode(401);
@@ -74,7 +71,6 @@ class AuthController extends BaseController
         if ($session) {
             $user = $session->getUser();
             return $this->response->setJSON([
-            'status' => 'success',
                 'status' => 'success',
                 'username' => $user->username,
                 "is_super_admin" => $user->is_super_admin
@@ -82,7 +78,6 @@ class AuthController extends BaseController
         }
 
         return $this->response->setJSON([
-            'status' => 'success',
             'status' => 'error',
             'message' => 'Token Not Found.'
         ])->setStatusCode(404);

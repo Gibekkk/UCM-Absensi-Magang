@@ -74,8 +74,9 @@
                     'RequestType': 'API',
                     'X-CSRF-TOKEN': '<?= csrf_hash() ?>'
                 },
-                success: (res) => {
-                    if (res.status === 'success') {
+                complete: (xhr) => {
+    const res = JSON.parse(xhr.responseText);
+                    if (res.status == 'success') {
                         $('#my-username').text(res.username);
                         if (res.is_super_admin == 1) {
                             $('#navbar').append(`

@@ -67,8 +67,9 @@
                     'X-CSRF-TOKEN': '<?= csrf_hash() ?>'
                 },
                 type: 'PATCH',
-                success: (res) => {
-                    if (res.status === 'success') {
+                complete: (xhr) => {
+    const res = JSON.parse(xhr.responseText);
+                    if (res.status == 'success') {
                     } else {
                         showAlert("Error Saving", res.message || "Unknown Error Occurred.");
                         element.checked = !element.checked; // Revert toggle
@@ -87,8 +88,9 @@
                     'X-CSRF-TOKEN': '<?= csrf_hash() ?>'
                 },
                 type: 'GET',
-                success: (res) => {
-                    if (res.status === 'success') {
+                complete: (xhr) => {
+    const res = JSON.parse(xhr.responseText);
+                    if (res.status == 'success') {
                         $('#studentModal #studentForm #department_name').empty();
                         if (name == null) $('#studentModal #studentForm #department_name').append(`<option value="" ${name == null ? "selected" : ""}>Select Department</Option>`);
                         res.departments.forEach(department => {
@@ -112,8 +114,9 @@
                     'X-CSRF-TOKEN': '<?= csrf_hash() ?>'
                 },
                 type: 'GET',
-                success: (res) => {
-                    if (res.status === 'success') {
+                complete: (xhr) => {
+    const res = JSON.parse(xhr.responseText);
+                    if (res.status == 'success') {
                         $('#studentModal #studentForm #internship_id').empty();
                         if (id == null) $('#studentModal #studentForm #internship_id').append(`<option value="" ${id == null ? "selected" : ""}>Select Internship</Option>`);
                         res.internships.forEach(internship => {
@@ -136,7 +139,7 @@
                         xhr.setRequestHeader('X-CSRF-TOKEN', '<?= csrf_hash() ?>');
                     },
                     dataSrc: function(res) {
-                        if (res.status === 'success') {
+                        if (res.status == 'success') {
                             return res.students;
                         } else {
                             showAlert("Error", res.message || "Unknown Error Occurred.");
@@ -220,8 +223,9 @@
                 },
                 type: type,
                 data: JSON.stringify(formData),
-                success: (res) => {
-                    if (res.status === 'success') {
+                complete: (xhr) => {
+    const res = JSON.parse(xhr.responseText);
+                    if (res.status == 'success') {
                         $('#studentModal').modal('hide');
                         $('#studentModal #studentForm')[0].reset();
                         $('#mhsTable').DataTable().ajax.reload();
@@ -251,8 +255,9 @@
                     'X-CSRF-TOKEN': '<?= csrf_hash() ?>'
                 },
                 type: 'GET',
-                success: (res) => {
-                    if (res.status === 'success') {
+                complete: (xhr) => {
+    const res = JSON.parse(xhr.responseText);
+                    if (res.status == 'success') {
                         $('#studentModal #modalTitle').text('Edit Student');
                         $('#studentModal #studentId').val(res.students.id);
                         $('#studentModal input[name="nim"]').val(res.students.nim);
@@ -286,8 +291,9 @@
                     'RequestType': 'API',
                     'X-CSRF-TOKEN': '<?= csrf_hash() ?>'
                 },
-                success: (res) => {
-                    if (res.status === 'success') {
+                complete: (xhr) => {
+    const res = JSON.parse(xhr.responseText);
+                    if (res.status == 'success') {
                         showAlert(`Import Success!`, `Imported: ${res.data.success}, Failed: ${res.data.failed}`);
                         $('#mhsTable').DataTable().ajax.reload();
                     } else {

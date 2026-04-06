@@ -368,7 +368,7 @@
                     input: nim
                 }),
                 success: function(res) {
-                    if (res.status === 'success') {
+                    if (res.status == 'success') {
                         showModal(true, "Success", (res.attendance_type == "IN" ? "Welcome, " : "See You Later, ") + res.name.split(" ")[0]);
                         refreshDataTable();
                     } else {
@@ -416,7 +416,7 @@
                     'RequestType': 'API'
                 },
                 success: function(res) {
-                    if (res.status === 'success') {
+                    if (res.status == 'success') {
                         const data = res.attendances;
 
                         const statusMap = {};

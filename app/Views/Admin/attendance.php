@@ -91,8 +91,9 @@
                     'X-CSRF-TOKEN': '<?= csrf_hash() ?>'
                 },
                 type: 'GET',
-                success: (res) => {
-                    if (res.status === 'success') {
+                complete: (xhr) => {
+    const res = JSON.parse(xhr.responseText);
+                    if (res.status == 'success') {
                         $('#deptInput').empty();
                         $('#deptInput').append(`<option value="" selected>Select Department</Option>`);
                         res.departments.forEach(department => {
@@ -115,8 +116,9 @@
                     'X-CSRF-TOKEN': '<?= csrf_hash() ?>'
                 },
                 type: 'GET',
-                success: (res) => {
-                    if (res.status === 'success') {
+                complete: (xhr) => {
+    const res = JSON.parse(xhr.responseText);
+                    if (res.status == 'success') {
                         $('#internshipInput').empty();
                         $('#internshipInput').append(`<option value="" selected>Select Internship</Option>`);
                         res.internships.forEach(internship => {
@@ -183,7 +185,7 @@
                         xhr.setRequestHeader('X-CSRF-TOKEN', '<?= csrf_hash() ?>');
                     },
                     dataSrc: function(res) {
-                        if (res.status === 'success') {
+                        if (res.status == 'success') {
                             return res.attendances;
                         } else {
                             showAlert("Error", res.message || "Unknown Error Occurred");

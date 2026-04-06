@@ -98,8 +98,12 @@ class InternshipStudentModel extends Model
     {
         $studentModel = new StudentModel();
         if ($data['data']['is_active'] == 0) {
-            $studentModel->where('id', $data['data']['student_id'])->update(['is_active' => 0]);
+            $editedInternshipStudent = $this->find($data);
+            $studentModel->builder()
+             ->whereIn('id', $editedInternshipStudent->student_id)
+             ->update(['is_active' => 0]);
         }
+        return $data;
     }
 
     protected function syncStatusAfterFind(array $data)

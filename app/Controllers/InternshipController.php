@@ -29,6 +29,7 @@ class InternshipController extends BaseController
 
             if (count($queryRes) == 0)
                 return $this->response->setJSON([
+            'status' => 'success',
                     'status' => 'error',
                     'message' => 'Internship Not Found.'
                 ])->setStatusCode(404);
@@ -77,6 +78,7 @@ class InternshipController extends BaseController
         }
 
         return $this->response->setJSON([
+            'status' => 'success',
             'internships' => $internships
         ]);
     }
@@ -113,6 +115,7 @@ class InternshipController extends BaseController
         }
 
         return $this->response->setJSON([
+            'status' => 'success',
             'internships' => $internships
         ]);
     }
@@ -139,6 +142,7 @@ class InternshipController extends BaseController
         }
 
         return $this->response->setJSON([
+            'status' => 'success',
             'departments' => $departments
         ]);
     }
@@ -162,11 +166,13 @@ class InternshipController extends BaseController
 
         if ($this->internshipModel->insert($internship)) {
             return $this->response->setJSON([
+            'status' => 'success',
                 'status' => 'success',
                 'message' => 'Internship Added.'
             ]);
         }
         return $this->response->setJSON([
+            'status' => 'success',
             'status' => 'error',
             'message' => 'Unknown Error Occured.'
         ])->setStatusCode(500);
@@ -193,23 +199,27 @@ class InternshipController extends BaseController
             if ($user->is_super_admin || $internshipData->created_by == $userId) {
                 if ($this->internshipModel->update($id, $internship)) {
                     return $this->response->setJSON([
+            'status' => 'success',
                         'status' => 'success',
                         'message' => 'Internship Edited.'
                     ]);
                 }
             } else {
                 return $this->response->setJSON([
+            'status' => 'success',
                     'status' => 'error',
                     'message' => 'You Do Not Have Access.'
                 ])->setStatusCode(402);
             }
         } else {
             return $this->response->setJSON([
+            'status' => 'success',
                 'status' => 'error',
                 'message' => 'Internship Not Found.'
             ])->setStatusCode(404);
         }
         return $this->response->setJSON([
+            'status' => 'success',
             'status' => 'error',
             'message' => 'Unknown Error Occured.'
         ])->setStatusCode(500);
@@ -231,23 +241,27 @@ class InternshipController extends BaseController
             if ($user->is_super_admin || $internshipData->created_by == $userId) {
                 if ($this->internshipModel->update($id, $internship)) {
                     return $this->response->setJSON([
+            'status' => 'success',
                         'status' => 'success',
                         'message' => 'Internship Edited.'
                     ]);
                 }
             } else {
                 return $this->response->setJSON([
+            'status' => 'success',
                     'status' => 'error',
                     'message' => 'You Do Not Have Access.'
                 ])->setStatusCode(402);
             }
         } else {
             return $this->response->setJSON([
+            'status' => 'success',
                 'status' => 'error',
                 'message' => 'Internship Not Found.'
             ])->setStatusCode(404);
         }
         return $this->response->setJSON([
+            'status' => 'success',
             'status' => 'error',
             'message' => 'Unknown Error Occured.'
         ])->setStatusCode(500);
@@ -260,17 +274,20 @@ class InternshipController extends BaseController
         if ($this->internshipModel->find($id)) {
             if ($this->internshipModel->delete($id)) {
                 return $this->response->setJSON([
+            'status' => 'success',
                     'status' => 'success',
                     'message' => 'Internship Deleted.'
                 ]);
             }
         } else {
             return $this->response->setJSON([
+            'status' => 'success',
                 'status' => 'error',
                 'message' => 'Internship Not Found.'
             ])->setStatusCode(404);
         }
         return $this->response->setJSON([
+            'status' => 'success',
             'status' => 'error',
             'message' => 'Unknown Error Occured.'
         ])->setStatusCode(500);

@@ -92,11 +92,15 @@
                 },
                 type: 'GET',
                 success: (res) => {
-                    $('#deptInput').empty();
-                    $('#deptInput').append(`<option value="" selected>Select Department</Option>`);
-                    res.departments.forEach(department => {
-                        $('#deptInput').append(`<option value="${department.name}">${department.name}</Option>`);
-                    });
+                    if (res.status === 'success') {
+                        $('#deptInput').empty();
+                        $('#deptInput').append(`<option value="" selected>Select Department</Option>`);
+                        res.departments.forEach(department => {
+                            $('#deptInput').append(`<option value="${department.name}">${department.name}</Option>`);
+                        });
+                    } else {
+                        showAlert("Error", res.message || "Unknown Error Occurred");
+                    }
                 }
             });
         }
@@ -112,11 +116,15 @@
                 },
                 type: 'GET',
                 success: (res) => {
-                    $('#internshipInput').empty();
-                    $('#internshipInput').append(`<option value="" selected>Select Internship</Option>`);
-                    res.internships.forEach(internship => {
-                        $('#internshipInput').append(`<option value="${internship.id}">${internship.name}</Option>`);
-                    });
+                    if (res.status === 'success') {
+                        $('#internshipInput').empty();
+                        $('#internshipInput').append(`<option value="" selected>Select Internship</Option>`);
+                        res.internships.forEach(internship => {
+                            $('#internshipInput').append(`<option value="${internship.id}">${internship.name}</Option>`);
+                        });
+                    } else {
+                        showAlert("Error", res.message || "Unknown Error Occurred");
+                    }
                 }
             });
         }
@@ -162,7 +170,6 @@
 
             let url = '<?= base_url("api/attendance"); ?>';
             
-            // Logika URL/Parameter diserahkan kepada Anda sesuai kebutuhan backend
             if (params) {
                 url += `/${params}`;
             }
@@ -175,7 +182,14 @@
                         xhr.setRequestHeader('RequestType', 'API');
                         xhr.setRequestHeader('X-CSRF-TOKEN', '<?= csrf_hash() ?>');
                     },
-                    dataSrc: 'attendances'
+                    dataSrc: function(res) {
+                        if (res.status === 'success') {
+                            return res.attendances;
+                        } else {
+                            showAlert("Error", res.message || "Unknown Error Occurred");
+                            return [];
+                        }
+                    }
                 },
                 ordering: true,
                 orderFixed: [4, 'desc'],

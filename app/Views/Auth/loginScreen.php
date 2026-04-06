@@ -8,7 +8,6 @@
     <link href="<?= base_url('css/app.css') ?>" rel="stylesheet">
     <style>
         body {
-            /* Menggunakan gambar dari folder public/img/ */
             background-image: url('<?= base_url("img/loginBackground.jpg"); ?>');
             background-size: cover;
             background-position: center;
@@ -20,7 +19,6 @@
             justify-content: center;
             font-family: 'Inter', system-ui, sans-serif;
             margin: 0;
-            /* Overlay gelap agar gambar tidak terlalu terang/mengganggu teks */
             background-color: rgba(0, 0, 0, 0.45);
             background-blend-mode: overlay;
         }
@@ -29,7 +27,6 @@
             width: 100%;
             max-width: 400px;
             padding: 2.5rem;
-            /* Glassmorphism effect */
             box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
             position: relative;
         }
@@ -69,16 +66,6 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
 
-        .alert-glass {
-            background: rgba(220, 53, 69, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: #fff;
-            border-radius: 12px;
-            padding: 1rem;
-            margin-bottom: 1.5rem;
-            text-align: center;
-        }
-
         h2 {
             color: #fff;
             font-weight: 700;
@@ -93,7 +80,6 @@
     <div class="glass-card glass-panel">
         <h2 class="text-center">Login</h2>
 
-        <!-- Tambahkan id pada form -->
         <form id="loginForm">
             <div class="mb-3">
                 <input type="text" name="username" class="form-control" placeholder="Username" required>
@@ -103,7 +89,6 @@
             </div>
             <button type="submit" class="btn btn-login">Sign In</button>
         </form>
-
     </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -115,7 +100,6 @@
             const token = getCookie('token');
 
             if (token) {
-                // Kirim logout ke server sebelum menghapus cookie
                 fetch('<?= base_url("auth/logout"); ?>', {
                         method: 'POST',
                         headers: {
@@ -124,18 +108,22 @@
                         body: JSON.stringify({
                             token: token
                         }),
-                        keepalive: true // Memastikan request terkirim meski halaman berpindah
+                        keepalive: true
                     })
-                    .then(() => {
-                        console.log("Logged out from server");
+                    .then(response => response.json())
+                    .then(res => {
+                        if (res.status === 'success') {
+                            console.log("Logged out from server");
+                        } else {
+                            console.error(res.message || "Unknown Error Occurred");
+                        }
                         deleteCookie('token');
-                    })
-                    .catch(err => console.error("Logout failed", err));
+                    });
             }
         });
 
         document.getElementById('loginForm').addEventListener('submit', function(e) {
-            e.preventDefault(); // Mencegah reload halaman
+            e.preventDefault();
 
             const formData = new FormData(this);
 
@@ -144,16 +132,13 @@
                     body: formData
                 })
                 .then(response => response.json())
-                .then(data => {
-                    if (data.status === 'success') {
-                        setCookie('token', data.token);
+                .then(res => {
+                    if (res.status === 'success') {
+                        setCookie('token', res.token);
                         window.location.href = '<?= base_url("/admin/students"); ?>';
                     } else {
-                        showAlert('Login Error', data.message);
+                        showAlert('Login Error', res.message || "Unknown Error Occurred");
                     }
-                })
-                .catch(error => {
-                    showAlert('Unknown Login Error', 'An error occurred. Please try again');
                 });
         });
     </script>

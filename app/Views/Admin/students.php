@@ -59,7 +59,7 @@
     <script>
         function updateIsActive(id, element) {
             $.ajax({
-                url: '<?= base_url("admin/api/internships/setIsActive/"); ?>' + id + '/' + (element.checked ? "1" : "0"),
+                url: '<?= base_url("admin/api/students/setIsActive/"); ?>' + id + '/' + (element.checked ? "1" : "0"),
                 contentType: 'application/json',
                 headers: {
                     'token': getCookie('token'),
@@ -67,10 +67,12 @@
                     'X-CSRF-TOKEN': '<?= csrf_hash() ?>'
                 },
                 type: 'PATCH',
-                success: (data) => {},
-                error: (res) => {
-                    $('#internshipModal').modal('hide');
-                    showAlert("Error Saving", res.message ?? "Unknown Error Occured.")
+                success: (res) => {
+                    if (res.status === 'success') {
+                    } else {
+                        showAlert("Error Saving", res.message || "Unknown Error Occurred.");
+                        element.checked = !element.checked; // Revert toggle
+                    }
                 }
             });
         }
@@ -86,12 +88,16 @@
                 },
                 type: 'GET',
                 success: (res) => {
-                    $('#studentModal #studentForm #department_name').empty();
-                    if (name == null) $('#studentModal #studentForm #department_name').append(`<option value="" ${name == null ? "selected" : ""}>Select Department</Option>`);
-                    res.departments.forEach(department => {
-                        $('#studentModal #studentForm #department_name').append(`<option value="${department.name}" ${name != null && name == department.name ? "selected" : ""}>${department.name}</Option>`);
-                    });
-                    populateInternship(id);
+                    if (res.status === 'success') {
+                        $('#studentModal #studentForm #department_name').empty();
+                        if (name == null) $('#studentModal #studentForm #department_name').append(`<option value="" ${name == null ? "selected" : ""}>Select Department</Option>`);
+                        res.departments.forEach(department => {
+                            $('#studentModal #studentForm #department_name').append(`<option value="${department.name}" ${name != null && name == department.name ? "selected" : ""}>${department.name}</Option>`);
+                        });
+                        populateInternship(id);
+                    } else {
+                        showAlert("Error", res.message || "Unknown Error Occurred.");
+                    }
                 }
             });
         }
@@ -107,17 +113,20 @@
                 },
                 type: 'GET',
                 success: (res) => {
-                    $('#studentModal #studentForm #internship_id').empty();
-                    if (id == null) $('#studentModal #studentForm #internship_id').append(`<option value="" ${id == null ? "selected" : ""}>Select Internship</Option>`);
-                    res.internships.forEach(internship => {
-                        $('#studentModal #studentForm #internship_id').append(`<option value="${internship.id}" ${id != null && id == internship.id ? "selected" : ""}>${internship.name}</Option>`);
-                    });
+                    if (res.status === 'success') {
+                        $('#studentModal #studentForm #internship_id').empty();
+                        if (id == null) $('#studentModal #studentForm #internship_id').append(`<option value="" ${id == null ? "selected" : ""}>Select Internship</Option>`);
+                        res.internships.forEach(internship => {
+                            $('#studentModal #studentForm #internship_id').append(`<option value="${internship.id}" ${id != null && id == internship.id ? "selected" : ""}>${internship.name}</Option>`);
+                        });
+                    } else {
+                        showAlert("Error", res.message || "Unknown Error Occurred.");
+                    }
                 }
             });
         }
 
         $(document).ready(function() {
-            // 1. RESTful DataTables Initialization
             $('#mhsTable').DataTable({
                 ajax: {
                     url: '<?= base_url("admin/api/students"); ?>',
@@ -126,7 +135,14 @@
                         xhr.setRequestHeader('RequestType', 'API');
                         xhr.setRequestHeader('X-CSRF-TOKEN', '<?= csrf_hash() ?>');
                     },
-                    dataSrc: 'students'
+                    dataSrc: function(res) {
+                        if (res.status === 'success') {
+                            return res.students;
+                        } else {
+                            showAlert("Error", res.message || "Unknown Error Occurred.");
+                            return [];
+                        }
+                    }
                 },
                 ordering: true,
                 order: [
@@ -168,7 +184,6 @@
                         render: (data, type, row) => `
                             <button class="btn btn-sm btn-outline-primary" onclick="openEditModal('${row.id}')">Edit</button>
                         `
-                        // <button class="btn btn-sm btn-outline-danger" onclick="confirmDelete('${row.id}')">Delete</button>
                     }
                 ],
                 "drawCallback": function(settings) {
@@ -182,69 +197,50 @@
                 }
             });
 
-            $('#studentModal #studentForm #department_name').focus(populateDepartment());
-            $('#studentModal #studentForm #department_name').change(populateInternship());
+            $('#department_name').on('change', function() {
+                populateInternship();
+            });
         });
 
-        // 2. Handle Submit Form (Add & Edit)
         $('#studentModal #studentForm').on('submit', function(e) {
             e.preventDefault();
             let formData = Object.fromEntries(new FormData($('#studentModal #studentForm')[0]));
-            if (!$('#studentModal #studentForm #studentId').val()) {
-                $.ajax({
-                    url: '<?= base_url("admin/api/students"); ?>',
-                    contentType: 'application/json',
-                    headers: {
-                        'token': getCookie('token'),
-                        'RequestType': 'API',
-                        'X-CSRF-TOKEN': '<?= csrf_hash() ?>'
-                    },
-                    type: 'POST',
-                    data: JSON.stringify(formData),
-                    success: (res) => {
+            let studentId = $('#studentModal #studentForm #studentId').val();
+
+            let type = studentId ? 'PUT' : 'POST';
+            let url = studentId ? '<?= base_url("admin/api/students/"); ?>' + studentId : '<?= base_url("admin/api/students"); ?>';
+
+            $.ajax({
+                url: url,
+                contentType: 'application/json',
+                headers: {
+                    'token': getCookie('token'),
+                    'RequestType': 'API',
+                    'X-CSRF-TOKEN': '<?= csrf_hash() ?>'
+                },
+                type: type,
+                data: JSON.stringify(formData),
+                success: (res) => {
+                    if (res.status === 'success') {
                         $('#studentModal').modal('hide');
                         $('#studentModal #studentForm')[0].reset();
                         $('#mhsTable').DataTable().ajax.reload();
-                    },
-                    error: (res) => {
+                    } else {
                         $('#studentModal').modal('hide');
-                        showAlert("Error Saving", res.message ?? "Unknown Error Occured.")
+                        showAlert("Error Saving", res.message || "Unknown Error Occurred.");
                     }
-                });
-            } else {
-                $.ajax({
-                    url: '<?= base_url("admin/api/students/"); ?>' + $('#studentModal #studentForm #studentId').val(),
-                    contentType: 'application/json',
-                    headers: {
-                        'token': getCookie('token'),
-                        'RequestType': 'API',
-                        'X-CSRF-TOKEN': '<?= csrf_hash() ?>'
-                    },
-                    type: 'PUT',
-                    data: JSON.stringify(formData),
-                    success: (res) => {
-                        $('#studentModal').modal('hide');
-                        $('#studentForm')[0].reset();
-                        $('#mhsTable').DataTable().ajax.reload();
-                    },
-                    error: (res) => {
-                        $('#studentModal').modal('hide');
-                        showAlert("Error Saving", res.message ?? "Unknown Error Occured.")
-                    }
-                });
-            }
+                }
+            });
         });
 
-        // 3. Fungsi Buka Modal Add
         function openAddModal() {
-            populateDepartment();
             $('#studentModal #modalTitle').text('Add Student');
             $('#studentModal #studentForm')[0].reset();
             $('#studentModal #studentId').val('');
+            populateDepartment();
             $('#studentModal').modal('show');
         }
 
-        // 4. Fungsi Edit (Get Data)
         function openEditModal(id) {
             $.ajax({
                 url: '<?= base_url("admin/api/students/"); ?>' + id,
@@ -255,54 +251,23 @@
                     'X-CSRF-TOKEN': '<?= csrf_hash() ?>'
                 },
                 type: 'GET',
-                success: (data) => {
-                    $('#studentModal #modalTitle').text('Edit Student');
-                    $('#studentModal #studentId').val(data.students.id);
-                    $('#studentModal input[name="nim"]').val(data.students.nim);
-                    $('#studentModal input[name="full_name"]').val(data.students.full_name);
-                    $('#studentModal input[name="major"]').val(data.students.major);
-                    $('#studentModal input[name="sub_major"]').val(data.students.sub_major);
-                    populateDepartment(data.students.internship_department, data.students.internship_id);
-                    $('#studentModal').modal('show');
-                },
-                error: (res) => {
-                    $('#studentModal').modal('hide');
-                    showAlert("Error Saving", res.message ?? "Unknown Error Occured.")
+                success: (res) => {
+                    if (res.status === 'success') {
+                        $('#studentModal #modalTitle').text('Edit Student');
+                        $('#studentModal #studentId').val(res.students.id);
+                        $('#studentModal input[name="nim"]').val(res.students.nim);
+                        $('#studentModal input[name="full_name"]').val(res.students.full_name);
+                        $('#studentModal input[name="major"]').val(res.students.major);
+                        $('#studentModal input[name="sub_major"]').val(res.students.sub_major);
+                        populateDepartment(res.students.internship_department, res.students.internship_id);
+                        $('#studentModal').modal('show');
+                    } else {
+                        showAlert("Error", res.message || "Unknown Error Occured.");
+                    }
                 }
             });
         }
 
-        // 5. Fungsi Delete (Trigger Modal)
-        // let studentIdToDelete = null;
-
-        // function confirmDelete(id) {
-        //     studentIdToDelete = id;
-        //     $('#deleteModalBody').html("Are you sure you want to delete this student? This action cannot be undone.");
-        //     $('#deleteModal').modal('show');
-        // }
-
-        // 6. Eksekusi Delete
-        // $('#confirmDeleteBtn').on('click', function() {
-        //     if (studentIdToDelete) {
-        //         $.ajax({
-        //             url: '<?= base_url("admin/api/students/"); ?>' + studentIdToDelete,
-        //             contentType: 'application/json',
-        //             headers: {
-        //                 'token': getCookie('token'),
-        //                 'RequestType': 'API',
-        //                 'X-CSRF-TOKEN': '<?= csrf_hash() ?>'
-        //             },
-        //             type: 'DELETE',
-        //             success: () => {
-        //                 $('#deleteModal').modal('hide');
-        //                 $('#mhsTable').DataTable().ajax.reload();
-        //                 studentIdToDelete = null;
-        //             }
-        //         });
-        //     }
-        // });
-
-        // 7. RESTful Import
         function importData(input) {
             let file = input.files[0];
             if (!file) return;
@@ -314,8 +279,8 @@
                 url: '<?= base_url("admin/api/students/import"); ?>',
                 type: 'POST',
                 data: formData,
-                processData: false, // WAJIB
-                contentType: false, // WAJIB
+                processData: false,
+                contentType: false,
                 headers: {
                     'token': getCookie('token'),
                     'RequestType': 'API',
@@ -323,16 +288,11 @@
                 },
                 success: (res) => {
                     if (res.status === 'success') {
-                        console.log(`Import Success! Imported: ${res.data.success}, Failed: ${res.data.failed}`);
                         showAlert(`Import Success!`, `Imported: ${res.data.success}, Failed: ${res.data.failed}`);
                         $('#mhsTable').DataTable().ajax.reload();
                     } else {
-                        console.error('Error: ' + res.message);
+                        showAlert("Import Error", res.message || "Unknown Error Occurred.");
                     }
-                },
-                error: (xhr) => {
-                    let msg = xhr.responseJSON ? xhr.responseJSON.message : 'Terjadi kesalahan sistem';
-                    console.error('Import Failed: ' + msg);
                 }
             });
         }

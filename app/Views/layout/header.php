@@ -47,14 +47,10 @@
                     </ul>
 
                     <div class="dropdown text-end">
-                        <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                            <p href="#" class="d-inline px-2 link-dark" id="username"></p>
+                        <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownProfile" data-bs-toggle="dropdown" aria-expanded="false">
+                            <p href="#" class="d-inline px-2 link-dark" id="my-username"></p>
                         </a>
-                        <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
-                            <!-- <li><a class="dropdown-item" href="#">Profile</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li> -->
+                        <ul class="dropdown-menu text-small" aria-labelledby="dropdownProfile">
                             <li><a class="dropdown-item" href="<?= base_url('auth/login') ?>">Sign out</a></li>
                         </ul>
                     </div>
@@ -79,19 +75,22 @@
                     'X-CSRF-TOKEN': '<?= csrf_hash() ?>'
                 },
                 success: (res) => {
-                    $('#username').text(res.username);
-                    if (res.is_super_admin == 1) {
-                        $('#navbar').append(`
-                    <li>
-                        <a href="<?= base_url('admin/users') ?>" 
-                           class="nav-link px-2 link-<?= ($page == "users") ? "dark" : "secondary" ?>">
-                           Users
-                        </a>
-                    </li>
-                `);
+                    if (res.status === 'success') {
+                        $('#my-username').text(res.username);
+                        if (res.is_super_admin == 1) {
+                            $('#navbar').append(`
+                                <li>
+                                    <a href="<?= base_url('admin/users') ?>" 
+                                    class="nav-link px-2 link-<?= ($page == "users") ? "dark" : "secondary" ?>">
+                                    Users
+                                    </a>
+                                </li>
+                            `);
+                        }
+                    } else {
+                        showAlert("Error", res.message || "Unknown Error Occurred");
                     }
-                },
-                error: (err) => console.error("Error Fetching Profile")
+                }
             });
         });
     </script>

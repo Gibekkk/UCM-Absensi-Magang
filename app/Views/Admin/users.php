@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Internship Data - UC Internship</title>
+    <title>User Data - UC Internship</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/v/bs5/dt-1.13.4/datatables.min.css" rel="stylesheet" />
     <link href="<?= base_url('css/app.css') ?>" rel="stylesheet">
@@ -17,7 +17,7 @@
             <div class="p-4">
                 <!-- Toolbar -->
                 <div class="d-flex justify-content-between mb-3">
-                    <h3>Internship Data</h3>
+                    <h3>User Data</h3>
                     <div>
                         <button class="btn btn-primary" data-bs-toggle="modal" onclick="openAddModal()">Add User</button>
                     </div>
@@ -61,15 +61,16 @@
                     'X-CSRF-TOKEN': '<?= csrf_hash() ?>'
                 },
                 type: 'PATCH',
-                success: (data) => {},
-                error: (res) => {
-                    $('#userModal').modal('hide');
-                    showAlert("Error Saving", res.message ?? "Unknown Error Occured.")
+                success: (res) => {
+                    if (res.status === 'success') {
+                        showAlert("Error Saving", res.message || "Unknown Error Occurred.");
+                        element.checked = !element.checked; // Revert toggle
+                    }
                 }
             });
         }
+
         $(document).ready(function() {
-            // 1. RESTful DataTables Initialization
             $('#userTable').DataTable({
                 ajax: {
                     url: '<?= base_url("admin/api/users"); ?>',
@@ -78,7 +79,14 @@
                         xhr.setRequestHeader('RequestType', 'API');
                         xhr.setRequestHeader('X-CSRF-TOKEN', '<?= csrf_hash() ?>');
                     },
-                    dataSrc: 'users'
+                    dataSrc: function(res) {
+                        if (res.status === 'success') {
+                            return res.users;
+                        } else {
+                            showAlert("Error", res.message || "Unknown Error Occurred.");
+                            return [];
+                        }
+                    }
                 },
                 ordering: true,
                 order: [
@@ -114,7 +122,6 @@
                         render: (data, type, row) => `
                             <button class="btn btn-sm btn-outline-primary" onclick="openEditModal('${row.id}')">Edit</button>
                         `
-                        // <button class="btn btn-sm btn-outline-danger" onclick="confirmDelete('${row.id}')">Delete</button>
                     }
                 ],
                 "drawCallback": function(settings) {
@@ -129,65 +136,45 @@
             });
         });
 
-        // 2. Handle Submit Form (Add & Edit)
         $('#userModal #userForm').on('submit', function(e) {
             e.preventDefault();
             let formData = Object.fromEntries(new FormData($('#userModal #userForm')[0]));
-            if (!$('#userModal #userForm #userId').val()) {
-                $.ajax({
-                    url: '<?= base_url("admin/api/users"); ?>',
-                    contentType: 'application/json',
-                    headers: {
-                        'token': getCookie('token'),
-                        'RequestType': 'API',
-                        'X-CSRF-TOKEN': '<?= csrf_hash() ?>'
-                    },
-                    type: 'POST',
-                    data: JSON.stringify(formData),
-                    success: (res) => {
-                        $('#userModal').modal('hide');
-                        $('#userModal #userForm')[0].reset();
-                        $('#userTable').DataTable().ajax.reload();
-                    },
-                    error: (res) => {
-                        $('#userModal').modal('hide');
-                        showAlert("Error Saving", res.message ?? "Unknown Error Occured.")
-                    }
-                });
-            } else {
-                $.ajax({
-                    url: '<?= base_url("admin/api/users/"); ?>' + $('#userModal #userForm #userId').val(),
-                    contentType: 'application/json',
-                    headers: {
-                        'token': getCookie('token'),
-                        'RequestType': 'API',
-                        'X-CSRF-TOKEN': '<?= csrf_hash() ?>'
-                    },
-                    type: 'PUT',
-                    data: JSON.stringify(formData),
-                    success: (res) => {
+            let userId = $('#userModal #userForm #userId').val();
+            
+            let type = userId ? 'PUT' : 'POST';
+            let url = userId ? '<?= base_url("admin/api/users/"); ?>' + userId : '<?= base_url("admin/api/users"); ?>';
+
+            $.ajax({
+                url: url,
+                contentType: 'application/json',
+                headers: {
+                    'token': getCookie('token'),
+                    'RequestType': 'API',
+                    'X-CSRF-TOKEN': '<?= csrf_hash() ?>'
+                },
+                type: type,
+                data: JSON.stringify(formData),
+                success: (res) => {
+                    if (res.status === 'success') {
                         $('#userModal').modal('hide');
                         $('#userForm')[0].reset();
                         $('#userTable').DataTable().ajax.reload();
-                    },
-                    error: (res) => {
+                    } else {
                         $('#userModal').modal('hide');
-                        showAlert("Error Saving", res.message ?? "Unknown Error Occured.")
+                        showAlert("Error Saving", res.message || "Unknown Error Occurred.");
                     }
-                });
-            }
+                }
+            });
         });
 
-        // 3. Fungsi Buka Modal Add
         function openAddModal() {
-            $('#userModal #modalTitle').text('Add Internship');
+            $('#userModal #modalTitle').text('Add User');
             $('#userModal #userForm')[0].reset();
             $('#userModal #userId').val('');
             $('#userModal #password').prop('required', true);
             $('#userModal').modal('show');
         }
 
-        // 4. Fungsi Edit (Get Data)
         function openEditModal(id) {
             $.ajax({
                 url: '<?= base_url("admin/api/users/"); ?>' + id,
@@ -198,60 +185,28 @@
                     'X-CSRF-TOKEN': '<?= csrf_hash() ?>'
                 },
                 type: 'GET',
-                success: (data) => {
-                    $('#userModal #modalTitle').text('Edit User');
-                    $('#userModal #userId').val(data.users.id);
-                    $('#userModal #password').prop('required', false);
-                    $('#userModal input[name="full_name"]').val(data.users.full_name);
-                    $('#userModal input[name="username"]').val(data.users.username);
-                    $('#userModal input[name="email"]').val(data.users.email);
-                    $('#userModal input[name="phone_number"]').val(data.users.phone_number);
-                    $('#userModal').modal('show');
-                },
-                error: (res) => {
-                    $('#userModal').modal('hide');
-                    showAlert("Error Saving", res.message ?? "Unknown Error Occured.")
+                success: (res) => {
+                    if (res.status === 'success') {
+                        $('#userModal #modalTitle').text('Edit User');
+                        $('#userModal #userId').val(res.users.id);
+                        $('#userModal #password').prop('required', false);
+                        $('#userModal input[name="full_name"]').val(res.users.full_name);
+                        $('#userModal input[name="username"]').val(res.users.username);
+                        $('#userModal input[name="email"]').val(res.users.email);
+                        $('#userModal input[name="phone_number"]').val(res.users.phone_number);
+                        $('#userModal').modal('show');
+                    } else {
+                        showAlert("Error", res.message || "Unknown Error Occurred.");
+                    }
                 }
             });
         }
 
-        // 5. Fungsi Delete (Trigger Modal)
-        let userIdToDelete = null;
-
-        // function confirmDelete(id) {
-        //     userIdToDelete = id;
-        //     $('#deleteModalBody').html("Are you sure you want to delete this user? This action cannot be undone.");
-        //     $('#deleteModal').modal('show');
-        // }
-
-        // 6. Eksekusi Delete
-        // $('#confirmDeleteBtn').on('click', function() {
-        //     if (userIdToDelete) {
-        //         $.ajax({
-        //             url: '<?= base_url("admin/api/users/"); ?>' + userIdToDelete,
-        //             contentType: 'application/json',
-        //             headers: {
-        //                 'token': getCookie('token'),
-        //                 'RequestType': 'API',
-        //                 'X-CSRF-TOKEN': '<?= csrf_hash() ?>'
-        //             },
-        //             type: 'DELETE',
-        //             success: () => {
-        //                 $('#deleteModal').modal('hide');
-        //                 $('#userTable').DataTable().ajax.reload();
-        //                 userIdToDelete = null;
-        //             }
-        //         });
-        //     }
-        // });
-
-        // 7. RESTful Import
         function importData(input) {
             let formData = new FormData();
             formData.append('file', input.files[0]);
             $.ajax({
                 url: '<?= base_url("api/users/import"); ?>',
-                contentType: 'application/json',
                 headers: {
                     'token': getCookie('token'),
                     'RequestType': 'API',
@@ -261,9 +216,12 @@
                 data: formData,
                 processData: false,
                 contentType: false,
-                success: () => {
-                    console.error('Import Success');
-                    $('#userTable').DataTable().ajax.reload();
+                success: (res) => {
+                    if (res.status === 'success') {
+                        $('#userTable').DataTable().ajax.reload();
+                    } else {
+                        showAlert("Import Error", res.message || "Unknown Error Occurred.");
+                    }
                 }
             });
         }

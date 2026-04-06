@@ -37,6 +37,7 @@ class StudentController extends BaseController
 
             if (count($queryRes) == 0)
                 return $this->response->setJSON([
+            'status' => 'success',
                     'status' => 'error',
                     'message' => 'Student Not Found.'
                 ])->setStatusCode(404);
@@ -91,6 +92,7 @@ class StudentController extends BaseController
         }
 
         return $this->response->setJSON([
+            'status' => 'success',
             'students' => $students
         ]);
     }
@@ -111,34 +113,52 @@ class StudentController extends BaseController
             'modified_by' => $id,
         ];
 
-        $internshipData = $this->internshipModel->find($data['internship_id']);
+        $internshipData = $this->internshipModel->where('id', $data['internship_id'])->where('is_active', 1)->first();
         if ($internshipData) {
             // Jika ini error, hal yang normal, kode ini bekerja dengan baik
             if ($internshipData->created_by == $id || $user->is_super_admin == 1) {
-                if ($this->studentModel->insert($student)) {
-                    $studentId = $this->studentModel->where('nim', $data['nim'])->first()->id;
-                    $this->internshipStudentModel->insert([
-                        "student_id" => $studentId,
-                        "internship_id" => $data["internship_id"],
-                        "is_active" => "1",
-                        "created_by" => $id,
-                        "modified_by" => $id,
-                    ]);
+                $studentSameData = $this->studentModel
+                    ->where('nim', $student['nim'])
+                    ->where('full_name', $student['full_name'])
+                    ->where('major', $student['major'])
+                    ->where('sub_major', $student['sub_major'])
+                    ->where('is_active', $student['is_active'])
+                    ->findAll();
+                if (count($studentSameData) == 0) {
+                    if ($this->studentModel->insert($student)) {
+                        $studentId = $this->studentModel->where('nim', $data['nim'])->where('is_active', 1)->first()->id;
+                        $this->internshipStudentModel->insert([
+                            "student_id" => $studentId,
+                            "internship_id" => $data["internship_id"],
+                            "is_active" => "1",
+                            "created_by" => $id,
+                            "modified_by" => $id,
+                        ]);
 
+                        return $this->response->setJSON([
+            'status' => 'success',
+                            'status' => 'success',
+                            'message' => 'Student Added.'
+                        ]);
+                    }
+                } else {
                     return $this->response->setJSON([
-                        'status' => 'success',
-                        'message' => 'Student Added.'
-                    ]);
+            'status' => 'success',
+                        'status' => 'error',
+                        'message' => 'This User is Still Active'
+                    ])->setStatusCode(403);
                 }
             } else {
                 return $this->response->setJSON([
+            'status' => 'success',
                     'status' => 'error',
                     'message' => 'You Do Not Have Access.'
-                ])->setStatusCode(500);
+                ])->setStatusCode(402);
             }
         }
 
         return $this->response->setJSON([
+            'status' => 'success',
             'status' => 'error',
             'message' => 'Unknown Error Occured.'
         ])->setStatusCode(500);
@@ -161,29 +181,57 @@ class StudentController extends BaseController
 
         $studentData = $this->studentModel->find($id);
         if ($studentData) {
-            if ($user->is_super_admin || $studentData->created_by == $userId) {
-                if ($this->studentModel->update($id, $student)) {
-                    // Jika ini error, hal yang normal, kode ini bekerja dengan baik
-                    if ($studentData->getInternshipStudent()->internship_id != $data['internship_id']) {
-                        $this->internshipStudentModel->update($studentData->getInternshipStudent()->id, [
-                            "internship_id" => $data["internship_id"],
-                            "modified_by" => $userId,
-                        ]);
-                    }
+            $internshipData = $this->internshipModel->where('id', $data['internship_id'])->where('is_active', 1)->first();
+            if ($internshipData) {
+                if ($user->is_super_admin || $studentData->created_by == $userId) {
+                    $studentSameData = $this->studentModel
+                        ->where('nim', $student['nim'])
+                        ->where('full_name', $student['full_name'])
+                        ->where('major', $student['major'])
+                        ->where('sub_major', $student['sub_major'])
+                        ->where('is_active', 1)
+                        ->where('id !=', $id)
+                        ->findAll();
+                    if (count($studentSameData) == 0) {
+                        if ($this->studentModel->update($id, $student)) {
+                            // Jika ini error, hal yang normal, kode ini bekerja dengan baik
+                            if ($studentData->getInternshipStudent()->internship_id != $data['internship_id']) {
+                                $this->internshipStudentModel->update($studentData->getInternshipStudent()->id, [
+                                    "internship_id" => $data["internship_id"],
+                                    "modified_by" => $userId,
+                                ]);
+                            }
 
-                    return $this->response->setJSON([
-                        'status' => 'success',
-                        'message' => 'Student Edited.'
-                    ]);
+                            return $this->response->setJSON([
+            'status' => 'success',
+                                'status' => 'success',
+                                'message' => 'Student Edited.'
+                            ]);
+                        }
+                    } else {
+                        return $this->response->setJSON([
+            'status' => 'success',
+                            'status' => 'error',
+                            'message' => 'This User is Still Active.'
+                        ])->setStatusCode(403);
+                    }
                 }
+            } else {
+                return $this->response->setJSON([
+            'status' => 'success',
+                    'status' => 'error',
+                    'message' => 'Internship Not Found.'
+                ])->setStatusCode(404);
             }
         } else {
             return $this->response->setJSON([
+            'status' => 'success',
                 'status' => 'error',
                 'message' => 'Student Not Found.'
             ])->setStatusCode(404);
         }
         return $this->response->setJSON([
+            'status' => 'success',
             'status' => 'error',
             'message' => 'Unknown Error Occured.'
         ])->setStatusCode(500);
@@ -202,29 +250,57 @@ class StudentController extends BaseController
 
         $studentData = $this->studentModel->find($id);
         if ($studentData) {
-            if ($user->is_super_admin || $studentData->created_by == $userId) {
-                if ($this->studentModel->update($id, $student)) {
-                    // Jika ini error, hal yang normal, kode ini bekerja dengan baik
-                    if ($studentData->getInternshipStudent()->is_active != $isActive) {
-                        $this->internshipStudentModel->update($studentData->getInternshipStudent()->id, [
-                            "is_active" => $isActive,
-                            "modified_by" => $userId,
-                        ]);
-                    }
+            $studentSameData = $this->studentModel
+                ->where('nim', $studentData->nim)
+                ->where('full_name', $studentData->full_name)
+                ->where('major', $studentData->major)
+                ->where('sub_major', $studentData->sub_major)
+                ->where('id !=', $studentData->id)
+                ->where('is_active', 1)
+                ->findAll();
+            if (count($studentSameData) == 0) {
+                if ($user->is_super_admin || $studentData->created_by == $userId) {
+                    $internshipData = $this->internshipModel->where('id', $studentData->getInternshipStudent()->internship_id)->where('is_active', 1)->first();
+                    if ($internshipData || $isActive == 0) {
+                        if ($this->studentModel->update($id, $student)) {
+                            // Jika ini error, hal yang normal, kode ini bekerja dengan baik
+                            if ($studentData->getInternshipStudent()->is_active != $isActive) {
+                                $this->internshipStudentModel->update($studentData->getInternshipStudent()->id, [
+                                    "is_active" => $isActive,
+                                    "modified_by" => $userId,
+                                ]);
+                            }
 
-                    return $this->response->setJSON([
-                        'status' => 'success',
-                        'message' => 'Student Edited.'
-                    ]);
+                            return $this->response->setJSON([
+            'status' => 'success',
+                                'status' => 'success',
+                                'message' => 'Student Edited.'
+                            ]);
+                        }
+                    } else {
+                        return $this->response->setJSON([
+            'status' => 'success',
+                            'status' => 'error',
+                            'message' => 'Internship Not Active.'
+                        ])->setStatusCode(403);
+                    }
                 }
+            } else {
+                return $this->response->setJSON([
+            'status' => 'success',
+                    'status' => 'error',
+                    'message' => 'Student Already Exist.'
+                ])->setStatusCode(403);
             }
         } else {
             return $this->response->setJSON([
+            'status' => 'success',
                 'status' => 'error',
                 'message' => 'Student Not Found.'
             ])->setStatusCode(404);
         }
         return $this->response->setJSON([
+            'status' => 'success',
             'status' => 'error',
             'message' => 'Unknown Error Occured.'
         ])->setStatusCode(500);
@@ -237,97 +313,150 @@ class StudentController extends BaseController
             $internshipStudent = $student->getInternshipStudent();
             if ($this->studentModel->delete($id) && $this->internshipStudentModel->delete($internshipStudent->id)) {
                 return $this->response->setJSON([
+            'status' => 'success',
                     'status' => 'success',
                     'message' => 'Student Deleted.'
                 ]);
             }
         } else {
             return $this->response->setJSON([
+            'status' => 'success',
                 'status' => 'error',
                 'message' => 'Student Not Found.'
             ])->setStatusCode(404);
         }
         return $this->response->setJSON([
+            'status' => 'success',
             'status' => 'error',
             'message' => 'Unknown Error Occured.'
         ])->setStatusCode(500);
     }
+public function importStudents()
+{
+    $file = $this->request->getFile('file_excel');
+    $token = $this->request->getHeaderLine('token');
 
-    public function importStudents()
-    {
-        // TODO: Buat koneksi jadi 1 dengan yang sudah jalan
-        // TODO: Buat filter student lebih akurat dengan sistem yang baru
-        $file = $this->request->getFile('file_excel');
-        $token = $this->request->getHeaderLine('token');
+    // Validasi Session & User
+    $session = $this->sessionModel->where('id', $token)->first();
+    if (!$session) {
+        return $this->response->setStatusCode(401)->setJSON(['status' => 'error', 'message' => 'Unauthorized']);
+    }
+    $user = $session->getUser();
+    $userId = $user->id;
 
-        // Validasi Session
-        $session = $this->sessionModel->where('id', $token)->first();
-        if (!$session) {
-            return $this->response->setStatusCode(401)->setJSON(['status' => 'error', 'message' => 'Unauthorized']);
-        }
-        $id = $session->getUser()->id;
+    // Validasi File
+    if (!$file || !$file->isValid() || $file->hasMoved()) {
+        return $this->response->setStatusCode(400)->setJSON(['status' => 'error', 'message' => 'File tidak valid']);
+    }
 
-        // Validasi File
-        if (!$file || !$file->isValid() || $file->hasMoved()) {
-            return $this->response->setStatusCode(400)->setJSON(['status' => 'error', 'message' => 'File tidak valid']);
-        }
+    try {
+        $path = $file->getTempName();
+        $spreadsheet = IOFactory::load($path);
+        $sheetData = $spreadsheet->getActiveSheet()->toArray();
 
-        try {
-            $path = $file->getTempName();
-            $spreadsheet = IOFactory::load($path);
-            $sheetData = $spreadsheet->getActiveSheet()->toArray();
+        $successCount = 0;
+        $errorCount = 0;
 
-            $successCount = 0;
-            $errorCount = 0;
+        foreach ($sheetData as $index => $row) {
+            if ($index == 0) continue; // Skip header baris pertama
 
-            foreach ($sheetData as $index => $row) {
-                if ($index == 0) continue; // Skip header
+            // Mapping Excel: NIM(0), Full Name(1), Major(2), Sub Major(3), Internship Name(4)
+            $rawNim = (string)($row[0] ?? '');
+            $nim = str_replace("'", "", $rawNim);
+            $fullName = $row[1] ?? null;
+            $major = $row[2] ?? null;
+            $subMajor = $row[3] ?? null;
+            $internshipName = $row[4] ?? null;
+            $internshipDepartment = $row[5] ?? null;
 
-                // Mapping: NIM(0), Full Name(1), Major(2), Sub Major(3), Internship Name(4), Is Active(5)
-                $rawNim = (string)($row[0] ?? '');
-                $nim = str_replace("'", "", $rawNim);
-                $internshipName = $row[4] ?? null;
-
-                $internship = $this->internshipModel->where('name', $internshipName)->first();
-
-                if ($internship && $nim && !$this->studentModel->where('nim', $nim)->first()) {
-                    $db = \Config\Database::connect();
-                    $db->transStart();
-
-                    $this->studentModel->insert([
-                        'nim'         => $nim,
-                        'full_name'   => $row[1],
-                        'major'       => $row[2],
-                        'sub_major'   => $row[3],
-                        'is_active'   => $row[5] ?? '1',
-                        'created_by'  => $id,
-                        'modified_by' => $id,
-                    ]);
-
-                    $student = $this->studentModel->where('nim', $nim)->first();
-
-                    $this->internshipStudentModel->insert([
-                        'student_id'    => $student->id,
-                        'internship_id' => $internship->id,
-                        'is_active'     => $row[5] ?? '1',
-                        'created_by'    => $id,
-                        'modified_by'   => $id,
-                    ]);
-
-                    $db->transComplete();
-                    if ($db->transStatus()) $successCount++;
-                    else $errorCount++;
-                } else {
-                    $errorCount++;
-                }
+            if (empty($nim) || empty($fullName) || empty($internshipName) || empty($internshipDepartment)) {
+                $errorCount++;
+                continue;
             }
 
-            return $this->response->setJSON([
-                'status' => 'success',
-                'data'   => ['success' => $successCount, 'failed' => $errorCount]
-            ]);
-        } catch (\Exception $e) {
-            return $this->response->setStatusCode(500)->setJSON(['status' => 'error', 'message' => $e->getMessage()]);
+            // 1. Cari Internship berdasarkan Nama dan pastikan Aktif (Sesuai logika addStudent)
+            $internshipData = $this->internshipModel->where('name', $internshipName)->where('department', $internshipDepartment)->where('is_active', 1)->first();
+
+            if ($internshipData) {
+                // 2. Validasi Hak Akses (Sesuai logika addStudent)
+                if ($internshipData->created_by == $userId || $user->is_super_admin == 1) {
+                    
+                    // 3. Cek Duplikasi Data Student yang masih aktif (Sesuai logika addStudent)
+                    $studentSameData = $this->studentModel
+                        ->where('nim', $nim)
+                        ->where('full_name', $fullName)
+                        ->where('major', $major)
+                        ->where('sub_major', $subMajor)
+                        ->where('is_active', "1")
+                        ->findAll();
+
+                    if (count($studentSameData) == 0) {
+                        $db = \Config\Database::connect();
+                        $db->transStart();
+
+                        // Insert Student
+                        $this->studentModel->insert([
+                            'nim'         => $nim,
+                            'full_name'   => $fullName,
+                            'major'       => $major,
+                            'sub_major'   => $subMajor,
+                            'is_active'   => "1",
+                            'created_by'  => $userId,
+                            'modified_by' => $userId,
+                        ]);
+
+                        $studentId = $this->studentModel
+                        ->where('nim', $nim)
+                        ->where('full_name', $fullName)
+                        ->where('major', $major)
+                        ->where('sub_major', $subMajor)
+                        ->where('is_active', "1")
+                        ->first()->id;
+
+                        // Insert Internship Student (Relasi)
+                        $this->internshipStudentModel->insert([
+                            "student_id"    => $studentId,
+                            "internship_id" => $internshipData->id,
+                            "is_active"     => "1",
+                            "created_by"    => $userId,
+                            "modified_by"   => $userId,
+                        ]);
+
+                        $db->transComplete();
+
+                        if ($db->transStatus()) {
+                            $successCount++;
+                        } else {
+                            $errorCount++;
+                        }
+                    } else {
+                        // Student sudah ada dan aktif
+                        $errorCount++;
+                    }
+                } else {
+                    // Tidak punya akses ke internship ini
+                    $errorCount++;
+                }
+            } else {
+                // Internship tidak ditemukan atau tidak aktif
+                $errorCount++;
+            }
         }
+
+        return $this->response->setJSON([
+            'status' => 'success',
+            'message' => 'Proses impor selesai',
+            'data'   => [
+                'success' => $successCount,
+                'failed'  => $errorCount
+            ]
+        ]);
+
+    } catch (\Exception $e) {
+        return $this->response->setStatusCode(500)->setJSON([
+            'status' => 'error', 
+            'message' => $e->getMessage()
+        ]);
     }
+}
 }

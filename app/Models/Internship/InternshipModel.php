@@ -81,9 +81,10 @@ class InternshipModel extends Model
     protected function setStatusStudentInternships(array $data)
     {
         $internshipStudentModel = new InternshipStudentModel();
-        if ($data['data']['is_active'] == 0) {
-            $internshipStudentModel->where('internship_id', $data['id'])->update(['is_active' => 0]);
+        if (isset($data['data']['is_active']) && $data['data']['is_active'] == 0) {
+            $internshipStudentModel->builder()->where('internship_id', $data['id'])->update(['is_active' => 0]);
         }
+        return $data;
     }
 
     protected function syncStatusAfterFind(array $data)

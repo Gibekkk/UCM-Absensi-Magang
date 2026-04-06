@@ -63,15 +63,16 @@
                     'X-CSRF-TOKEN': '<?= csrf_hash() ?>'
                 },
                 type: 'PATCH',
-                success: (data) => {},
-                error: (res) => {
-                    $('#internshipModal').modal('hide');
-                    showAlert("Error Saving", res.message ?? "Unknown Error Occured.")
+                success: (res) => {
+                    if (res.status !== "success") {
+                        showAlert("Error", res.message || "Unknown Error Occurred");
+                        element.checked = !element.checked; // Revert checkbox
+                    }
                 }
             });
         }
+
         $(document).ready(function() {
-            // 1. RESTful DataTables Initialization
             $('#internshipTable').DataTable({
                 ajax: {
                     url: '<?= base_url("admin/api/internships"); ?>',
@@ -80,7 +81,14 @@
                         xhr.setRequestHeader('RequestType', 'API');
                         xhr.setRequestHeader('X-CSRF-TOKEN', '<?= csrf_hash() ?>');
                     },
-                    dataSrc: 'internships'
+                    dataSrc: function(res) {
+                        if (res.status === "success") {
+                            return res.internships;
+                        } else {
+                            showAlert("Error", res.message || "Unknown Error Occurred");
+                            return [];
+                        }
+                    }
                 },
                 ordering: true,
                 order: [
@@ -128,7 +136,6 @@
                         render: (data, type, row) => `
                             <button class="btn btn-sm btn-outline-primary" onclick="openEditModal('${row.id}')">Edit</button>
                         `
-                        // <button class="btn btn-sm btn-outline-danger" onclick="confirmDelete('${row.id}')">Delete</button>
                     }
                 ],
                 "drawCallback": function(settings) {
@@ -141,59 +148,38 @@
                     });
                 }
             });
-
         });
 
-        // 2. Handle Submit Form (Add & Edit)
         $('#internshipModal #internshipForm').on('submit', function(e) {
             e.preventDefault();
             let formData = Object.fromEntries(new FormData($('#internshipModal #internshipForm')[0]));
-            if (!$('#internshipModal #internshipForm #internshipId').val()) {
-                $.ajax({
-                    url: '<?= base_url("admin/api/internships"); ?>',
-                    contentType: 'application/json',
-                    headers: {
-                        'token': getCookie('token'),
-                        'RequestType': 'API',
-                        'X-CSRF-TOKEN': '<?= csrf_hash() ?>'
-                    },
-                    type: 'POST',
-                    data: JSON.stringify(formData),
-                    success: (res) => {
+            let id = $('#internshipModal #internshipForm #internshipId').val();
+            
+            let type = id ? 'PUT' : 'POST';
+            let url = id ? '<?= base_url("admin/api/internships/"); ?>' + id : '<?= base_url("admin/api/internships"); ?>';
+
+            $.ajax({
+                url: url,
+                contentType: 'application/json',
+                headers: {
+                    'token': getCookie('token'),
+                    'RequestType': 'API',
+                    'X-CSRF-TOKEN': '<?= csrf_hash() ?>'
+                },
+                type: type,
+                data: JSON.stringify(formData),
+                success: (res) => {
+                    if (res.status === "success") {
                         $('#internshipModal').modal('hide');
                         $('#internshipModal #internshipForm')[0].reset();
                         $('#internshipTable').DataTable().ajax.reload();
-                    },
-                    error: (res) => {
-                        $('#internshipModal').modal('hide');
-                        showAlert("Error Saving", res.message ?? "Unknown Error Occured.")
+                    } else {
+                        showAlert("Error Saving", res.message || "Unknown Error Occurred");
                     }
-                });
-            } else {
-                $.ajax({
-                    url: '<?= base_url("admin/api/internships/"); ?>' + $('#internshipModal #internshipForm #internshipId').val(),
-                    contentType: 'application/json',
-                    headers: {
-                        'token': getCookie('token'),
-                        'RequestType': 'API',
-                        'X-CSRF-TOKEN': '<?= csrf_hash() ?>'
-                    },
-                    type: 'PUT',
-                    data: JSON.stringify(formData),
-                    success: (res) => {
-                        $('#internshipModal').modal('hide');
-                        $('#internshipForm')[0].reset();
-                        $('#internshipTable').DataTable().ajax.reload();
-                    },
-                    error: (res) => {
-                        $('#internshipModal').modal('hide');
-                        showAlert("Error Saving", res.message ?? "Unknown Error Occured.")
-                    }
-                });
-            }
+                }
+            });
         });
 
-        // 3. Fungsi Buka Modal Add
         function openAddModal() {
             $('#internshipModal #modalTitle').text('Add Internship');
             $('#internshipModal #internshipForm')[0].reset();
@@ -201,7 +187,6 @@
             $('#internshipModal').modal('show');
         }
 
-        // 4. Fungsi Edit (Get Data)
         function openEditModal(id) {
             $.ajax({
                 url: '<?= base_url("admin/api/internships/"); ?>' + id,
@@ -212,60 +197,28 @@
                     'X-CSRF-TOKEN': '<?= csrf_hash() ?>'
                 },
                 type: 'GET',
-                success: (data) => {
-                    $('#internshipModal #modalTitle').text('Edit Internship');
-                    $('#internshipModal #internshipId').val(data.internships.id);
-                    $('#internshipModal input[name="name"]').val(data.internships.name);
-                    $('#internshipModal input[name="department"]').val(data.internships.department);
-                    $('#internshipModal input[name="head_department"]').val(data.internships.head_department);
-                    $('#internshipModal input[name="start_date"]').val(data.internships.start_date.date.split(" ")[0]);
-                    $('#internshipModal input[name="end_date"]').val(data.internships.end_date.date.split(" ")[0]);
-                    $('#internshipModal').modal('show');
-                },
-                error: (res) => {
-                    $('#internshipModal').modal('hide');
-                    showAlert("Error Saving", res.message ?? "Unknown Error Occured.")
+                success: (res) => {
+                    if (res.status === "success") {
+                        $('#internshipModal #modalTitle').text('Edit Internship');
+                        $('#internshipModal #internshipId').val(res.internships.id);
+                        $('#internshipModal input[name="name"]').val(res.internships.name);
+                        $('#internshipModal input[name="department"]').val(res.internships.department);
+                        $('#internshipModal input[name="head_department"]').val(res.internships.head_department);
+                        $('#internshipModal input[name="start_date"]').val(res.internships.start_date.date.split(" ")[0]);
+                        $('#internshipModal input[name="end_date"]').val(res.internships.end_date.date.split(" ")[0]);
+                        $('#internshipModal').modal('show');
+                    } else {
+                        showAlert("Error", res.message || "Unknown Error Occurred");
+                    }
                 }
             });
         }
 
-        // 5. Fungsi Delete (Trigger Modal)
-        let internshipIdToDelete = null;
-
-        // function confirmDelete(id) {
-        //     internshipIdToDelete = id;
-        //     $('#deleteModalBody').html("Are you sure you want to delete this internship? This action cannot be undone.");
-        //     $('#deleteModal').modal('show');
-        // }
-
-        // 6. Eksekusi Delete
-        // $('#confirmDeleteBtn').on('click', function() {
-        //     if (internshipIdToDelete) {
-        //         $.ajax({
-        //             url: '<?= base_url("admin/api/internships/"); ?>' + internshipIdToDelete,
-        //             contentType: 'application/json',
-        //             headers: {
-        //                 'token': getCookie('token'),
-        //                 'RequestType': 'API',
-        //                 'X-CSRF-TOKEN': '<?= csrf_hash() ?>'
-        //             },
-        //             type: 'DELETE',
-        //             success: () => {
-        //                 $('#deleteModal').modal('hide');
-        //                 $('#internshipTable').DataTable().ajax.reload();
-        //                 internshipIdToDelete = null;
-        //             }
-        //         });
-        //     }
-        // });
-
-        // 7. RESTful Import
         function importData(input) {
             let formData = new FormData();
             formData.append('file', input.files[0]);
             $.ajax({
                 url: '<?= base_url("api/internships/import"); ?>',
-                contentType: 'application/json',
                 headers: {
                     'token': getCookie('token'),
                     'RequestType': 'API',
@@ -275,9 +228,12 @@
                 data: formData,
                 processData: false,
                 contentType: false,
-                success: () => {
-                    console.error('Import Success');
-                    $('#internshipTable').DataTable().ajax.reload();
+                success: (res) => {
+                    if (res.status === "success") {
+                        $('#internshipTable').DataTable().ajax.reload();
+                    } else {
+                        showAlert("Import Error", res.message || "Unknown Error Occurred");
+                    }
                 }
             });
         }

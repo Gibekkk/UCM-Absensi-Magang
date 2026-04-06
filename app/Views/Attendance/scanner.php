@@ -242,7 +242,6 @@
         <div class="glass-card modal-content">
             <!-- Icon Container -->
             <div id="modalIcon" class="icon-box">
-                <!-- SVG akan diisi via JS -->
             </div>
             <h3 id="modalTitle">Success</h3>
             <p id="modalMessage">Attendance recorded successfully!</p>
@@ -304,8 +303,6 @@
             }
         });
 
-
-        // Modifikasi fungsi sendAttendance
         function sendAttendance(nim) {
             if (isModalOpen) return;
 
@@ -319,34 +316,12 @@
                 data: JSON.stringify({
                     input: nim
                 }),
-
-                // Menangani berbagai status code
-                statusCode: {
-                    200: function(res) {
-                        // Berhasil
-                        showModal(true, "Success", (res.status == "IN" ? "Welcome, " : "See You Later, ") + res.name.split(" ")[0]);
+                success: function(res) {
+                    if (res.status === 'success') {
+                        showModal(true, "Success", (res.attendance_type == "IN" ? "Welcome, " : "See You Later, ") + res.name.split(" ")[0]);
                         refreshDataTable();
-                    },
-                    400: function(xhr) {
-                        // Bad Request (misal: Absensi terlalu cepat)
-                        const res = xhr.responseJSON;
-                        showModal(false, "Failed", res.message || "You Have Been Absent.");
-                    },
-                    404: function(xhr) {
-                        // Bad Request (misal: NIM tidak ditemukan)
-                        const res = xhr.responseJSON;
-                        showModal(false, "Failed", res.message || "NIM not found or invalid.");
-                    },
-                    500: function() {
-                        // Server Error
-                        showModal(false, "Server Error", "Something went wrong.");
-                    }
-                },
-
-                // Menangani error umum (yang tidak tercover di statusCode)
-                error: function(xhr) {
-                    if (xhr.status !== 200 && xhr.status !== 404 && xhr.status !== 403 && xhr.status !== 500) {
-                        showModal(false, "Error", "Something went wrong.");
+                    } else {
+                        showModal(false, "Failed", res.message || "Unknown Error Occurred.");
                     }
                 }
             });
@@ -390,45 +365,46 @@
                     'RequestType': 'API'
                 },
                 success: function(res) {
-                    const data = res.attendances;
+                    if (res.status === 'success') {
+                        const data = res.attendances;
 
-                    // Logika Hitung: Jika status terakhir NIM adalah 'IN', maka hitung.
-                    // Asumsi: Data sudah terurut berdasarkan waktu (paling baru di bawah/atas)
-                    const statusMap = {};
-                    data.forEach(item => {
-                        statusMap[item.nim] = item.scan_time_type;
-                    });
-                    const inCount = Object.values(statusMap).filter(status => status === 'IN').length;
-                    $('#inCount').text(inCount);
+                        const statusMap = {};
+                        data.forEach(item => {
+                            statusMap[item.nim] = item.scan_time_type;
+                        });
+                        const inCount = Object.values(statusMap).filter(status => status === 'IN').length;
+                        $('#inCount').text(inCount);
 
-                    if (table) table.destroy();
-                    table = $('#attendanceTable').DataTable({
-                        data: data,
-                        paging: true,
-                        pageLength: 25,
-                        ordering: true,
-                        searching: false,
-                        info: false,
-                        order: [1, 'desc'],
-                        columns: [{
-                                orderable: false,
-                                data: 'nim'
-                            },
-                            {
-                                orderable: false,
-                                data: 'created_date',
-                                render: (data, type, row) => {
-                                    // Cek apakah data berupa objek (seperti format CI4 Entity)
-                                    const dateVal = (typeof data === 'object' && data !== null) ? data.date : data;
-                                    return dayjs(dateVal).format('HH:mm:ss');
+                        if (table) table.destroy();
+                        table = $('#attendanceTable').DataTable({
+                            data: data,
+                            paging: true,
+                            pageLength: 25,
+                            ordering: true,
+                            searching: false,
+                            info: false,
+                            order: [1, 'desc'],
+                            columns: [{
+                                    orderable: false,
+                                    data: 'nim'
                                 },
-                            },
-                            {
-                                orderable: false,
-                                data: 'scan_time_type'
-                            }
-                        ]
-                    });
+                                {
+                                    orderable: false,
+                                    data: 'created_date',
+                                    render: (data, type, row) => {
+                                        const dateVal = (typeof data === 'object' && data !== null) ? data.date : data;
+                                        return dayjs(dateVal).format('HH:mm:ss');
+                                    },
+                                },
+                                {
+                                    orderable: false,
+                                    data: 'scan_time_type'
+                                }
+                            ]
+                        });
+                    } else {
+                        console.error(res.message || "Unknown Error Occurred.");
+                    }
                 }
             });
         }

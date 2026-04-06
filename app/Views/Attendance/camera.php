@@ -78,6 +78,7 @@
         #attendanceTable th {
             background-color: transparent !important;
             border-color: rgba(255, 255, 255, 0.1) !important;
+            font-size: 30px;
         }
 
         #attendanceTable thead th {

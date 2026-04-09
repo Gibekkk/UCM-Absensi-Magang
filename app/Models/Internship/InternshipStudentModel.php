@@ -9,7 +9,7 @@ use Ramsey\Uuid\Uuid;
 
 class InternshipStudentModel extends Model
 {
-    protected $table            = 'db_internship.m_internship_student';
+    protected $table            = 'ictadmin_dbwp_ucm_internship.m_internship_student';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = false;
     protected $returnType       = InternshipStudentEntity::class;

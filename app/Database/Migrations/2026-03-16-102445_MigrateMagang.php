@@ -68,8 +68,8 @@ class MigrateMagang extends Migration
             ],
         ]);
         $this->forge->addKey('id', true);
-        $this->forge->addForeignKey('created_by', 'db_mstr.m_user', 'id', 'CASCADE', 'CASCADE');
-        $this->forge->addForeignKey('modified_by', 'db_mstr.m_user', 'id', 'CASCADE', 'CASCADE');
+        $this->forge->addForeignKey('created_by', 'ictadmin_dbwp_ucm_master.m_user', 'id', 'CASCADE', 'CASCADE');
+        $this->forge->addForeignKey('modified_by', 'ictadmin_dbwp_ucm_master.m_user', 'id', 'CASCADE', 'CASCADE');
         $this->forge->createTable('m_internship');
 
         $this->forge->addField([
@@ -126,8 +126,8 @@ class MigrateMagang extends Migration
         ]);
         $this->forge->addKey('id', true);
         $this->forge->addForeignKey('internship_id', 'm_internship', 'id', 'CASCADE', 'CASCADE');
-        $this->forge->addForeignKey('created_by', 'db_mstr.m_user', 'id', 'CASCADE', 'CASCADE');
-        $this->forge->addForeignKey('modified_by', 'db_mstr.m_user', 'id', 'CASCADE', 'CASCADE');
+        $this->forge->addForeignKey('created_by', 'ictadmin_dbwp_ucm_master.m_user', 'id', 'CASCADE', 'CASCADE');
+        $this->forge->addForeignKey('modified_by', 'ictadmin_dbwp_ucm_master.m_user', 'id', 'CASCADE', 'CASCADE');
         $this->forge->createTable('m_internship_student');
 
         $this->forge->addField([

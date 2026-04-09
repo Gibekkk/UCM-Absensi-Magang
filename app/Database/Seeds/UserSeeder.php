@@ -40,6 +40,6 @@ class UserSeeder extends Seeder
                 'email' => 'email@example.com',
             ],
         ];
-        $this->db->table('db_mstr.m_user')->insertBatch($data);
+        $this->db->table('ictadmin_dbwp_ucm_master.m_user')->insertBatch($data);
     }
 }

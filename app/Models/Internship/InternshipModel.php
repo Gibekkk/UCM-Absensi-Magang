@@ -8,7 +8,7 @@ use Ramsey\Uuid\Uuid;
 
 class InternshipModel extends Model
 {
-    protected $table            = 'db_internship.m_internship';
+    protected $table            = 'ictadmin_dbwp_ucm_internship.m_internship';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = false;
     protected $returnType       = InternshipEntity::class;
@@ -102,7 +102,7 @@ class InternshipModel extends Model
 
                 if (!empty($studentIds)) {
                     $db = \Config\Database::connect();
-                    $db->table('db_mstr.m_student')
+                    $db->table('ictadmin_dbwp_ucm_master.m_student')
                         ->whereIn('id', $studentIds)
                         ->update(['is_active' => 0]);
                 }

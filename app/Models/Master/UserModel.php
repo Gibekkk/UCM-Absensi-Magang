@@ -8,7 +8,7 @@ use Ramsey\Uuid\Uuid;
 
 class UserModel extends Model
 {
-    protected $table            = 'db_mstr.m_user';
+    protected $table            = 'ictadmin_dbwp_ucm_master.m_user';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = false;
     protected $returnType       = UserEntity::class;

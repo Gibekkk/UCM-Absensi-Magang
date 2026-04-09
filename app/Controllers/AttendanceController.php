@@ -246,8 +246,8 @@ class AttendanceController extends BaseController
         $user = $this->sessionModel->where('id', $token)->first()->getUser();
         $queryRes = $this->internshipAttendanceModel
             ->select('t_internship_attendance.*')
-            ->join('db_internship.m_internship_student as internship_student', 'internship_student.id = t_internship_attendance.internship_student_id')
-            ->join('db_mstr.m_student as student', 'student.id = internship_student.student_id')
+            ->join('ictadmin_dbwp_ucm_internship.m_internship_student as internship_student', 'internship_student.id = t_internship_attendance.internship_student_id')
+            ->join('ictadmin_dbwp_ucm_master.m_student as student', 'student.id = internship_student.student_id')
             ->where('student.nim', $nim)
             ->findAll();
         $attendances = [];
@@ -294,8 +294,8 @@ class AttendanceController extends BaseController
         $user = $this->sessionModel->where('id', $token)->first()->getUser();
         $queryRes = $this->internshipAttendanceModel
             ->select('t_internship_attendance.*')
-            ->join('db_internship.m_internship_student as internship_student', 'internship_student.id = t_internship_attendance.internship_student_id')
-            ->join('db_internship.m_internship as internship', 'internship.id = internship_student.internship_id')
+            ->join('ictadmin_dbwp_ucm_internship.m_internship_student as internship_student', 'internship_student.id = t_internship_attendance.internship_student_id')
+            ->join('ictadmin_dbwp_ucm_internship.m_internship as internship', 'internship.id = internship_student.internship_id')
             ->where('internship.department', $department)
             ->findAll();
         $attendances = [];
@@ -342,8 +342,8 @@ class AttendanceController extends BaseController
         $user = $this->sessionModel->where('id', $token)->first()->getUser();
         $queryRes = $this->internshipAttendanceModel
             ->select('t_internship_attendance.*')
-            ->join('db_internship.m_internship_student as internship_student', 'internship_student.id = t_internship_attendance.internship_student_id')
-            ->join('db_internship.m_internship as internship', 'internship.id = internship_student.internship_id')
+            ->join('ictadmin_dbwp_ucm_internship.m_internship_student as internship_student', 'internship_student.id = t_internship_attendance.internship_student_id')
+            ->join('ictadmin_dbwp_ucm_internship.m_internship as internship', 'internship.id = internship_student.internship_id')
             ->where('internship.id', $internship_id)
             ->findAll();
         $attendances = [];

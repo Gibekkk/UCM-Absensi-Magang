@@ -1,0 +1,72 @@
+ERROR - 2026-04-08 13:31:05 --> Error connecting to the database: mysqli_sql_exception: Unknown database 'ictadmin_dbwp_ucm_master' in /home/gibekkk/Documents/Project/PHP/CodeIgniter/UCM-Absensi-Magang/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php:201
+Stack trace:
+#0 /home/gibekkk/Documents/Project/PHP/CodeIgniter/UCM-Absensi-Magang/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php(201): mysqli->real_connect()
+#1 /home/gibekkk/Documents/Project/PHP/CodeIgniter/UCM-Absensi-Magang/vendor/codeigniter4/framework/system/Database/BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect()
+#2 /home/gibekkk/Documents/Project/PHP/CodeIgniter/UCM-Absensi-Magang/vendor/codeigniter4/framework/system/Database/BaseConnection.php(654): CodeIgniter\Database\BaseConnection->initialize()
+#3 /home/gibekkk/Documents/Project/PHP/CodeIgniter/UCM-Absensi-Magang/vendor/codeigniter4/framework/system/Database/BaseConnection.php(1565): CodeIgniter\Database\BaseConnection->query()
+#4 /home/gibekkk/Documents/Project/PHP/CodeIgniter/UCM-Absensi-Magang/vendor/codeigniter4/framework/system/Database/BaseConnection.php(1585): CodeIgniter\Database\BaseConnection->listTables()
+#5 /home/gibekkk/Documents/Project/PHP/CodeIgniter/UCM-Absensi-Magang/vendor/codeigniter4/framework/system/Database/MigrationRunner.php(821): CodeIgniter\Database\BaseConnection->tableExists()
+#6 /home/gibekkk/Documents/Project/PHP/CodeIgniter/UCM-Absensi-Magang/vendor/codeigniter4/framework/system/Database/MigrationRunner.php(173): CodeIgniter\Database\MigrationRunner->ensureTable()
+#7 /home/gibekkk/Documents/Project/PHP/CodeIgniter/UCM-Absensi-Magang/vendor/codeigniter4/framework/system/Commands/Database/Migrate.php(89): CodeIgniter\Database\MigrationRunner->latest()
+#8 /home/gibekkk/Documents/Project/PHP/CodeIgniter/UCM-Absensi-Magang/vendor/codeigniter4/framework/system/CLI/SignalTrait.php(245): CodeIgniter\Commands\Database\Migrate::CodeIgniter\Commands\Database\{closure}()
+#9 /home/gibekkk/Documents/Project/PHP/CodeIgniter/UCM-Absensi-Magang/vendor/codeigniter4/framework/system/Commands/Database/Migrate.php(88): CodeIgniter\Commands\Database\Migrate->withSignalsBlocked()
+#10 /home/gibekkk/Documents/Project/PHP/CodeIgniter/UCM-Absensi-Magang/vendor/codeigniter4/framework/system/CLI/Commands.php(74): CodeIgniter\Commands\Database\Migrate->run()
+#11 /home/gibekkk/Documents/Project/PHP/CodeIgniter/UCM-Absensi-Magang/vendor/codeigniter4/framework/system/CLI/Console.php(47): CodeIgniter\CLI\Commands->run()
+#12 /home/gibekkk/Documents/Project/PHP/CodeIgniter/UCM-Absensi-Magang/vendor/codeigniter4/framework/system/Boot.php(442): CodeIgniter\CLI\Console->run()
+#13 /home/gibekkk/Documents/Project/PHP/CodeIgniter/UCM-Absensi-Magang/vendor/codeigniter4/framework/system/Boot.php(166): CodeIgniter\Boot::runCommand()
+#14 /home/gibekkk/Documents/Project/PHP/CodeIgniter/UCM-Absensi-Magang/spark(87): CodeIgniter\Boot::bootSpark()
+#15 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Unknown database 'ictadmin_dbwp_ucm_master' in /home/gibekkk/Documents/Project/PHP/CodeIgniter/UCM-Absensi-Magang/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php:231
+Stack trace:
+#0 /home/gibekkk/Documents/Project/PHP/CodeIgniter/UCM-Absensi-Magang/vendor/codeigniter4/framework/system/Database/BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect()
+#1 /home/gibekkk/Documents/Project/PHP/CodeIgniter/UCM-Absensi-Magang/vendor/codeigniter4/framework/system/Database/BaseConnection.php(654): CodeIgniter\Database\BaseConnection->initialize()
+#2 /home/gibekkk/Documents/Project/PHP/CodeIgniter/UCM-Absensi-Magang/vendor/codeigniter4/framework/system/Database/BaseConnection.php(1565): CodeIgniter\Database\BaseConnection->query()
+#3 /home/gibekkk/Documents/Project/PHP/CodeIgniter/UCM-Absensi-Magang/vendor/codeigniter4/framework/system/Database/BaseConnection.php(1585): CodeIgniter\Database\BaseConnection->listTables()
+#4 /home/gibekkk/Documents/Project/PHP/CodeIgniter/UCM-Absensi-Magang/vendor/codeigniter4/framework/system/Database/MigrationRunner.php(821): CodeIgniter\Database\BaseConnection->tableExists()
+#5 /home/gibekkk/Documents/Project/PHP/CodeIgniter/UCM-Absensi-Magang/vendor/codeigniter4/framework/system/Database/MigrationRunner.php(173): CodeIgniter\Database\MigrationRunner->ensureTable()
+#6 /home/gibekkk/Documents/Project/PHP/CodeIgniter/UCM-Absensi-Magang/vendor/codeigniter4/framework/system/Commands/Database/Migrate.php(89): CodeIgniter\Database\MigrationRunner->latest()
+#7 /home/gibekkk/Documents/Project/PHP/CodeIgniter/UCM-Absensi-Magang/vendor/codeigniter4/framework/system/CLI/SignalTrait.php(245): CodeIgniter\Commands\Database\Migrate::CodeIgniter\Commands\Database\{closure}()
+#8 /home/gibekkk/Documents/Project/PHP/CodeIgniter/UCM-Absensi-Magang/vendor/codeigniter4/framework/system/Commands/Database/Migrate.php(88): CodeIgniter\Commands\Database\Migrate->withSignalsBlocked()
+#9 /home/gibekkk/Documents/Project/PHP/CodeIgniter/UCM-Absensi-Magang/vendor/codeigniter4/framework/system/CLI/Commands.php(74): CodeIgniter\Commands\Database\Migrate->run()
+#10 /home/gibekkk/Documents/Project/PHP/CodeIgniter/UCM-Absensi-Magang/vendor/codeigniter4/framework/system/CLI/Console.php(47): CodeIgniter\CLI\Commands->run()
+#11 /home/gibekkk/Documents/Project/PHP/CodeIgniter/UCM-Absensi-Magang/vendor/codeigniter4/framework/system/Boot.php(442): CodeIgniter\CLI\Console->run()
+#12 /home/gibekkk/Documents/Project/PHP/CodeIgniter/UCM-Absensi-Magang/vendor/codeigniter4/framework/system/Boot.php(166): CodeIgniter\Boot::runCommand()
+#13 /home/gibekkk/Documents/Project/PHP/CodeIgniter/UCM-Absensi-Magang/spark(87): CodeIgniter\Boot::bootSpark()
+#14 {main}
+ERROR - 2026-04-08 13:31:07 --> Error connecting to the database: mysqli_sql_exception: Unknown database 'ictadmin_dbwp_ucm_master' in /home/gibekkk/Documents/Project/PHP/CodeIgniter/UCM-Absensi-Magang/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php:201
+Stack trace:
+#0 /home/gibekkk/Documents/Project/PHP/CodeIgniter/UCM-Absensi-Magang/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php(201): mysqli->real_connect()
+#1 /home/gibekkk/Documents/Project/PHP/CodeIgniter/UCM-Absensi-Magang/vendor/codeigniter4/framework/system/Database/BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect()
+#2 /home/gibekkk/Documents/Project/PHP/CodeIgniter/UCM-Absensi-Magang/vendor/codeigniter4/framework/system/Database/BaseConnection.php(654): CodeIgniter\Database\BaseConnection->initialize()
+#3 /home/gibekkk/Documents/Project/PHP/CodeIgniter/UCM-Absensi-Magang/vendor/codeigniter4/framework/system/Database/BaseConnection.php(1565): CodeIgniter\Database\BaseConnection->query()
+#4 /home/gibekkk/Documents/Project/PHP/CodeIgniter/UCM-Absensi-Magang/vendor/codeigniter4/framework/system/Database/BaseConnection.php(1585): CodeIgniter\Database\BaseConnection->listTables()
+#5 /home/gibekkk/Documents/Project/PHP/CodeIgniter/UCM-Absensi-Magang/vendor/codeigniter4/framework/system/Database/MigrationRunner.php(821): CodeIgniter\Database\BaseConnection->tableExists()
+#6 /home/gibekkk/Documents/Project/PHP/CodeIgniter/UCM-Absensi-Magang/vendor/codeigniter4/framework/system/Database/MigrationRunner.php(173): CodeIgniter\Database\MigrationRunner->ensureTable()
+#7 /home/gibekkk/Documents/Project/PHP/CodeIgniter/UCM-Absensi-Magang/vendor/codeigniter4/framework/system/Commands/Database/Migrate.php(89): CodeIgniter\Database\MigrationRunner->latest()
+#8 /home/gibekkk/Documents/Project/PHP/CodeIgniter/UCM-Absensi-Magang/vendor/codeigniter4/framework/system/CLI/SignalTrait.php(245): CodeIgniter\Commands\Database\Migrate::CodeIgniter\Commands\Database\{closure}()
+#9 /home/gibekkk/Documents/Project/PHP/CodeIgniter/UCM-Absensi-Magang/vendor/codeigniter4/framework/system/Commands/Database/Migrate.php(88): CodeIgniter\Commands\Database\Migrate->withSignalsBlocked()
+#10 /home/gibekkk/Documents/Project/PHP/CodeIgniter/UCM-Absensi-Magang/vendor/codeigniter4/framework/system/CLI/Commands.php(74): CodeIgniter\Commands\Database\Migrate->run()
+#11 /home/gibekkk/Documents/Project/PHP/CodeIgniter/UCM-Absensi-Magang/vendor/codeigniter4/framework/system/CLI/Console.php(47): CodeIgniter\CLI\Commands->run()
+#12 /home/gibekkk/Documents/Project/PHP/CodeIgniter/UCM-Absensi-Magang/vendor/codeigniter4/framework/system/Boot.php(442): CodeIgniter\CLI\Console->run()
+#13 /home/gibekkk/Documents/Project/PHP/CodeIgniter/UCM-Absensi-Magang/vendor/codeigniter4/framework/system/Boot.php(166): CodeIgniter\Boot::runCommand()
+#14 /home/gibekkk/Documents/Project/PHP/CodeIgniter/UCM-Absensi-Magang/spark(87): CodeIgniter\Boot::bootSpark()
+#15 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Unknown database 'ictadmin_dbwp_ucm_master' in /home/gibekkk/Documents/Project/PHP/CodeIgniter/UCM-Absensi-Magang/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php:231
+Stack trace:
+#0 /home/gibekkk/Documents/Project/PHP/CodeIgniter/UCM-Absensi-Magang/vendor/codeigniter4/framework/system/Database/BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect()
+#1 /home/gibekkk/Documents/Project/PHP/CodeIgniter/UCM-Absensi-Magang/vendor/codeigniter4/framework/system/Database/BaseConnection.php(654): CodeIgniter\Database\BaseConnection->initialize()
+#2 /home/gibekkk/Documents/Project/PHP/CodeIgniter/UCM-Absensi-Magang/vendor/codeigniter4/framework/system/Database/BaseConnection.php(1565): CodeIgniter\Database\BaseConnection->query()
+#3 /home/gibekkk/Documents/Project/PHP/CodeIgniter/UCM-Absensi-Magang/vendor/codeigniter4/framework/system/Database/BaseConnection.php(1585): CodeIgniter\Database\BaseConnection->listTables()
+#4 /home/gibekkk/Documents/Project/PHP/CodeIgniter/UCM-Absensi-Magang/vendor/codeigniter4/framework/system/Database/MigrationRunner.php(821): CodeIgniter\Database\BaseConnection->tableExists()
+#5 /home/gibekkk/Documents/Project/PHP/CodeIgniter/UCM-Absensi-Magang/vendor/codeigniter4/framework/system/Database/MigrationRunner.php(173): CodeIgniter\Database\MigrationRunner->ensureTable()
+#6 /home/gibekkk/Documents/Project/PHP/CodeIgniter/UCM-Absensi-Magang/vendor/codeigniter4/framework/system/Commands/Database/Migrate.php(89): CodeIgniter\Database\MigrationRunner->latest()
+#7 /home/gibekkk/Documents/Project/PHP/CodeIgniter/UCM-Absensi-Magang/vendor/codeigniter4/framework/system/CLI/SignalTrait.php(245): CodeIgniter\Commands\Database\Migrate::CodeIgniter\Commands\Database\{closure}()
+#8 /home/gibekkk/Documents/Project/PHP/CodeIgniter/UCM-Absensi-Magang/vendor/codeigniter4/framework/system/Commands/Database/Migrate.php(88): CodeIgniter\Commands\Database\Migrate->withSignalsBlocked()
+#9 /home/gibekkk/Documents/Project/PHP/CodeIgniter/UCM-Absensi-Magang/vendor/codeigniter4/framework/system/CLI/Commands.php(74): CodeIgniter\Commands\Database\Migrate->run()
+#10 /home/gibekkk/Documents/Project/PHP/CodeIgniter/UCM-Absensi-Magang/vendor/codeigniter4/framework/system/CLI/Console.php(47): CodeIgniter\CLI\Commands->run()
+#11 /home/gibekkk/Documents/Project/PHP/CodeIgniter/UCM-Absensi-Magang/vendor/codeigniter4/framework/system/Boot.php(442): CodeIgniter\CLI\Console->run()
+#12 /home/gibekkk/Documents/Project/PHP/CodeIgniter/UCM-Absensi-Magang/vendor/codeigniter4/framework/system/Boot.php(166): CodeIgniter\Boot::runCommand()
+#13 /home/gibekkk/Documents/Project/PHP/CodeIgniter/UCM-Absensi-Magang/spark(87): CodeIgniter\Boot::bootSpark()
+#14 {main}

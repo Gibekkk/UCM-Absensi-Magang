@@ -1,0 +1,401 @@
+CRITICAL - 2026-03-18 07:19:02 --> ErrorException: New expressions are not supported in this context
+[Method: GET, Route: auth/login]
+in APPPATH/Controllers/AuthController.php on line 8.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2026-03-18 07:19:18 --> ErrorException: New expressions are not supported in this context
+[Method: GET, Route: auth/login]
+in APPPATH/Controllers/AuthController.php on line 8.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2026-03-18 07:21:49 --> Error: Class "App\Models\UserModel" not found
+[Method: POST, Route: auth/login]
+in APPPATH/Controllers/AuthController.php on line 15.
+ 1 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\AuthController->processLogin()
+ 2 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+ 3 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 4 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+ 6 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+ 7 SYSTEMPATH/rewrite.php(44): require_once('/home/gibekkk/Documents/Project/PHP/CodeIgniter/UCM-Absensi-Magang/public/index.php')
+CRITICAL - 2026-03-18 07:22:37 --> TypeError: mysqli_result::fetch_object(): Argument #1 ($class) must be a valid class name, App\Entities\UserEntity given
+[Method: POST, Route: auth/login]
+in SYSTEMPATH/Database/MySQLi/Result.php on line 156.
+ 1 SYSTEMPATH/Database/MySQLi/Result.php(156): mysqli_result->fetch_object()
+ 2 SYSTEMPATH/Database/BaseResult.php(157): CodeIgniter\Database\MySQLi\Result->fetchObject()
+ 3 SYSTEMPATH/Database/BaseResult.php(112): CodeIgniter\Database\BaseResult->getCustomResultObject()
+ 4 SYSTEMPATH/Database/BaseResult.php(395): CodeIgniter\Database\BaseResult->getResult()
+ 5 SYSTEMPATH/Model.php(296): CodeIgniter\Database\BaseResult->getFirstRow()
+ 6 SYSTEMPATH/BaseModel.php(713): CodeIgniter\Model->doFirst()
+ 7 APPPATH/Controllers/AuthController.php(28): CodeIgniter\BaseModel->first()
+ 8 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\AuthController->processLogin()
+ 9 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+10 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+11 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+13 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+14 SYSTEMPATH/rewrite.php(44): require_once('/home/gibekkk/Documents/Project/PHP/CodeIgniter/UCM-Absensi-Magang/public/index.php')
+CRITICAL - 2026-03-18 07:23:13 --> TypeError: mysqli_result::fetch_object(): Argument #1 ($class) must be a valid class name, App\Entities\UserEntity given
+[Method: POST, Route: auth/login]
+in SYSTEMPATH/Database/MySQLi/Result.php on line 156.
+ 1 SYSTEMPATH/Database/MySQLi/Result.php(156): mysqli_result->fetch_object()
+ 2 SYSTEMPATH/Database/BaseResult.php(157): CodeIgniter\Database\MySQLi\Result->fetchObject()
+ 3 SYSTEMPATH/Database/BaseResult.php(112): CodeIgniter\Database\BaseResult->getCustomResultObject()
+ 4 SYSTEMPATH/Database/BaseResult.php(395): CodeIgniter\Database\BaseResult->getResult()
+ 5 SYSTEMPATH/Model.php(296): CodeIgniter\Database\BaseResult->getFirstRow()
+ 6 SYSTEMPATH/BaseModel.php(713): CodeIgniter\Model->doFirst()
+ 7 APPPATH/Controllers/AuthController.php(28): CodeIgniter\BaseModel->first()
+ 8 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\AuthController->processLogin()
+ 9 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+10 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+11 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+13 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+14 SYSTEMPATH/rewrite.php(44): require_once('/home/gibekkk/Documents/Project/PHP/CodeIgniter/UCM-Absensi-Magang/public/index.php')
+DEBUG - 2026-03-18 07:34:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-03-18 07:34:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2026-03-18 07:34:22 --> CodeIgniter\Filters\Exceptions\FilterException: "auth" filter must have a matching alias defined.
+[Method: GET, Route: admin/dashboard]
+in SYSTEMPATH/Filters/Filters.php on line 590.
+ 1 SYSTEMPATH/Filters/Filters.php(590): CodeIgniter\Filters\Exceptions\FilterException::forNoAlias()
+ 2 SYSTEMPATH/Filters/Filters.php(641): CodeIgniter\Filters\Filters->enableFilter()
+ 3 SYSTEMPATH/CodeIgniter.php(453): CodeIgniter\Filters\Filters->enableFilters()
+ 4 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 5 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+ 7 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+ 8 SYSTEMPATH/rewrite.php(44): require_once('/home/gibekkk/Documents/Project/PHP/CodeIgniter/UCM-Absensi-Magang/public/index.php')
+CRITICAL - 2026-03-18 07:43:06 --> ErrorException: Attempt to read property "id" on null
+[Method: GET, Route: admin/dashboard]
+in APPPATH/Filters/AuthFilter.php on line 36.
+ 1 APPPATH/Filters/AuthFilter.php(36): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/Filters/Filters.php(241): App\Filters\AuthFilter->before()
+ 3 SYSTEMPATH/Filters/Filters.php(221): CodeIgniter\Filters\Filters->runBefore()
+ 4 SYSTEMPATH/CodeIgniter.php(465): CodeIgniter\Filters\Filters->run()
+ 5 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 6 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+ 8 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+ 9 SYSTEMPATH/rewrite.php(44): require_once('/home/gibekkk/Documents/Project/PHP/CodeIgniter/UCM-Absensi-Magang/public/index.php')
+CRITICAL - 2026-03-18 07:45:40 --> CodeIgniter\Database\Exceptions\DataException: There is no primary key defined when trying to make insert.
+[Method: POST, Route: auth/login]
+in SYSTEMPATH/Model.php on line 316.
+ 1 SYSTEMPATH/Model.php(316): CodeIgniter\Database\Exceptions\DataException::forEmptyPrimaryKey()
+ 2 SYSTEMPATH/BaseModel.php(898): CodeIgniter\Model->doInsert()
+ 3 SYSTEMPATH/Model.php(665): CodeIgniter\BaseModel->insert()
+ 4 SYSTEMPATH/BaseModel.php(751): CodeIgniter\Model->insert()
+ 5 APPPATH/Controllers/AuthController.php(38): CodeIgniter\BaseModel->save()
+ 6 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\AuthController->processLogin()
+ 7 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 9 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+11 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+12 SYSTEMPATH/rewrite.php(44): require_once('/home/gibekkk/Documents/Project/PHP/CodeIgniter/UCM-Absensi-Magang/public/index.php')
+CRITICAL - 2026-03-18 07:46:58 --> CodeIgniter\Database\Exceptions\DataException: There is no primary key defined when trying to make insert.
+[Method: POST, Route: auth/login]
+in SYSTEMPATH/Model.php on line 316.
+ 1 SYSTEMPATH/Model.php(316): CodeIgniter\Database\Exceptions\DataException::forEmptyPrimaryKey()
+ 2 SYSTEMPATH/BaseModel.php(898): CodeIgniter\Model->doInsert()
+ 3 SYSTEMPATH/Model.php(665): CodeIgniter\BaseModel->insert()
+ 4 SYSTEMPATH/BaseModel.php(751): CodeIgniter\Model->insert()
+ 5 APPPATH/Controllers/AuthController.php(38): CodeIgniter\BaseModel->save()
+ 6 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\AuthController->processLogin()
+ 7 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 9 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+11 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+12 SYSTEMPATH/rewrite.php(44): require_once('/home/gibekkk/Documents/Project/PHP/CodeIgniter/UCM-Absensi-Magang/public/index.php')
+CRITICAL - 2026-03-18 07:46:59 --> CodeIgniter\Database\Exceptions\DataException: There is no primary key defined when trying to make insert.
+[Method: POST, Route: auth/login]
+in SYSTEMPATH/Model.php on line 316.
+ 1 SYSTEMPATH/Model.php(316): CodeIgniter\Database\Exceptions\DataException::forEmptyPrimaryKey()
+ 2 SYSTEMPATH/BaseModel.php(898): CodeIgniter\Model->doInsert()
+ 3 SYSTEMPATH/Model.php(665): CodeIgniter\BaseModel->insert()
+ 4 SYSTEMPATH/BaseModel.php(751): CodeIgniter\Model->insert()
+ 5 APPPATH/Controllers/AuthController.php(38): CodeIgniter\BaseModel->save()
+ 6 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\AuthController->processLogin()
+ 7 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 9 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+11 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+12 SYSTEMPATH/rewrite.php(44): require_once('/home/gibekkk/Documents/Project/PHP/CodeIgniter/UCM-Absensi-Magang/public/index.php')
+CRITICAL - 2026-03-18 07:46:59 --> CodeIgniter\Database\Exceptions\DataException: There is no primary key defined when trying to make insert.
+[Method: POST, Route: auth/login]
+in SYSTEMPATH/Model.php on line 316.
+ 1 SYSTEMPATH/Model.php(316): CodeIgniter\Database\Exceptions\DataException::forEmptyPrimaryKey()
+ 2 SYSTEMPATH/BaseModel.php(898): CodeIgniter\Model->doInsert()
+ 3 SYSTEMPATH/Model.php(665): CodeIgniter\BaseModel->insert()
+ 4 SYSTEMPATH/BaseModel.php(751): CodeIgniter\Model->insert()
+ 5 APPPATH/Controllers/AuthController.php(38): CodeIgniter\BaseModel->save()
+ 6 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\AuthController->processLogin()
+ 7 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 9 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+11 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+12 SYSTEMPATH/rewrite.php(44): require_once('/home/gibekkk/Documents/Project/PHP/CodeIgniter/UCM-Absensi-Magang/public/index.php')
+CRITICAL - 2026-03-18 07:47:03 --> CodeIgniter\Database\Exceptions\DataException: There is no primary key defined when trying to make insert.
+[Method: POST, Route: auth/login]
+in SYSTEMPATH/Model.php on line 316.
+ 1 SYSTEMPATH/Model.php(316): CodeIgniter\Database\Exceptions\DataException::forEmptyPrimaryKey()
+ 2 SYSTEMPATH/BaseModel.php(898): CodeIgniter\Model->doInsert()
+ 3 SYSTEMPATH/Model.php(665): CodeIgniter\BaseModel->insert()
+ 4 SYSTEMPATH/BaseModel.php(751): CodeIgniter\Model->insert()
+ 5 APPPATH/Controllers/AuthController.php(38): CodeIgniter\BaseModel->save()
+ 6 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\AuthController->processLogin()
+ 7 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 9 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+11 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+12 SYSTEMPATH/rewrite.php(44): require_once('/home/gibekkk/Documents/Project/PHP/CodeIgniter/UCM-Absensi-Magang/public/index.php')
+CRITICAL - 2026-03-18 07:48:12 --> CodeIgniter\Database\Exceptions\DataException: There is no primary key defined when trying to make insert.
+[Method: POST, Route: auth/login]
+in SYSTEMPATH/Model.php on line 316.
+ 1 SYSTEMPATH/Model.php(316): CodeIgniter\Database\Exceptions\DataException::forEmptyPrimaryKey()
+ 2 SYSTEMPATH/BaseModel.php(898): CodeIgniter\Model->doInsert()
+ 3 SYSTEMPATH/Model.php(665): CodeIgniter\BaseModel->insert()
+ 4 SYSTEMPATH/BaseModel.php(751): CodeIgniter\Model->insert()
+ 5 APPPATH/Controllers/AuthController.php(38): CodeIgniter\BaseModel->save()
+ 6 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\AuthController->processLogin()
+ 7 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 9 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+11 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+12 SYSTEMPATH/rewrite.php(44): require_once('/home/gibekkk/Documents/Project/PHP/CodeIgniter/UCM-Absensi-Magang/public/index.php')
+CRITICAL - 2026-03-18 07:48:13 --> CodeIgniter\Database\Exceptions\DataException: There is no primary key defined when trying to make insert.
+[Method: POST, Route: auth/login]
+in SYSTEMPATH/Model.php on line 316.
+ 1 SYSTEMPATH/Model.php(316): CodeIgniter\Database\Exceptions\DataException::forEmptyPrimaryKey()
+ 2 SYSTEMPATH/BaseModel.php(898): CodeIgniter\Model->doInsert()
+ 3 SYSTEMPATH/Model.php(665): CodeIgniter\BaseModel->insert()
+ 4 SYSTEMPATH/BaseModel.php(751): CodeIgniter\Model->insert()
+ 5 APPPATH/Controllers/AuthController.php(38): CodeIgniter\BaseModel->save()
+ 6 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\AuthController->processLogin()
+ 7 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 9 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+11 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+12 SYSTEMPATH/rewrite.php(44): require_once('/home/gibekkk/Documents/Project/PHP/CodeIgniter/UCM-Absensi-Magang/public/index.php')
+CRITICAL - 2026-03-18 07:48:13 --> CodeIgniter\Database\Exceptions\DataException: There is no primary key defined when trying to make insert.
+[Method: POST, Route: auth/login]
+in SYSTEMPATH/Model.php on line 316.
+ 1 SYSTEMPATH/Model.php(316): CodeIgniter\Database\Exceptions\DataException::forEmptyPrimaryKey()
+ 2 SYSTEMPATH/BaseModel.php(898): CodeIgniter\Model->doInsert()
+ 3 SYSTEMPATH/Model.php(665): CodeIgniter\BaseModel->insert()
+ 4 SYSTEMPATH/BaseModel.php(751): CodeIgniter\Model->insert()
+ 5 APPPATH/Controllers/AuthController.php(38): CodeIgniter\BaseModel->save()
+ 6 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\AuthController->processLogin()
+ 7 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 9 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+11 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+12 SYSTEMPATH/rewrite.php(44): require_once('/home/gibekkk/Documents/Project/PHP/CodeIgniter/UCM-Absensi-Magang/public/index.php')
+CRITICAL - 2026-03-18 07:48:13 --> CodeIgniter\Database\Exceptions\DataException: There is no primary key defined when trying to make insert.
+[Method: POST, Route: auth/login]
+in SYSTEMPATH/Model.php on line 316.
+ 1 SYSTEMPATH/Model.php(316): CodeIgniter\Database\Exceptions\DataException::forEmptyPrimaryKey()
+ 2 SYSTEMPATH/BaseModel.php(898): CodeIgniter\Model->doInsert()
+ 3 SYSTEMPATH/Model.php(665): CodeIgniter\BaseModel->insert()
+ 4 SYSTEMPATH/BaseModel.php(751): CodeIgniter\Model->insert()
+ 5 APPPATH/Controllers/AuthController.php(38): CodeIgniter\BaseModel->save()
+ 6 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\AuthController->processLogin()
+ 7 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 9 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+11 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+12 SYSTEMPATH/rewrite.php(44): require_once('/home/gibekkk/Documents/Project/PHP/CodeIgniter/UCM-Absensi-Magang/public/index.php')
+CRITICAL - 2026-03-18 07:48:55 --> ErrorException: Attempt to read property "id" on null
+[Method: GET, Route: admin/dashboard]
+in APPPATH/Filters/AuthFilter.php on line 36.
+ 1 APPPATH/Filters/AuthFilter.php(36): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/Filters/Filters.php(241): App\Filters\AuthFilter->before()
+ 3 SYSTEMPATH/Filters/Filters.php(221): CodeIgniter\Filters\Filters->runBefore()
+ 4 SYSTEMPATH/CodeIgniter.php(465): CodeIgniter\Filters\Filters->run()
+ 5 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 6 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+ 8 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+ 9 SYSTEMPATH/rewrite.php(44): require_once('/home/gibekkk/Documents/Project/PHP/CodeIgniter/UCM-Absensi-Magang/public/index.php')
+CRITICAL - 2026-03-18 07:50:27 --> CodeIgniter\Database\Exceptions\DataException: There is no primary key defined when trying to make insert.
+[Method: POST, Route: auth/login]
+in SYSTEMPATH/Model.php on line 316.
+ 1 SYSTEMPATH/Model.php(316): CodeIgniter\Database\Exceptions\DataException::forEmptyPrimaryKey()
+ 2 SYSTEMPATH/BaseModel.php(898): CodeIgniter\Model->doInsert()
+ 3 SYSTEMPATH/Model.php(665): CodeIgniter\BaseModel->insert()
+ 4 SYSTEMPATH/BaseModel.php(751): CodeIgniter\Model->insert()
+ 5 APPPATH/Controllers/AuthController.php(38): CodeIgniter\BaseModel->save()
+ 6 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\AuthController->processLogin()
+ 7 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 9 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+11 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+12 SYSTEMPATH/rewrite.php(44): require_once('/home/gibekkk/Documents/Project/PHP/CodeIgniter/UCM-Absensi-Magang/public/index.php')
+CRITICAL - 2026-03-18 07:55:16 --> ErrorException: Attempt to read property "id" on null
+[Method: GET, Route: admin/dashboard]
+in APPPATH/Filters/AuthFilter.php on line 36.
+ 1 APPPATH/Filters/AuthFilter.php(36): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/Filters/Filters.php(241): App\Filters\AuthFilter->before()
+ 3 SYSTEMPATH/Filters/Filters.php(221): CodeIgniter\Filters\Filters->runBefore()
+ 4 SYSTEMPATH/CodeIgniter.php(465): CodeIgniter\Filters\Filters->run()
+ 5 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 6 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+ 8 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+ 9 SYSTEMPATH/rewrite.php(44): require_once('/home/gibekkk/Documents/Project/PHP/CodeIgniter/UCM-Absensi-Magang/public/index.php')
+CRITICAL - 2026-03-18 07:57:11 --> ErrorException: Attempt to read property "id" on null
+[Method: GET, Route: admin/dashboard]
+in APPPATH/Filters/AuthFilter.php on line 36.
+ 1 APPPATH/Filters/AuthFilter.php(36): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/Filters/Filters.php(241): App\Filters\AuthFilter->before()
+ 3 SYSTEMPATH/Filters/Filters.php(221): CodeIgniter\Filters\Filters->runBefore()
+ 4 SYSTEMPATH/CodeIgniter.php(465): CodeIgniter\Filters\Filters->run()
+ 5 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 6 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+ 8 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+ 9 SYSTEMPATH/rewrite.php(44): require_once('/home/gibekkk/Documents/Project/PHP/CodeIgniter/UCM-Absensi-Magang/public/index.php')
+CRITICAL - 2026-03-18 07:59:18 --> ErrorException: Trying to access array offset on null
+[Method: GET, Route: admin/dashboard]
+in APPPATH/Filters/AuthFilter.php on line 36.
+ 1 APPPATH/Filters/AuthFilter.php(36): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/Filters/Filters.php(241): App\Filters\AuthFilter->before()
+ 3 SYSTEMPATH/Filters/Filters.php(221): CodeIgniter\Filters\Filters->runBefore()
+ 4 SYSTEMPATH/CodeIgniter.php(465): CodeIgniter\Filters\Filters->run()
+ 5 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 6 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+ 8 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+ 9 SYSTEMPATH/rewrite.php(44): require_once('/home/gibekkk/Documents/Project/PHP/CodeIgniter/UCM-Absensi-Magang/public/index.php')
+CRITICAL - 2026-03-18 07:59:19 --> ErrorException: Trying to access array offset on null
+[Method: GET, Route: admin/dashboard]
+in APPPATH/Filters/AuthFilter.php on line 36.
+ 1 APPPATH/Filters/AuthFilter.php(36): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/Filters/Filters.php(241): App\Filters\AuthFilter->before()
+ 3 SYSTEMPATH/Filters/Filters.php(221): CodeIgniter\Filters\Filters->runBefore()
+ 4 SYSTEMPATH/CodeIgniter.php(465): CodeIgniter\Filters\Filters->run()
+ 5 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 6 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+ 8 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+ 9 SYSTEMPATH/rewrite.php(44): require_once('/home/gibekkk/Documents/Project/PHP/CodeIgniter/UCM-Absensi-Magang/public/index.php')
+CRITICAL - 2026-03-18 07:59:36 --> ErrorException: Attempt to read property "id" on null
+[Method: GET, Route: admin/dashboard]
+in APPPATH/Filters/AuthFilter.php on line 36.
+ 1 APPPATH/Filters/AuthFilter.php(36): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/Filters/Filters.php(241): App\Filters\AuthFilter->before()
+ 3 SYSTEMPATH/Filters/Filters.php(221): CodeIgniter\Filters\Filters->runBefore()
+ 4 SYSTEMPATH/CodeIgniter.php(465): CodeIgniter\Filters\Filters->run()
+ 5 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 6 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+ 8 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+ 9 SYSTEMPATH/rewrite.php(44): require_once('/home/gibekkk/Documents/Project/PHP/CodeIgniter/UCM-Absensi-Magang/public/index.php')
+CRITICAL - 2026-03-18 07:59:37 --> ErrorException: Attempt to read property "id" on null
+[Method: GET, Route: admin/dashboard]
+in APPPATH/Filters/AuthFilter.php on line 36.
+ 1 APPPATH/Filters/AuthFilter.php(36): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/Filters/Filters.php(241): App\Filters\AuthFilter->before()
+ 3 SYSTEMPATH/Filters/Filters.php(221): CodeIgniter\Filters\Filters->runBefore()
+ 4 SYSTEMPATH/CodeIgniter.php(465): CodeIgniter\Filters\Filters->run()
+ 5 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 6 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+ 8 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+ 9 SYSTEMPATH/rewrite.php(44): require_once('/home/gibekkk/Documents/Project/PHP/CodeIgniter/UCM-Absensi-Magang/public/index.php')
+CRITICAL - 2026-03-18 08:00:45 --> ErrorException: Attempt to read property "id" on null
+[Method: GET, Route: admin/dashboard]
+in APPPATH/Filters/AuthFilter.php on line 36.
+ 1 APPPATH/Filters/AuthFilter.php(36): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/Filters/Filters.php(241): App\Filters\AuthFilter->before()
+ 3 SYSTEMPATH/Filters/Filters.php(221): CodeIgniter\Filters\Filters->runBefore()
+ 4 SYSTEMPATH/CodeIgniter.php(465): CodeIgniter\Filters\Filters->run()
+ 5 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 6 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+ 8 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+ 9 SYSTEMPATH/rewrite.php(44): require_once('/home/gibekkk/Documents/Project/PHP/CodeIgniter/UCM-Absensi-Magang/public/index.php')
+CRITICAL - 2026-03-18 08:01:20 --> ErrorException: Attempt to read property "id" on null
+[Method: GET, Route: admin/dashboard]
+in APPPATH/Filters/AuthFilter.php on line 37.
+ 1 APPPATH/Filters/AuthFilter.php(37): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/Filters/Filters.php(241): App\Filters\AuthFilter->before()
+ 3 SYSTEMPATH/Filters/Filters.php(221): CodeIgniter\Filters\Filters->runBefore()
+ 4 SYSTEMPATH/CodeIgniter.php(465): CodeIgniter\Filters\Filters->run()
+ 5 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 6 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+ 8 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+ 9 SYSTEMPATH/rewrite.php(44): require_once('/home/gibekkk/Documents/Project/PHP/CodeIgniter/UCM-Absensi-Magang/public/index.php')
+CRITICAL - 2026-03-18 08:01:43 --> ErrorException: Attempt to read property "id" on null
+[Method: GET, Route: admin/dashboard]
+in APPPATH/Filters/AuthFilter.php on line 37.
+ 1 APPPATH/Filters/AuthFilter.php(37): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/Filters/Filters.php(241): App\Filters\AuthFilter->before()
+ 3 SYSTEMPATH/Filters/Filters.php(221): CodeIgniter\Filters\Filters->runBefore()
+ 4 SYSTEMPATH/CodeIgniter.php(465): CodeIgniter\Filters\Filters->run()
+ 5 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 6 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+ 8 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+ 9 SYSTEMPATH/rewrite.php(44): require_once('/home/gibekkk/Documents/Project/PHP/CodeIgniter/UCM-Absensi-Magang/public/index.php')
+CRITICAL - 2026-03-18 08:17:02 --> CodeIgniter\Database\Exceptions\DatabaseException: Deletes are not allowed unless they contain a "where" or "like" clause.
+[Method: POST, Route: auth/logout]
+in SYSTEMPATH/Database/BaseBuilder.php on line 2819.
+ 1 SYSTEMPATH/Model.php(442): CodeIgniter\Database\BaseBuilder->delete()
+ 2 SYSTEMPATH/BaseModel.php(1186): CodeIgniter\Model->doDelete()
+ 3 APPPATH/Controllers/AuthController.php(62): CodeIgniter\BaseModel->delete()
+ 4 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\AuthController->processLogout()
+ 5 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+ 6 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 7 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+ 9 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+10 SYSTEMPATH/rewrite.php(44): require_once('/home/gibekkk/Documents/Project/PHP/CodeIgniter/UCM-Absensi-Magang/public/index.php')
+CRITICAL - 2026-03-18 08:25:01 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "admin/dashboard.php"
+[Method: GET, Route: admin/dashboard]
+in SYSTEMPATH/Exceptions/FrameworkException.php on line 39.
+ 1 SYSTEMPATH/View/View.php(226): CodeIgniter\Exceptions\FrameworkException::forInvalidFile()
+ 2 SYSTEMPATH/Common.php(1250): CodeIgniter\View\View->render()
+ 3 APPPATH/Controllers/AdminController.php(9): view()
+ 4 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\AdminController->index()
+ 5 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+ 6 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 7 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+ 9 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+10 SYSTEMPATH/rewrite.php(44): require_once('/home/gibekkk/Documents/Project/PHP/CodeIgniter/UCM-Absensi-Magang/public/index.php')
+CRITICAL - 2026-03-18 09:01:44 --> CodeIgniter\Database\Exceptions\DatabaseException: Deletes are not allowed unless they contain a "where" or "like" clause.
+[Method: POST, Route: auth/logout]
+in SYSTEMPATH/Database/BaseBuilder.php on line 2819.
+ 1 SYSTEMPATH/Model.php(442): CodeIgniter\Database\BaseBuilder->delete()
+ 2 SYSTEMPATH/BaseModel.php(1186): CodeIgniter\Model->doDelete()
+ 3 APPPATH/Controllers/AuthController.php(62): CodeIgniter\BaseModel->delete()
+ 4 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\AuthController->processLogout()
+ 5 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+ 6 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 7 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+ 9 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+10 SYSTEMPATH/rewrite.php(44): require_once('/home/gibekkk/Documents/Project/PHP/CodeIgniter/UCM-Absensi-Magang/public/index.php')
+CRITICAL - 2026-03-18 09:50:22 --> ErrorException: Undefined variable $students
+[Method: GET, Route: admin/dashboard]
+in APPPATH/Views/Admin/dashboard.php on line 55.
+ 1 APPPATH/Views/Admin/dashboard.php(55): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/View/View.php(238): include('/home/gibekkk/Documents/Project/PHP/CodeIgniter/UCM-Absensi-Magang/app/Views/Admin/dashboard.php')
+ 3 SYSTEMPATH/View/View.php(241): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1250): CodeIgniter\View\View->render()
+ 5 APPPATH/Controllers/AdminController.php(11): view()
+ 6 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\AdminController->index()
+ 7 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 9 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+11 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+12 SYSTEMPATH/rewrite.php(44): require_once('/home/gibekkk/Documents/Project/PHP/CodeIgniter/UCM-Absensi-Magang/public/index.php')

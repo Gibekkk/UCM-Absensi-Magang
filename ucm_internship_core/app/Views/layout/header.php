@@ -61,7 +61,6 @@
     </main>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="<?= base_url('js/app.js') ?>"></script>
     <script>
         $(document).ready(function() {
@@ -75,7 +74,7 @@
                     'X-CSRF-TOKEN': '<?= csrf_hash() ?>'
                 },
                 complete: (xhr) => {
-    const res = JSON.parse(xhr.responseText);
+                    const res = JSON.parse(xhr.responseText);
                     if (res.status == 'success') {
                         $('#my-username').text(res.username);
                         if (res.is_super_admin == 1) {

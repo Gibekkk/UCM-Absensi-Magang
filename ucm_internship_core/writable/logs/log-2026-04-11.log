@@ -1,0 +1,12 @@
+CRITICAL - 2026-04-11 16:17:18 --> CodeIgniter\Database\Exceptions\DatabaseException: Deletes are not allowed unless they contain a "where" or "like" clause.
+[Method: POST, Route: auth/logout]
+in SYSTEMPATH/Database/BaseBuilder.php on line 2819.
+ 1 SYSTEMPATH/Model.php(441): CodeIgniter\Database\BaseBuilder->delete()
+ 2 SYSTEMPATH/BaseModel.php(1207): CodeIgniter\Model->doDelete()
+ 3 APPPATH/Controllers/AuthController.php(61): CodeIgniter\BaseModel->delete()
+ 4 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\AuthController->processLogout()
+ 5 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+ 6 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 7 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+ 9 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()

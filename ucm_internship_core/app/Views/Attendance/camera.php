@@ -368,7 +368,8 @@
                 data: JSON.stringify({
                     input: nim
                 }),
-                success: function(res) {
+                complete: (xhr) => {
+                    const res = JSON.parse(xhr.responseText);
                     if (res.status == 'success') {
                         showModal(true, "Success", (res.attendance_type == "IN" ? "Welcome, " : "See You Later, ") + res.name.split(" ")[0]);
                         refreshDataTable();
@@ -416,7 +417,8 @@
                 headers: {
                     'RequestType': 'API'
                 },
-                success: function(res) {
+                complete: (xhr) => {
+                    const res = JSON.parse(xhr.responseText);
                     if (res.status == 'success') {
                         const data = res.attendances;
 

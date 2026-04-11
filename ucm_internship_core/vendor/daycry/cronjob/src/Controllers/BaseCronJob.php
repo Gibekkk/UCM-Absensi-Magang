@@ -16,7 +16,7 @@ class BaseCronJob extends BaseController
     protected $session;
     protected $viewData = [];
 
-    public function initController(RequestInterface $request, ResponseInterface $response, LoggerInterface $logger)
+    public function initController(RequestInterface $request, ResponseInterface $response, LoggerInterface $logger): void
     {
         $this->helpers[] = 'form';
         // Do Not Edit This Line

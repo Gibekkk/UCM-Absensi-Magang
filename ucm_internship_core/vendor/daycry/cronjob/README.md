@@ -2,9 +2,12 @@
 
 ---
 
-🚀 **[VER DOCUMENTACIÓN ONLINE](https://cronjob.readthedocs.io/)** 🚀
+🚀 **[VIEW ONLINE DOCUMENTATION](https://cronjob.readthedocs.io/)** 🚀
 
 ---
+
+> [!NOTE]  
+> An improved library has been created that includes everything from this library, plus queues, with an enhanced structure. [jobs vendor](https://github.com/daycry/jobs)
 
 > [!NOTE]  
 > If you want to use a queue system you can use [queues vendor](https://github.com/daycry/queues)
@@ -26,6 +29,7 @@ Welcome! The documentation is now organized for easier reading:
 - [Job Dependencies](docs/dependencies.md)
 - [Advanced Features](docs/advanced.md)
 - [Metrics & Monitoring](docs/metrics-monitoring.md)
+- [Roadmap](docs/roadmap.md)
 
 For full usage, examples, and integration details, see each section above.
 

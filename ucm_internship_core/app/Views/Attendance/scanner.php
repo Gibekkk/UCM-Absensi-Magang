@@ -320,7 +320,7 @@
                 complete: (xhr) => {
                     const res = JSON.parse(xhr.responseText);
                     if (res.status == 'success') {
-                        showModal(true, "Success", (res.attendance_type == "IN" ? "Welcome, " : "See You Later, ") + res.name.split(" ")[0]);
+                        showModal(true, "Success", (res.scan_status == "IN" ? "Welcome, " : "See You Later, ") + res.name.split(" ")[0]);
                         refreshDataTable();
                     } else {
                         showModal(false, "Failed", res.message || "Unknown Error Occurred.");

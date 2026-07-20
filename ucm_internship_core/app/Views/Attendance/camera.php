@@ -283,16 +283,13 @@
 
 <body>
     <?= view('layout/modals') ?>
-    <!-- Modal Container -->
     <div id="notifModal" class="modal-overlay" style="display: none;">
         <div class="glass-card modal-content">
-            <!-- Icon Container -->
             <div id="modalIcon" class="icon-box">
             </div>
             <h3 id="modalTitle">Success</h3>
             <p id="modalMessage">Attendance recorded successfully!</p>
 
-            <!-- Duration Bar -->
             <div class="progress-container">
                 <div id="progressBar" class="progress-bar"></div>
             </div>
@@ -339,24 +336,36 @@
     <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
     <script src="https://unpkg.com/html5-qrcode"></script>
     <script>
-        let html5QrcodeScanner = new Html5QrcodeScanner(
-            "reader", {
-                fps: 10,
-            }
-        );
+        let table;
+        let isModalOpen = false;
+        let isProcessing = false;
 
         function onScanSuccess(decodedText, decodedResult) {
-            if (isModalOpen) return;
+            if (isModalOpen || isProcessing) return;
             sendAttendance(decodedText);
         }
 
-        html5QrcodeScanner.render(onScanSuccess);
+        // Inisialisasi kamera secara langsung tanpa UI bawaan
+        const html5QrCode = new Html5Qrcode("reader");
 
-        let table;
-        let isModalOpen = false;
+        html5QrCode.start(
+            { facingMode: "environment" }, // Prioritas kamera belakang
+            { fps: 10 },
+            onScanSuccess
+        ).catch((err) => {
+            // Fallback ke kamera user/depan jika kamera belakang tidak tersedia (misal di PC/Laptop)
+            html5QrCode.start(
+                { facingMode: "user" },
+                { fps: 10 },
+                onScanSuccess
+            ).catch((err2) => {
+                console.error("Gagal mengakses kamera:", err2);
+            });
+        });
 
         function sendAttendance(nim) {
-            if (isModalOpen) return;
+            if (isModalOpen || isProcessing) return;
+            isProcessing = true;
 
             $.ajax({
                 url: '<?= base_url("api/attend") ?>',
@@ -371,11 +380,12 @@
                 complete: (xhr) => {
                     const res = JSON.parse(xhr.responseText);
                     if (res.status == 'success') {
-                        showModal(true, "Success", (res.attendance_type == "IN" ? "Welcome, " : "See You Later, ") + res.name.split(" ")[0]);
+                        showModal(true, "Success", (res.scan_status == "IN" ? "Welcome, " : "See You Later, ") + res.name.split(" ")[0]);
                         refreshDataTable();
                     } else {
                         showModal(false, "Failed", res.message || "Unknown Error Occurred.");
                     }
+                    isProcessing = false;
                 }
             });
         }

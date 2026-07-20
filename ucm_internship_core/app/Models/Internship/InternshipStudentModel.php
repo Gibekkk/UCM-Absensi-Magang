@@ -96,34 +96,55 @@ class InternshipStudentModel extends Model
 
     protected function syncStatusAfterFind(array $data)
     {
-        // Jika data kosong, langsung return
         if (!isset($data['data'])) return $data;
 
         $idsToUpdate = [];
         $today = date('Y-m-d');
 
-        // Fungsi untuk memproses satu baris data
         $process = function ($row) use (&$idsToUpdate, $today) {
-            // Jika row adalah objek (karena returnType = entity)
-            if (is_object($row) && isset($row->end_date) && $row->end_date < $today && $row->is_active == '1') {
-                $row->is_active = '0';
-                $idsToUpdate[] = $row->id;
+            if (is_object($row) && isset($row->is_active) && $row->is_active == '1') {
+                $shouldDeactivate = false;
+
+                // Kondisi 1: end_date sudah lewat (logika lama)
+                if (isset($row->end_date) && $row->end_date < $today) {
+                    $shouldDeactivate = true;
+                }
+
+                // Kondisi 2: internship induk tidak aktif (logika baru)
+                if (!$shouldDeactivate && isset($row->internship_id)) {
+                    $internshipInactive = \Config\Database::connect()
+                        ->table('ictadmin_dbwp_ucm_internship.m_internship')
+                        ->where('id', $row->internship_id)
+                        ->where('is_active', 0)
+                        ->countAllResults();
+
+                    if ($internshipInactive > 0) {
+                        $shouldDeactivate = true;
+                    }
+                }
+
+                if ($shouldDeactivate) {
+                    $row->is_active = '0';
+                    $idsToUpdate[] = $row->id;
+                }
             }
             return $row;
         };
 
-        // Jika hasil find() (satu data)
         if (!is_array($data['data'])) {
             $data['data'] = $process($data['data']);
-        }
-        // Jika hasil findAll() (banyak data)
-        else {
+        } else {
             foreach ($data['data'] as $key => $row) {
                 $data['data'][$key] = $process($row);
             }
         }
-        if (count($idsToUpdate) > 0) {
-            $this->whereIn('id', $idsToUpdate)->update(['is_active' => 0]);
+
+        // Bypass model callbacks
+        if (!empty($idsToUpdate)) {
+            \Config\Database::connect()
+                ->table($this->table)
+                ->whereIn('id', $idsToUpdate)
+                ->update(['is_active' => 0]);
         }
 
         return $data;

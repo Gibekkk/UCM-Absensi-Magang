@@ -1,0 +1,96 @@
+CRITICAL - 2026-05-05 07:47:12 --> CodeIgniter\Exceptions\InvalidArgumentException: Invalid primary key: 0 is not allowed.
+[Method: GET, Route: admin/api/internships/department/ICT]
+in SYSTEMPATH/BaseModel.php on line 833.
+ 1 SYSTEMPATH/BaseModel.php(818): CodeIgniter\BaseModel->validateID()
+ 2 SYSTEMPATH/BaseModel.php(1040): CodeIgniter\BaseModel->validateID()
+ 3 SYSTEMPATH/Model.php(709): CodeIgniter\BaseModel->update()
+ 4 APPPATH/Models/Internship/InternshipModel.php(144): CodeIgniter\Model->update()
+ 5 SYSTEMPATH/BaseModel.php(1741): App\Models\Internship\InternshipModel->syncStatusAfterFind()
+ 6 SYSTEMPATH/BaseModel.php(684): CodeIgniter\BaseModel->trigger()
+ 7 APPPATH/Controllers/InternshipController.php(92): CodeIgniter\BaseModel->findAll()
+ 8 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\InternshipController->findInternshipByDepartment()
+ 9 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+10 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+11 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+13 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+CRITICAL - 2026-05-05 07:47:22 --> CodeIgniter\Exceptions\InvalidArgumentException: Invalid primary key: 0 is not allowed.
+[Method: GET, Route: admin/api/internships/department/ICT]
+in SYSTEMPATH/BaseModel.php on line 833.
+ 1 SYSTEMPATH/BaseModel.php(818): CodeIgniter\BaseModel->validateID()
+ 2 SYSTEMPATH/BaseModel.php(1040): CodeIgniter\BaseModel->validateID()
+ 3 SYSTEMPATH/Model.php(709): CodeIgniter\BaseModel->update()
+ 4 APPPATH/Models/Internship/InternshipModel.php(144): CodeIgniter\Model->update()
+ 5 SYSTEMPATH/BaseModel.php(1741): App\Models\Internship\InternshipModel->syncStatusAfterFind()
+ 6 SYSTEMPATH/BaseModel.php(684): CodeIgniter\BaseModel->trigger()
+ 7 APPPATH/Controllers/InternshipController.php(92): CodeIgniter\BaseModel->findAll()
+ 8 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\InternshipController->findInternshipByDepartment()
+ 9 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+10 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+11 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+13 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+CRITICAL - 2026-05-05 07:47:47 --> CodeIgniter\Exceptions\InvalidArgumentException: Invalid primary key: 0 is not allowed.
+[Method: GET, Route: admin/api/internships/department/ICT]
+in SYSTEMPATH/BaseModel.php on line 833.
+ 1 SYSTEMPATH/BaseModel.php(818): CodeIgniter\BaseModel->validateID()
+ 2 SYSTEMPATH/BaseModel.php(1040): CodeIgniter\BaseModel->validateID()
+ 3 SYSTEMPATH/Model.php(709): CodeIgniter\BaseModel->update()
+ 4 APPPATH/Models/Internship/InternshipModel.php(144): CodeIgniter\Model->update()
+ 5 SYSTEMPATH/BaseModel.php(1741): App\Models\Internship\InternshipModel->syncStatusAfterFind()
+ 6 SYSTEMPATH/BaseModel.php(684): CodeIgniter\BaseModel->trigger()
+ 7 APPPATH/Controllers/InternshipController.php(92): CodeIgniter\BaseModel->findAll()
+ 8 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\InternshipController->findInternshipByDepartment()
+ 9 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+10 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+11 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+13 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+CRITICAL - 2026-05-05 07:48:01 --> CodeIgniter\Exceptions\InvalidArgumentException: Invalid primary key: 0 is not allowed.
+[Method: GET, Route: admin/api/internships]
+in SYSTEMPATH/BaseModel.php on line 833.
+ 1 SYSTEMPATH/BaseModel.php(818): CodeIgniter\BaseModel->validateID()
+ 2 SYSTEMPATH/BaseModel.php(1040): CodeIgniter\BaseModel->validateID()
+ 3 SYSTEMPATH/Model.php(709): CodeIgniter\BaseModel->update()
+ 4 APPPATH/Models/Internship/InternshipModel.php(144): CodeIgniter\Model->update()
+ 5 SYSTEMPATH/BaseModel.php(1741): App\Models\Internship\InternshipModel->syncStatusAfterFind()
+ 6 SYSTEMPATH/BaseModel.php(684): CodeIgniter\BaseModel->trigger()
+ 7 APPPATH/Controllers/InternshipController.php(54): CodeIgniter\BaseModel->findAll()
+ 8 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\InternshipController->getInternships()
+ 9 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+10 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+11 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+13 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+CRITICAL - 2026-05-05 08:01:36 --> CodeIgniter\Exceptions\InvalidArgumentException: Invalid primary key: 0 is not allowed.
+[Method: GET, Route: admin/api/internships]
+in SYSTEMPATH/BaseModel.php on line 833.
+ 1 SYSTEMPATH/BaseModel.php(818): CodeIgniter\BaseModel->validateID()
+ 2 SYSTEMPATH/BaseModel.php(1040): CodeIgniter\BaseModel->validateID()
+ 3 SYSTEMPATH/Model.php(709): CodeIgniter\BaseModel->update()
+ 4 APPPATH/Models/Internship/InternshipModel.php(144): CodeIgniter\Model->update()
+ 5 SYSTEMPATH/BaseModel.php(1741): App\Models\Internship\InternshipModel->syncStatusAfterFind()
+ 6 SYSTEMPATH/BaseModel.php(684): CodeIgniter\BaseModel->trigger()
+ 7 APPPATH/Controllers/InternshipController.php(54): CodeIgniter\BaseModel->findAll()
+ 8 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\InternshipController->getInternships()
+ 9 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+10 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+11 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+13 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+CRITICAL - 2026-05-05 08:17:42 --> CodeIgniter\Exceptions\InvalidArgumentException: Invalid primary key: 0 is not allowed.
+[Method: GET, Route: admin/api/internships]
+in SYSTEMPATH/BaseModel.php on line 833.
+ 1 SYSTEMPATH/BaseModel.php(818): CodeIgniter\BaseModel->validateID()
+ 2 SYSTEMPATH/BaseModel.php(1040): CodeIgniter\BaseModel->validateID()
+ 3 SYSTEMPATH/Model.php(709): CodeIgniter\BaseModel->update()
+ 4 APPPATH/Models/Internship/InternshipModel.php(144): CodeIgniter\Model->update()
+ 5 SYSTEMPATH/BaseModel.php(1741): App\Models\Internship\InternshipModel->syncStatusAfterFind()
+ 6 SYSTEMPATH/BaseModel.php(684): CodeIgniter\BaseModel->trigger()
+ 7 APPPATH/Controllers/InternshipController.php(54): CodeIgniter\BaseModel->findAll()
+ 8 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\InternshipController->getInternships()
+ 9 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+10 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+11 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+13 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()

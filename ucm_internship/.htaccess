@@ -1,9 +1,8 @@
 Options -Indexes
 Options +FollowSymLinks
-
 RewriteEngine On
-RewriteBase /UCM-Absensi-Magang/ucm_internship/
+RewriteBase /
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.*)$ index.php?/$1 [L,QSA]
+RewriteRule ^(.*)$ index.php/$1 [L,NC,QSA]

@@ -89,9 +89,9 @@ class InternshipController extends BaseController
         $user = $this->sessionModel->where('id', $token)->first()->getUser();
 
         if ($user->is_super_admin == 1) {
-            $queryRes = $this->internshipModel->where('department', $department)->findAll();
+            $queryRes = $this->internshipModel->where('department', $department)->where('is_active', "1")->findAll();
         } else {
-            $queryRes = $this->internshipModel->where('department', $department)->where('created_by', $user->id)->findAll();
+            $queryRes = $this->internshipModel->where('department', $department)->where('created_by', $user->id)->where('is_active', "1")->findAll();
         }
 
         foreach ($queryRes as $internship) {
